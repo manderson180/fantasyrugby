@@ -549,7 +549,7 @@
   .stat-card--row .stat-lbl {
     flex: 1;
     font-size: 0.63rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.6px;
     text-transform: uppercase;
     color: var(--text-muted);
@@ -677,6 +677,8 @@
     .modal-featured-grid { grid-template-columns: repeat(3, 1fr); }
     .modal-stats-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: none; grid-auto-flow: row; gap: 3px; align-self: stretch; }
     .modal-stats-summary-row { flex-direction: column; }
+    .modal-stats-col { width: 100%; }
+    .modal-stats-grid { width: 100%; }
     .stat-card { padding: 6px 4px; }
     .stat-card--row { padding: 4px 8px; gap: 6px; }
     .stat-card--row .stat-val { font-size: 0.85rem; }
@@ -688,8 +690,11 @@
   }
 
   @media (max-width: 400px) {
-    .modal-stats-grid { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; }
-    .stat-card--row { padding: 4px 8px; }
+    .modal-stats-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: none; grid-auto-flow: row; }
+    .stat-card--row { padding: 4px 6px; gap: 4px; }
+    .stat-card--row .stat-lbl { font-size: 0.58rem; }
+    .stat-card--row .stat-val { font-size: 0.88rem; }
+    .stat-card--row .stat-rank-badge { font-size: 0.6rem; min-width: 24px; }
   }
 </style>
 </head>
