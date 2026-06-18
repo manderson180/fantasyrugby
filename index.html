@@ -191,14 +191,37 @@
   .count-badge span { color: var(--accent); }
 
   /* ── Table layout ── */
-  .table-wrapper {
+  .table-area {
     flex: 1;
     min-height: 0;
+    position: relative;
+  }
+  .table-wrapper {
+    width: 100%;
+    height: 100%;
     overflow-x: auto;
     overflow-y: auto;
     position: relative;
     overscroll-behavior: none;
     -webkit-overflow-scrolling: auto;
+  }
+  .scroll-hint {
+    position: absolute;
+    pointer-events: none;
+    z-index: 30;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .scroll-hint.visible { opacity: 1; }
+  .scroll-hint--right {
+    top: 0; right: 0; bottom: 0;
+    width: 56px;
+    background: linear-gradient(to right, transparent, rgba(13,13,13,0.85));
+  }
+  .scroll-hint--bottom {
+    left: 0; right: 0; bottom: 0;
+    height: 56px;
+    background: linear-gradient(to bottom, transparent, rgba(13,13,13,0.95));
   }
 
   table {
@@ -272,9 +295,9 @@
   thead .frozen { background: var(--frozen-bg-head); z-index: 25; }
   tbody tr:hover .frozen { background: #0f2530; }
 
-  .frozen-player { left: 0;     min-width: 180px; max-width: 250px; overflow: hidden; text-overflow: ellipsis; }
-  .frozen-pos    { left: 180px; min-width: 110px; max-width: 110px; }
-  .frozen-team   { left: 290px; min-width: 140px; max-width: 140px; }
+  .frozen-player { left: 0;     min-width: 210px; max-width: 280px; overflow: hidden; text-overflow: ellipsis; }
+  .frozen-pos    { left: 210px; min-width: 110px; max-width: 110px; }
+  .frozen-team   { left: 320px; min-width: 140px; max-width: 140px; }
 
   /* shadow on last frozen col to visually separate */
   .frozen-team { box-shadow: 3px 0 6px rgba(0,0,0,0.4); }
@@ -365,7 +388,8 @@
   }
   .team-col-logo {
     height: 18px;
-    width: auto;
+    width: 24px;
+    object-fit: contain;
     flex-shrink: 0;
   }
 
@@ -577,7 +601,7 @@
 
   .stat-card--featured {
     background: var(--surface2);
-    border-color: var(--accent);
+    border: none;
     padding: 10px 8px;
   }
   .stat-card--featured .stat-val { font-size: 1.45rem; }
@@ -638,6 +662,10 @@
     .controls label  { font-size: 0.7rem; }
     .view-toggle { margin-left: 0; }
     .count-badge { font-size: 0.7rem; padding: 4px 8px; }
+    #search-group { width: 100%; }
+    #search-group input[type="text"] { flex: 1; width: auto; }
+    #pos-group, #team-group { flex: 0 0 calc(50% - 4px); min-width: 0; }
+    #pos-group select, #team-group select { width: 100%; }
 
     /* On mobile only freeze rank + player; let pos/team scroll */
     .frozen-pos  { position: static !important; background: transparent !important;
@@ -654,7 +682,7 @@
     .frozen-player { left: 0; min-width: 130px; max-width: 130px;
                      box-shadow: 3px 0 6px rgba(0,0,0,0.4); }
 
-    .table-wrapper { flex: 1; min-height: 0; }
+    .table-area { flex: 1; min-height: 0; }
 
     td { padding: 5px 6px; font-size: 0.8rem; }
     th { padding: 6px 6px; font-size: 0.65rem; }
@@ -674,11 +702,11 @@
     .modal-header { padding: 12px 16px 14px; }
     .modal-name   { font-size: 1.3rem; }
     .modal-body   { padding: 14px 16px 24px; }
-    .modal-featured-grid { grid-template-columns: repeat(3, 1fr); }
-    .modal-stats-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: none; grid-auto-flow: row; gap: 3px; align-self: stretch; }
+    .modal-featured-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+    .modal-featured-grid .stat-card--featured { flex: 0 0 calc(33.333% - 4px); }
+    .modal-stats-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(10, auto); grid-auto-flow: column; gap: 3px; width: 100%; }
     .modal-stats-summary-row { flex-direction: column; }
     .modal-stats-col { width: 100%; }
-    .modal-stats-grid { width: 100%; }
     .stat-card { padding: 6px 4px; }
     .stat-card--row { padding: 4px 8px; gap: 6px; }
     .stat-card--row .stat-val { font-size: 0.85rem; }
@@ -690,7 +718,7 @@
   }
 
   @media (max-width: 400px) {
-    .modal-stats-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: none; grid-auto-flow: row; }
+    .modal-stats-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(10, auto); grid-auto-flow: column; }
     .stat-card--row { padding: 4px 6px; gap: 4px; }
     .stat-card--row .stat-lbl { font-size: 0.58rem; }
     .stat-card--row .stat-val { font-size: 0.88rem; }
@@ -719,11 +747,11 @@
 </header>
 
 <div class="controls">
-  <div class="stat-group">
+  <div class="stat-group" id="search-group">
     <label>Search</label>
     <input type="text" id="search" placeholder="Player name..." oninput="applyFilters()">
   </div>
-  <div class="stat-group">
+  <div class="stat-group" id="pos-group">
     <select id="posFilter" onchange="applyFilters()">
       <option value="">All Positions</option>
       <optgroup label="By Group">
@@ -742,10 +770,10 @@
       </optgroup>
     </select>
   </div>
-  <div class="stat-group">
+  <div class="stat-group" id="team-group">
     <select id="teamFilter" onchange="applyFilters()"><option value="">All Teams</option></select>
   </div>
-  <div class="stat-group">
+  <div class="stat-group" id="view-group">
     <label>View</label>
     <div class="view-toggle">
       <button class="active" id="btn-overview" onclick="setView('overview')">Overview</button>
@@ -755,11 +783,15 @@
   <div class="count-badge">Showing <span id="count">—</span> players</div>
 </div>
 
-<div class="table-wrapper">
-  <table id="mainTable">
-    <thead id="thead"></thead>
-    <tbody id="tbody"></tbody>
-  </table>
+<div class="table-area">
+  <div class="scroll-hint scroll-hint--right"></div>
+  <div class="scroll-hint scroll-hint--bottom"></div>
+  <div class="table-wrapper">
+    <table id="mainTable">
+      <thead id="thead"></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
 </div>
 
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
@@ -1145,6 +1177,7 @@ function applyFilters() {
 
   renderHeaders();
   renderRows();
+  setupScrollHints();
 }
 
 function setView(v) {
@@ -1358,6 +1391,25 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') { e.preventDefault(); navigateModal(1); }
   if (e.key === 'ArrowLeft')  { e.preventDefault(); navigateModal(-1); }
 });
+
+function setupScrollHints() {
+  const wrapper  = document.querySelector('.table-wrapper');
+  const hintR    = document.querySelector('.scroll-hint--right');
+  const hintB    = document.querySelector('.scroll-hint--bottom');
+  if (!wrapper || !hintR || !hintB) return;
+
+  function update() {
+    hintR.classList.toggle('visible', wrapper.scrollLeft < wrapper.scrollWidth  - wrapper.clientWidth  - 2);
+    hintB.classList.toggle('visible', wrapper.scrollTop  < wrapper.scrollHeight - wrapper.clientHeight - 2);
+  }
+
+  if (!wrapper._scrollHintsBound) {
+    wrapper.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', () => requestAnimationFrame(update));
+    wrapper._scrollHintsBound = true;
+  }
+  requestAnimationFrame(update);
+}
 
 populateTeamFilter();
 applyFilters();
