@@ -704,14 +704,16 @@
     }
     tbody tr:hover .frozen-team .team-col-inner { background: #0f2530; }
     .team-col-inner {
-      width: var(--mob-team-w, 155px);
-      max-width: 100%;
+      width: 155px;
       height: 100%;
       background: var(--frozen-bg-body);
       overflow: hidden;
       min-width: 0;
       padding: 5px 4px;
       box-sizing: border-box;
+      /* clip-path avoids layout reflow — only a compositor repaint per frame */
+      clip-path: inset(0 calc(155px - var(--mob-team-w, 155px)) 0 0);
+      will-change: clip-path;
     }
     thead .frozen-team .team-col-inner { background: transparent; }
     .team-col-name  { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
@@ -1462,7 +1464,9 @@ function setupScrollHints() {
   const hintB    = document.querySelector('.scroll-hint--bottom');
   if (!wrapper || !hintR || !hintB) return;
 
+  let rafPending = false;
   function update() {
+    rafPending = false;
     const sl = wrapper.scrollLeft;
     // Scroll-linked player column width: 160px → 100px over first 150px of scroll
     if (window.innerWidth <= 768) {
@@ -1486,7 +1490,9 @@ function setupScrollHints() {
   }
 
   if (!wrapper._scrollHintsBound) {
-    wrapper.addEventListener('scroll', update, { passive: true });
+    wrapper.addEventListener('scroll', () => {
+      if (!rafPending) { rafPending = true; requestAnimationFrame(update); }
+    }, { passive: true });
     window.addEventListener('resize', () => requestAnimationFrame(update));
     wrapper._scrollHintsBound = true;
   }
