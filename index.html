@@ -673,56 +673,55 @@
     #pos-group, #team-group { flex: 0 0 calc(50% - 4px); min-width: 0; }
     #pos-group select, #team-group select { width: 100%; }
 
-    /* On mobile pos/team scroll in default; team width is scroll-linked via --mob-team-w */
-    .frozen-pos  { position: static !important; background: transparent !important;
-                   box-shadow: none !important; min-width: auto; max-width: none; }
-    .frozen-team { position: static !important; background: transparent !important;
-                   box-shadow: none !important; }
-    thead .frozen-pos, thead .frozen-team { background: var(--frozen-bg-head) !important; }
-    tbody tr:hover .frozen-pos,
-    tbody tr:hover .frozen-team { background: transparent !important; }
-
-    /* Pos badge always 28px on mobile; consistent 4px horizontal padding to avoid jump on freeze */
-    .pos-badge { width: 28px; font-size: 0.65rem; letter-spacing: 0; }
-    .pos-badge::after { content: attr(data-short); }
-    td.pos-col { padding-left: 4px; padding-right: 4px; }
-
-    /* Team: scroll-linked width (155→32px via --mob-team-w), consistent padding */
-    .team-col-inner { overflow: hidden; min-width: 0; }
-    .team-col-name  { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
-    td.team-col, th.team-col { min-width: var(--mob-team-w, 155px); max-width: var(--mob-team-w, 155px);
-                               padding-left: 4px; padding-right: 4px; }
-
-    /* Pts column: plain scrolling cell on mobile — no sticky, no special background */
-    td.pts-col { border-right: none; }
-
-    /* Player column width driven by JS scroll-linked variable --mob-player-w */
-    .frozen-player { left: 0; min-width: var(--mob-player-w, 160px); max-width: var(--mob-player-w, 160px);
-                     box-shadow: 3px 0 6px rgba(0,0,0,0.4); }
-
-    /* When horizontally scrolled: freeze pos/team (logo only); player width handled by JS */
-    .table-scrolled .frozen-player { box-shadow: none !important; }
-    .table-scrolled .player-name-full { display: none; }
-    .table-scrolled .player-name-short { display: inline; }
-
-    .table-scrolled .frozen-pos {
+    /* Pos: always sticky on mobile, tracks player right edge via --mob-player-w */
+    .frozen-pos {
       position: sticky !important;
-      left: 100px !important;
+      left: var(--mob-player-w, 160px) !important;
       min-width: 36px !important; max-width: 36px !important;
       padding-left: 4px !important; padding-right: 4px !important;
       background: var(--frozen-bg-body) !important;
       box-shadow: none !important;
     }
-    .table-scrolled thead .frozen-pos { background: var(--frozen-bg-head) !important; }
-    .table-scrolled tbody tr:hover .frozen-pos { background: #0f2530 !important; }
-    .table-scrolled .frozen-team {
+    thead .frozen-pos { background: var(--frozen-bg-head) !important; }
+    tbody tr:hover .frozen-pos { background: #0f2530 !important; }
+
+    /* Pos badge always 28px on mobile */
+    .pos-badge { width: 28px; font-size: 0.65rem; letter-spacing: 0; }
+    .pos-badge::after { content: attr(data-short); }
+
+    /* Team: always sticky, tracks pos right edge via calc(), width scroll-linked via --mob-team-w */
+    .frozen-team {
       position: sticky !important;
-      left: 136px !important;
+      left: calc(var(--mob-player-w, 160px) + 36px) !important;
+      min-width: var(--mob-team-w, 155px) !important; max-width: var(--mob-team-w, 155px) !important;
+      padding-left: 4px !important; padding-right: 4px !important;
       background: var(--frozen-bg-body) !important;
+      box-shadow: none !important;
+    }
+    thead .frozen-team { background: var(--frozen-bg-head) !important; }
+    tbody tr:hover .frozen-team { background: #0f2530 !important; }
+    .team-col-inner { overflow: hidden; min-width: 0; }
+    .team-col-name  { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
+    td.team-col, th.team-col { padding-left: 4px; padding-right: 4px; }
+
+    /* Pts: always sticky on mobile, tracks right edge of team */
+    .frozen-pts {
+      position: sticky !important;
+      left: calc(var(--mob-player-w, 160px) + 36px + var(--mob-team-w, 155px)) !important;
+      background: var(--frozen-bg-body) !important;
+      z-index: 5;
       box-shadow: 3px 0 6px rgba(0,0,0,0.4) !important;
     }
-    .table-scrolled thead .frozen-team { background: var(--frozen-bg-head) !important; }
-    .table-scrolled tbody tr:hover .frozen-team { background: #0f2530 !important; }
+    thead .frozen-pts { background: var(--frozen-bg-head) !important; z-index: 25; }
+    tbody tr:hover .frozen-pts { background: #0f2530 !important; }
+    td.pts-col { border-right: none; }
+
+    /* Player column width driven by JS scroll-linked variable --mob-player-w */
+    .frozen-player { left: 0; min-width: var(--mob-player-w, 160px); max-width: var(--mob-player-w, 160px); }
+
+    /* When scrolled: switch to abbreviated player name */
+    .table-scrolled .player-name-full { display: none; }
+    .table-scrolled .player-name-short { display: inline; }
 
     .table-area { flex: 1; min-height: 0; }
 
@@ -736,7 +735,7 @@
       max-width: 100%;
       height: 92dvh;
       max-height: 92dvh;
-      border-radius: 4px 4px 0 0;
+      border-radius: 16px 16px 0 0;
       border-left: none;
       border-right: none;
       border-bottom: none;
