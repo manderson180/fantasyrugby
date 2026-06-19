@@ -685,33 +685,20 @@
     .pos-badge { width: 34px; font-size: 0.65rem; letter-spacing: 0; }
     .pos-badge::after { content: attr(data-short); }
 
-    /* Team name clips cleanly behind the right-pinned pts column */
+    /* Team name truncates with ellipsis; fixed width fits all names except Hollywoodbets Sharks */
     .team-col-inner { overflow: hidden; min-width: 0; }
     .team-col-name  { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
+    td.team-col, th.team-col { min-width: 155px; max-width: 155px; }
 
-    /* Default (unscrolled) mobile player column */
-    .frozen-player { left: 0; min-width: 160px; max-width: 160px;
-                     box-shadow: 3px 0 6px rgba(0,0,0,0.4);
-                     transition: min-width 0.22s ease, max-width 0.22s ease, box-shadow 0.22s ease; }
+    /* Pts column: plain scrolling cell on mobile — no sticky, no special background */
+    td.pts-col { border-right: none; }
 
-    /* Total points always pinned to right edge on mobile */
-    .frozen-pts {
-      position: sticky;
-      right: 0;
-      z-index: 5;
-      background: var(--frozen-bg-body);
-      box-shadow: -3px 0 6px rgba(0,0,0,0.4);
-    }
-    thead .frozen-pts { background: var(--frozen-bg-head); z-index: 25; }
-    tbody tr:hover .frozen-pts { background: #0f2530; }
+    /* Player column width driven by JS scroll-linked variable --mob-player-w */
+    .frozen-player { left: 0; min-width: var(--mob-player-w, 160px); max-width: var(--mob-player-w, 160px);
+                     box-shadow: 3px 0 6px rgba(0,0,0,0.4); }
 
-    /* In scrolled state pts reverts to normal flow — left-frozen cols sit on top */
-    .table-scrolled .frozen-pts { position: static !important; box-shadow: none !important; background: transparent !important; z-index: auto !important; }
-    .table-scrolled thead .frozen-pts { background: transparent !important; }
-    .table-scrolled tbody tr:hover .frozen-pts { background: transparent !important; }
-
-    /* When horizontally scrolled: compact player col + freeze pos/team (logo only) */
-    .table-scrolled .frozen-player { min-width: 100px !important; max-width: 100px !important; box-shadow: none !important; }
+    /* When horizontally scrolled: freeze pos/team (logo only); player width handled by JS */
+    .table-scrolled .frozen-player { box-shadow: none !important; }
     .table-scrolled .player-name-full { display: none; }
     .table-scrolled .player-name-short { display: inline; }
 
@@ -1465,10 +1452,16 @@ function setupScrollHints() {
   if (!wrapper || !hintR || !hintB) return;
 
   function update() {
+    const sl = wrapper.scrollLeft;
+    // Scroll-linked player column width: 160px → 100px over first 150px of scroll
+    if (window.innerWidth <= 768) {
+      wrapper.style.setProperty('--mob-player-w', Math.round(160 - Math.min(sl / 150, 1) * 60) + 'px');
+    } else {
+      wrapper.style.removeProperty('--mob-player-w');
+    }
     const isScrolled = wrapper.classList.contains('table-scrolled');
-    const scrolled = wrapper.scrollLeft > (isScrolled ? 15 : 100);
-    wrapper.classList.toggle('table-scrolled', scrolled);
-    hintR.classList.toggle('visible', wrapper.scrollLeft < wrapper.scrollWidth  - wrapper.clientWidth  - 2);
+    wrapper.classList.toggle('table-scrolled', sl > (isScrolled ? 15 : 100));
+    hintR.classList.toggle('visible', sl < wrapper.scrollWidth  - wrapper.clientWidth  - 2);
     hintB.classList.toggle('visible', wrapper.scrollTop  < wrapper.scrollHeight - wrapper.clientHeight - 2);
   }
 
