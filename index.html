@@ -699,7 +699,9 @@
       background: transparent !important;
       box-shadow: none !important;
     }
-    thead .frozen-team { background: transparent !important; }
+    thead .frozen-team {
+      background: linear-gradient(to right, var(--frozen-bg-head) var(--mob-team-w, 155px), transparent var(--mob-team-w, 155px)) !important;
+    }
     tbody tr:hover .frozen-team .team-col-inner { background: #0f2530; }
     .team-col-inner {
       width: var(--mob-team-w, 155px);
@@ -711,7 +713,7 @@
       padding: 5px 4px;
       box-sizing: border-box;
     }
-    thead .frozen-team .team-col-inner { background: var(--frozen-bg-head); }
+    thead .frozen-team .team-col-inner { background: transparent; }
     .team-col-name  { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
 
     /* Pts: always sticky on mobile, tracks right edge of team content div */
