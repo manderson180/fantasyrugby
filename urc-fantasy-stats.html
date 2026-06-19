@@ -673,10 +673,10 @@
     #pos-group, #team-group { flex: 0 0 calc(50% - 4px); min-width: 0; }
     #pos-group select, #team-group select { width: 100%; }
 
-    /* Pos: always sticky on mobile, tracks player right edge via --mob-player-w */
+    /* Pos: always sticky on mobile — left overridden per-frame by scrollStyle */
     .frozen-pos {
       position: sticky !important;
-      left: var(--mob-player-w, 160px) !important;
+      left: 160px !important;
       min-width: 36px !important; max-width: 36px !important;
       padding-left: 4px !important; padding-right: 4px !important;
       background: var(--frozen-bg-body) !important;
@@ -693,15 +693,13 @@
        Only the inner div has the frozen background — its width collapses via --mob-team-w. */
     .frozen-team {
       position: sticky !important;
-      left: calc(var(--mob-player-w, 160px) + 36px) !important;
+      left: 196px !important;
       min-width: 155px !important; max-width: 155px !important;
       padding: 0 !important;
       background: transparent !important;
       box-shadow: none !important;
     }
-    thead .frozen-team {
-      background: linear-gradient(to right, var(--frozen-bg-head) var(--mob-team-w, 155px), transparent var(--mob-team-w, 155px)) !important;
-    }
+    thead .frozen-team { background: var(--frozen-bg-head) !important; }
     tbody tr:hover .frozen-team .team-col-inner { background: #0f2530; }
     .team-col-inner {
       width: 155px;
@@ -711,8 +709,6 @@
       min-width: 0;
       padding: 5px 4px;
       box-sizing: border-box;
-      /* clip-path avoids layout reflow — only a compositor repaint per frame */
-      clip-path: inset(0 calc(155px - var(--mob-team-w, 155px)) 0 0);
       will-change: clip-path;
     }
     thead .frozen-team .team-col-inner { background: transparent; }
@@ -721,7 +717,7 @@
     /* Pts: always sticky on mobile, tracks right edge of team content div */
     .frozen-pts {
       position: sticky !important;
-      left: var(--mob-pts-left, 351px) !important;
+      left: 351px !important;
       background: var(--frozen-bg-body) !important;
       z-index: 5;
       box-shadow: 3px 0 6px rgba(0,0,0,0.4) !important;
@@ -733,7 +729,7 @@
     /* Player: fixed 160px cell; name wrap clips to --mob-player-w so content narrows
        without affecting table layout — stats columns stay at their original positions */
     .frozen-player { left: 0; min-width: 160px; max-width: 160px; }
-    .player-name-wrap { max-width: var(--mob-player-w, 160px); }
+    .player-name-wrap { max-width: 160px; }
 
     /* When scrolled: switch to abbreviated player name */
     .table-scrolled .player-name-full { display: none; }
@@ -1464,24 +1460,28 @@ function setupScrollHints() {
   const hintB    = document.querySelector('.scroll-hint--bottom');
   if (!wrapper || !hintR || !hintB) return;
 
+  // Injected per-frame CSS with concrete px values — avoids CSS-var subtree cascade
+  const scrollStyle = document.createElement('style');
+  document.head.appendChild(scrollStyle);
+
   let rafPending = false;
   function update() {
     rafPending = false;
     const sl = wrapper.scrollLeft;
-    // Scroll-linked player column width: 160px → 100px over first 150px of scroll
     if (window.innerWidth <= 768) {
-      // Phase 1 (sl 0–123): team collapses 155→32px at 1px/px so pts stays flush with no gap
-      const teamW  = Math.max(32, 155 - sl);
-      // Phase 2 (sl 123–273): player collapses 160→100px; team already at 32px
+      // Phase 1 (sl 0–123): team collapses 155→32px at 1px/px
+      const teamW   = Math.max(32, 155 - sl);
+      // Phase 2 (sl 123–273): player collapses 160→100px
       const playerW = Math.round(160 - Math.max(0, Math.min((sl - 123) / 150, 1)) * 60);
-      wrapper.style.setProperty('--mob-team-w',   teamW   + 'px');
-      wrapper.style.setProperty('--mob-player-w', playerW + 'px');
-      // Precompute pts sticky-left so the browser skips the calc() and there's no lag
-      wrapper.style.setProperty('--mob-pts-left', (playerW + 36 + teamW) + 'px');
+      scrollStyle.textContent =
+        `.team-col-inner{clip-path:inset(0 ${155 - teamW}px 0 0)!important}` +
+        `.frozen-pos{left:${playerW}px!important}` +
+        `.frozen-team{left:${playerW + 36}px!important}` +
+        `thead .frozen-team{background:linear-gradient(to right,var(--frozen-bg-head) ${teamW}px,transparent ${teamW}px)!important}` +
+        `.frozen-pts{left:${playerW + 36 + teamW}px!important}` +
+        `.player-name-wrap{max-width:${playerW}px!important}`;
     } else {
-      wrapper.style.removeProperty('--mob-team-w');
-      wrapper.style.removeProperty('--mob-player-w');
-      wrapper.style.removeProperty('--mob-pts-left');
+      scrollStyle.textContent = '';
     }
     const isScrolled = wrapper.classList.contains('table-scrolled');
     wrapper.classList.toggle('table-scrolled', sl > (isScrolled ? 15 : 273));
