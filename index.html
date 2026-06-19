@@ -673,22 +673,25 @@
     #pos-group, #team-group { flex: 0 0 calc(50% - 4px); min-width: 0; }
     #pos-group select, #team-group select { width: 100%; }
 
-    /* On mobile only freeze rank + player; let pos/team scroll */
+    /* On mobile pos/team scroll in default; team width is scroll-linked via --mob-team-w */
     .frozen-pos  { position: static !important; background: transparent !important;
                    box-shadow: none !important; min-width: auto; max-width: none; }
     .frozen-team { position: static !important; background: transparent !important;
-                   box-shadow: none !important; min-width: auto; max-width: none; }
+                   box-shadow: none !important; }
     thead .frozen-pos, thead .frozen-team { background: var(--frozen-bg-head) !important; }
     tbody tr:hover .frozen-pos,
     tbody tr:hover .frozen-team { background: transparent !important; }
 
-    .pos-badge { width: 34px; font-size: 0.65rem; letter-spacing: 0; }
+    /* Pos badge always 28px on mobile; consistent 4px horizontal padding to avoid jump on freeze */
+    .pos-badge { width: 28px; font-size: 0.65rem; letter-spacing: 0; }
     .pos-badge::after { content: attr(data-short); }
+    td.pos-col { padding-left: 4px; padding-right: 4px; }
 
-    /* Team name truncates with ellipsis; fixed width fits all names except Hollywoodbets Sharks */
+    /* Team: scroll-linked width (155→32px via --mob-team-w), consistent padding */
     .team-col-inner { overflow: hidden; min-width: 0; }
     .team-col-name  { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
-    td.team-col, th.team-col { min-width: 155px; max-width: 155px; }
+    td.team-col, th.team-col { min-width: var(--mob-team-w, 155px); max-width: var(--mob-team-w, 155px);
+                               padding-left: 4px; padding-right: 4px; }
 
     /* Pts column: plain scrolling cell on mobile — no sticky, no special background */
     td.pts-col { border-right: none; }
@@ -712,19 +715,14 @@
     }
     .table-scrolled thead .frozen-pos { background: var(--frozen-bg-head) !important; }
     .table-scrolled tbody tr:hover .frozen-pos { background: #0f2530 !important; }
-    .table-scrolled .pos-badge { width: 28px; }
-
     .table-scrolled .frozen-team {
       position: sticky !important;
       left: 136px !important;
-      min-width: 32px !important; max-width: 32px !important;
-      padding-left: 4px !important; padding-right: 4px !important;
       background: var(--frozen-bg-body) !important;
       box-shadow: 3px 0 6px rgba(0,0,0,0.4) !important;
     }
     .table-scrolled thead .frozen-team { background: var(--frozen-bg-head) !important; }
     .table-scrolled tbody tr:hover .frozen-team { background: #0f2530 !important; }
-    .table-scrolled .team-col-name { display: none; }
 
     .table-area { flex: 1; min-height: 0; }
 
@@ -738,7 +736,7 @@
       max-width: 100%;
       height: 92dvh;
       max-height: 92dvh;
-      border-radius: 16px 16px 0 0;
+      border-radius: 4px 4px 0 0;
       border-left: none;
       border-right: none;
       border-bottom: none;
@@ -1455,12 +1453,16 @@ function setupScrollHints() {
     const sl = wrapper.scrollLeft;
     // Scroll-linked player column width: 160px → 100px over first 150px of scroll
     if (window.innerWidth <= 768) {
+      // Team col: 155→32px over first 80px of scroll (collapses before player)
+      wrapper.style.setProperty('--mob-team-w', Math.round(155 - Math.min(sl / 80, 1) * 123) + 'px');
+      // Player col: 160→100px over first 150px of scroll
       wrapper.style.setProperty('--mob-player-w', Math.round(160 - Math.min(sl / 150, 1) * 60) + 'px');
     } else {
+      wrapper.style.removeProperty('--mob-team-w');
       wrapper.style.removeProperty('--mob-player-w');
     }
     const isScrolled = wrapper.classList.contains('table-scrolled');
-    wrapper.classList.toggle('table-scrolled', sl > (isScrolled ? 15 : 100));
+    wrapper.classList.toggle('table-scrolled', sl > (isScrolled ? 15 : 150));
     hintR.classList.toggle('visible', sl < wrapper.scrollWidth  - wrapper.clientWidth  - 2);
     hintB.classList.toggle('visible', wrapper.scrollTop  < wrapper.scrollHeight - wrapper.clientHeight - 2);
   }
