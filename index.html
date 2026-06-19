@@ -18,8 +18,8 @@
     --text-muted: #a9a9a9;
     --neg: #e05252;
     --highlight-row: rgba(255,255,255,0.04);
-    --frozen-bg-head: rgba(18, 26, 32, 0.97);
-    --frozen-bg-body: rgba(13, 19, 24, 0.92);
+    --frozen-bg-head: rgb(18, 26, 32);
+    --frozen-bg-body: rgb(13, 19, 24);
   }
 
   html, body {
@@ -225,7 +225,8 @@
   }
 
   table {
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     width: 100%;
   }
 
@@ -277,7 +278,9 @@
 
   td.rank-col  { text-align: center; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); }
   td.player-col { font-weight: 600; font-size: 0.95rem; letter-spacing: 0px; }
-  .player-name-wrap { display: flex; align-items: center; gap: 6px; }
+  .player-name-wrap { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; overflow: hidden; }
+  .player-name-full { flex-shrink: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  .player-name-short { display: none; flex-shrink: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
   .player-summary-icon { height: 13px; width: auto; opacity: 1; flex-shrink: 0; }
   td.team-col  { font-size: 0.82rem; color: var(--text-muted); }
   td.pos-col   { text-align: center; }
@@ -521,7 +524,7 @@
   }
   .modal-summary {
     flex: 1;
-    font-size: 0.9rem; line-height: 1.6; color: #bbb;
+    font-size: 0.8rem; font-weight: 500; line-height: 1.6; color: #bbb;
     font-style: italic; border-left: 3px solid var(--accent); padding-left: 14px;
     min-width: 0;
   }
@@ -682,8 +685,45 @@
     .pos-badge { width: 34px; font-size: 0.65rem; letter-spacing: 0; }
     .pos-badge::after { content: attr(data-short); }
 
-    .frozen-player { left: 0; min-width: 130px; max-width: 130px;
+    /* Default (unscrolled) mobile player column */
+    .frozen-player { left: 0; min-width: 160px; max-width: 160px;
                      box-shadow: 3px 0 6px rgba(0,0,0,0.4); }
+
+    /* When horizontally scrolled: compact player col + freeze pos/team (logo only) */
+    .table-scrolled .frozen-player { min-width: 100px !important; max-width: 100px !important; }
+    .table-scrolled .player-name-full { display: none; }
+    .table-scrolled .player-name-short { display: inline; }
+
+    .table-scrolled .frozen-pos {
+      position: sticky !important;
+      left: 100px !important;
+      min-width: 46px !important; max-width: 46px !important;
+      background: var(--frozen-bg-body) !important;
+      box-shadow: none !important;
+    }
+    .table-scrolled thead .frozen-pos { background: var(--frozen-bg-head) !important; }
+    .table-scrolled tbody tr:hover .frozen-pos { background: #0f2530 !important; }
+
+    .table-scrolled .frozen-team {
+      position: sticky !important;
+      left: 146px !important;
+      min-width: 36px !important; max-width: 36px !important;
+      background: var(--frozen-bg-body) !important;
+      box-shadow: none !important;
+    }
+    .table-scrolled thead .frozen-team { background: var(--frozen-bg-head) !important; }
+    .table-scrolled tbody tr:hover .frozen-team { background: #0f2530 !important; }
+    .table-scrolled .team-col-name { display: none; }
+
+    .table-scrolled .frozen-pts {
+      position: sticky;
+      left: 182px;
+      z-index: 5;
+      background: var(--frozen-bg-body);
+      box-shadow: 3px 0 6px rgba(0,0,0,0.4);
+    }
+    .table-scrolled thead .frozen-pts { background: var(--frozen-bg-head); z-index: 25; }
+    .table-scrolled tbody tr:hover .frozen-pts { background: #0f2530; }
 
     .table-area { flex: 1; min-height: 0; }
 
@@ -1028,12 +1068,19 @@ function renderHeaders() {
     th.className = col.cls || '';
     if (col.tip) th.title = col.tip;
     if (col.frozen) { th.classList.add('frozen', `frozen-${col.frozen}`); }
+    if (col.key === 'TOT. PTS.') { th.classList.add('frozen-pts'); }
     if (col.key === sortCol) th.classList.add(sortDir === -1 ? 'sorted-desc' : 'sorted-asc');
     th.onclick = () => handleSort(col.key);
     tr.appendChild(th);
   });
   thead.innerHTML = '';
   thead.appendChild(tr);
+}
+
+function abbreviateName(name) {
+  const idx = name.indexOf(' ');
+  if (idx < 0) return name;
+  return name[0] + '. ' + name.slice(idx + 1);
 }
 
 function renderRows() {
@@ -1062,16 +1109,18 @@ function renderRows() {
 
       } else if (col.key === 'PLAYER') {
         const hasSummary = !!row['SEASON SUMMARY'];
-        td.innerHTML = `<span class="player-name-wrap">${v}${hasSummary ? '<img src="talk.png" class="player-summary-icon" alt="">' : ''}</span>`;
+        const shortName = abbreviateName(v);
+        td.innerHTML = `<span class="player-name-wrap"><span class="player-name-full">${v}</span><span class="player-name-short">${shortName}</span>${hasSummary ? '<img src="talk.png" class="player-summary-icon" alt="">' : ''}</span>`;
 
       } else if (col.key === 'POS') {
         td.innerHTML = posBadge(v);
 
       } else if (col.key === 'TEAM') {
         const tl = teamLogoSrc(v);
-        td.innerHTML = `<div class="team-col-inner">${tl ? `<img src="${tl}" class="team-col-logo" alt="">` : ''}<span>${v}</span></div>`;
+        td.innerHTML = `<div class="team-col-inner">${tl ? `<img src="${tl}" class="team-col-logo" alt="">` : ''}<span class="team-col-name">${v}</span></div>`;
 
       } else if (col.key === 'TOT. PTS.') {
+        td.classList.add('frozen-pts');
         const pct = parseFloat(row['PERCENTILE']) || 0;
         const bg  = percentileColor(pct);
         const col2 = percentileTextColor(pct);
@@ -1402,6 +1451,8 @@ function setupScrollHints() {
   if (!wrapper || !hintR || !hintB) return;
 
   function update() {
+    const scrolled = wrapper.scrollLeft > 2;
+    wrapper.classList.toggle('table-scrolled', scrolled);
     hintR.classList.toggle('visible', wrapper.scrollLeft < wrapper.scrollWidth  - wrapper.clientWidth  - 2);
     hintB.classList.toggle('visible', wrapper.scrollTop  < wrapper.scrollHeight - wrapper.clientHeight - 2);
   }
