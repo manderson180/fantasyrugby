@@ -673,7 +673,7 @@
     #pos-group, #team-group { flex: 0 0 calc(50% - 4px); min-width: 0; }
     #pos-group select, #team-group select { width: 100%; }
 
-    /* Pos: always sticky on mobile — left overridden per-frame by scrollStyle */
+    /* Pos: always sticky on mobile — left snaps 160→100 via .table-scrolled */
     .frozen-pos {
       position: sticky !important;
       left: 160px !important;
@@ -690,7 +690,7 @@
     .pos-badge::after { content: attr(data-short); }
 
     /* Team: fixed 155px cell (transparent beyond content div) so stats scroll through the gap.
-       Only the inner div has the frozen background — its width collapses via --mob-team-w. */
+       Only the inner div carries the frozen background; it's clipped 155→32 when collapsed. */
     .frozen-team {
       position: sticky !important;
       left: 196px !important;
@@ -709,7 +709,6 @@
       min-width: 0;
       padding: 5px 4px;
       box-sizing: border-box;
-      will-change: clip-path;
     }
     thead .frozen-team .team-col-inner { background: transparent; }
     .team-col-name  { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
@@ -726,14 +725,36 @@
     tbody tr:hover .frozen-pts { background: #0f2530 !important; }
     td.pts-col { border-right: none; }
 
-    /* Player: fixed 160px cell; name wrap clips to --mob-player-w so content narrows
-       without affecting table layout — stats columns stay at their original positions */
+    /* Player: fixed 160px cell; name wrap narrows 160→100 when collapsed without
+       affecting table layout — stats columns stay at their original positions */
     .frozen-player { left: 0; min-width: 160px; max-width: 160px; }
     .player-name-wrap { max-width: 160px; }
 
     /* When scrolled: switch to abbreviated player name */
     .table-scrolled .player-name-full { display: none; }
     .table-scrolled .player-name-short { display: inline; }
+
+    /* --- Snap collapse ---------------------------------------------------------
+       The frozen panel narrows in one short transition when the user crosses a
+       scroll threshold (JS toggles .table-scrolled with hysteresis). Both the
+       expanded state (defaults above: pos 160 / team 196 / pts 351, content 155/160)
+       and the collapsed state (below) use FIXED left values that don't depend on
+       scroll position — so native position:sticky does all per-frame work and the
+       scroll handler writes no styles. The frozen cell BOXES stay fixed-width, so
+       table layout and scroll position never change: stat columns already on screen
+       stay put, and the snap merely uncovers ~183px more of them on the left. */
+    .frozen-pos, .frozen-team, .frozen-pts { transition: left 200ms ease; }
+    .team-col-inner   { transition: clip-path 200ms ease; }
+    .player-name-wrap { transition: max-width 200ms ease; }
+
+    .table-scrolled .frozen-pos  { left: 100px !important; }
+    .table-scrolled .frozen-team { left: 136px !important; }
+    .table-scrolled .frozen-pts  { left: 168px !important; }
+    .table-scrolled .team-col-inner   { clip-path: inset(0 123px 0 0); }
+    .table-scrolled .player-name-wrap { max-width: 100px; }
+    .table-scrolled thead .frozen-team {
+      background: linear-gradient(to right, var(--frozen-bg-head) 32px, transparent 32px) !important;
+    }
 
     .table-area { flex: 1; min-height: 0; }
 
@@ -1460,33 +1481,27 @@ function setupScrollHints() {
   const hintB    = document.querySelector('.scroll-hint--bottom');
   if (!wrapper || !hintR || !hintB) return;
 
-  // Injected per-frame CSS with concrete px values — avoids CSS-var subtree cascade
-  const scrollStyle = document.createElement('style');
-  document.head.appendChild(scrollStyle);
-
   let rafPending = false;
   function update() {
     rafPending = false;
     const sl = wrapper.scrollLeft;
-    if (window.innerWidth <= 768) {
-      // Phase 1 (sl 0–123): team collapses 155→32px at 1px/px
-      const teamW   = Math.max(32, 155 - sl);
-      // Phase 2 (sl 123–273): player collapses 160→100px
-      const playerW = Math.round(160 - Math.max(0, Math.min((sl - 123) / 150, 1)) * 60);
-      scrollStyle.textContent =
-        `.team-col-inner{clip-path:inset(0 ${155 - teamW}px 0 0)!important}` +
-        `.frozen-pos{left:${playerW}px!important}` +
-        `.frozen-team{left:${playerW + 36}px!important}` +
-        `thead .frozen-team{background:linear-gradient(to right,var(--frozen-bg-head) ${teamW}px,transparent ${teamW}px)!important}` +
-        `.frozen-pts{left:${playerW + 36 + teamW}px!important}` +
-        `.player-name-wrap{max-width:${playerW}px!important}`;
-    } else {
-      scrollStyle.textContent = '';
-    }
-    const isScrolled = wrapper.classList.contains('table-scrolled');
-    wrapper.classList.toggle('table-scrolled', sl > (isScrolled ? 15 : 273));
+
+    // Read layout metrics for the scroll hints before any style write (no forced reflow)
     hintR.classList.toggle('visible', sl < wrapper.scrollWidth  - wrapper.clientWidth  - 2);
-    hintB.classList.toggle('visible', wrapper.scrollTop  < wrapper.scrollHeight - wrapper.clientHeight - 2);
+    hintB.classList.toggle('visible', wrapper.scrollTop < wrapper.scrollHeight - wrapper.clientHeight - 2);
+
+    // Snap collapse. The threshold (~183px) is the scroll point where the points
+    // column's natural position reaches its collapsed target — snapping exactly there
+    // lets pts and the team content edge animate together and stay flush (no stat-gap
+    // opening between them). Tight hysteresis (185 in / 177 out) prevents flicker while
+    // keeping any transient gap on the way out under ~6px. Both states are fixed in CSS,
+    // so this writes nothing per frame — just a class toggle that CSS transitions.
+    const isScrolled = wrapper.classList.contains('table-scrolled');
+    if (window.innerWidth <= 768) {
+      wrapper.classList.toggle('table-scrolled', sl > (isScrolled ? 177 : 185));
+    } else if (isScrolled) {
+      wrapper.classList.remove('table-scrolled');
+    }
   }
 
   if (!wrapper._scrollHintsBound) {
