@@ -673,11 +673,19 @@
     #pos-group, #team-group { flex: 0 0 calc(50% - 4px); min-width: 0; }
     #pos-group select, #team-group select { width: 100%; }
 
-    /* Pos: pinned at expanded left (160); slides left up to 60px via a composited
-       transform set per frame by the injected #mob-collapse stylesheet. */
+    /* --- Mobile: static compact frozen panel -----------------------------------
+       The frozen columns are permanently compact on mobile so stats are visible
+       without any scroll-linked collapse: abbreviated player name, pos badge, team
+       logo only, then points. Everything is static — no transforms, no per-frame JS.
+       Sticky lefts stack: player 0 / pos 108 / team 144 / pts 176. */
+    .frozen-player { left: 0; min-width: 108px; max-width: 108px; }
+    .player-name-wrap  { max-width: 100px; }
+    .player-name-full  { display: none; }
+    .player-name-short { display: inline; }
+
     .frozen-pos {
       position: sticky !important;
-      left: 160px !important;
+      left: 108px !important;
       min-width: 36px !important; max-width: 36px !important;
       padding-left: 4px !important; padding-right: 4px !important;
       background: var(--frozen-bg-body) !important;
@@ -690,37 +698,30 @@
     .pos-badge { width: 28px; font-size: 0.65rem; letter-spacing: 0; }
     .pos-badge::after { content: attr(data-short); }
 
-    /* Team: fixed 155px cell (transparent beyond content div) so stats scroll through the gap.
-       Cell slides left up to 60px (transform); inner content clips 155→32 (clip-path).
-       Both composited, set per frame by the injected #mob-collapse stylesheet. */
+    /* Team: logo only in a compact 32px cell */
     .frozen-team {
       position: sticky !important;
-      left: 196px !important;
-      min-width: 155px !important; max-width: 155px !important;
+      left: 144px !important;
+      min-width: 32px !important; max-width: 32px !important;
       padding: 0 !important;
-      background: transparent !important;
+      background: var(--frozen-bg-body) !important;
       box-shadow: none !important;
     }
     thead .frozen-team { background: var(--frozen-bg-head) !important; }
-    tbody tr:hover .frozen-team .team-col-inner { background: #0f2530; }
+    tbody tr:hover .frozen-team { background: #0f2530 !important; }
     .team-col-inner {
-      width: 155px;
+      width: 32px;
       height: 100%;
-      background: var(--frozen-bg-body);
-      overflow: hidden;
-      min-width: 0;
-      padding: 5px 4px;
+      justify-content: center;
+      padding: 5px 2px;
       box-sizing: border-box;
     }
-    thead .frozen-team .team-col-inner { background: transparent; }
-    .team-col-name  { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
+    .team-col-name { display: none; }
 
-    /* Pts: pinned at expanded left (351); slides left up to 183px via transform set
-       per frame. The shift equals -scrollLeft until fully collapsed, so pts stays glued
-       to both the team content edge and the first stat column at every scroll position. */
+    /* Pts: sticky immediately after the team logo */
     .frozen-pts {
       position: sticky !important;
-      left: 351px !important;
+      left: 176px !important;
       background: var(--frozen-bg-body) !important;
       z-index: 5;
       box-shadow: 3px 0 6px rgba(0,0,0,0.4) !important;
@@ -728,27 +729,6 @@
     thead .frozen-pts { background: var(--frozen-bg-head) !important; z-index: 25; }
     tbody tr:hover .frozen-pts { background: #0f2530 !important; }
     td.pts-col { border-right: none; }
-
-    /* Player: fixed 160px cell. The name stays put; as pos/team slide left over the
-       cell (their opaque backgrounds cover the name's right portion), the visible name
-       shrinks for free. We swap to the abbreviated name once collapse is underway. */
-    .frozen-player { left: 0; min-width: 160px; max-width: 160px; }
-    .player-name-wrap { max-width: 160px; }
-
-    /* Switch to abbreviated player name once the collapse is underway (set by JS) */
-    .table-scrolled .player-name-full { display: none; }
-    .table-scrolled .player-name-short { display: inline; }
-
-    /* --- Continuous composited collapse ----------------------------------------
-       The frozen panel narrows continuously as you scroll. The scroll handler writes
-       one <style id="mob-collapse"> rule per frame with concrete transform/clip-path
-       values for pos/team/pts/team-content. Why an injected rule rather than a CSS
-       custom property: custom properties INHERIT, so setting one on the wrapper would
-       invalidate the computed style of all ~26k descendant cells (~31ms/frame). A rule
-       change invalidates only the ~3k cells matching its selectors (~8ms/frame), and
-       because every animated property is composited (transform/clip-path) the table
-       never relayouts. Progress p = min(scrollLeft / 183, 1); 183 is the scroll point
-       where pts reaches its collapsed spot, so it stays flush with the stats throughout. */
 
     .table-area { flex: 1; min-height: 0; }
 
@@ -1475,48 +1455,12 @@ function setupScrollHints() {
   const hintB    = document.querySelector('.scroll-hint--bottom');
   if (!wrapper || !hintR || !hintB) return;
 
-  // One stylesheet whose single rule we rewrite per frame to drive the collapse.
-  // Editing a rule invalidates only the cells matching its selectors (~3k), unlike a
-  // custom property which would invalidate the whole inherited subtree (~26k cells).
-  const collapseStyle = document.createElement('style');
-  collapseStyle.id = 'mob-collapse';
-  document.head.appendChild(collapseStyle);
-  let lastP = -1;
-
   let rafPending = false;
   function update() {
     rafPending = false;
-    const sl = wrapper.scrollLeft;
-
-    // Read layout metrics for the scroll hints before any style write (no forced reflow)
-    hintR.classList.toggle('visible', sl < wrapper.scrollWidth  - wrapper.clientWidth  - 2);
-    hintB.classList.toggle('visible', wrapper.scrollTop < wrapper.scrollHeight - wrapper.clientHeight - 2);
-
-    // Continuous composited collapse driven by progress p = min(scrollLeft / 183, 1).
-    // All motion is transform/clip-path (composited) — no relayout — and it tracks
-    // scroll from the first pixel, so there's no dead zone and pts stays flush.
-    if (window.innerWidth <= 768) {
-      const p = Math.min(sl / 183, 1);
-      if (p !== lastP) {
-        lastP = p;
-        const slide    = (-60  * p).toFixed(1);
-        const ptsSlide = (-183 * p).toFixed(1);
-        const clip     = (123  * p).toFixed(1);
-        const teamW    = (155 - 123 * p).toFixed(1);
-        collapseStyle.textContent =
-          `.frozen-pos,.frozen-team{transform:translateX(${slide}px)}` +
-          `.frozen-pts{transform:translateX(${ptsSlide}px)}` +
-          `.team-col-inner{clip-path:inset(0 ${clip}px 0 0)}` +
-          `thead .frozen-team{background:linear-gradient(to right,var(--frozen-bg-head) ${teamW}px,transparent ${teamW}px)!important}`;
-      }
-      // Swap to the abbreviated player name once the collapse is meaningfully underway
-      const isScrolled = wrapper.classList.contains('table-scrolled');
-      wrapper.classList.toggle('table-scrolled', sl > (isScrolled ? 30 : 50));
-    } else if (lastP !== 0) {
-      lastP = 0;
-      collapseStyle.textContent = '';
-      wrapper.classList.remove('table-scrolled');
-    }
+    // Just the scroll-hint chevrons; the frozen panel is static (compact on mobile).
+    hintR.classList.toggle('visible', wrapper.scrollLeft < wrapper.scrollWidth  - wrapper.clientWidth  - 2);
+    hintB.classList.toggle('visible', wrapper.scrollTop  < wrapper.scrollHeight - wrapper.clientHeight - 2);
   }
 
   if (!wrapper._scrollHintsBound) {
