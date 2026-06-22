@@ -17,6 +17,8 @@
     --text: #f5f5f5;
     --text-muted: #a9a9a9;
     --neg: #e05252;
+    --cmp-win: #2ee06b;
+    --cmp-lose: #cf6f68;
     --highlight-row: rgba(255,255,255,0.04);
     --frozen-bg-head: rgb(18, 26, 32);
     --frozen-bg-body: rgb(13, 19, 24);
@@ -358,6 +360,7 @@
     flex-direction: column;
     overflow: hidden;
   }
+  .compare-modal { max-width: 620px; }
 
   .modal-header {
     flex-shrink: 0;
@@ -662,6 +665,212 @@
     white-space: nowrap;
   }
 
+  /* ── Tools overflow menu ── */
+  .tools-group { position: relative; margin-left: auto; }
+  .tools-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .tools-btn:hover { color: var(--accent); border-color: var(--accent); }
+  .tools-btn.open  { color: #000; background: var(--accent); border-color: var(--accent); }
+  .tools-caret { font-size: 0.7rem; }
+  .tools-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 240px;
+    max-width: calc(100vw - 24px);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.55);
+    padding: 6px;
+    z-index: 60;
+  }
+  .tools-menu.open { display: block; }
+  .tools-menu-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    border-radius: 6px;
+    padding: 9px 10px;
+    cursor: pointer;
+    font-family: 'Rajdhani', sans-serif;
+    transition: background 0.15s;
+  }
+  .tools-menu-item:hover { background: var(--surface2); }
+  .tools-menu-item-title {
+    font-size: 0.92rem; font-weight: 700; letter-spacing: 0.3px;
+    text-transform: uppercase; color: var(--text);
+  }
+  .tools-menu-item-sub { font-size: 0.74rem; color: var(--text-muted); }
+
+  /* ── Compare selection tray ── */
+  .compare-tray {
+    display: none;
+    flex-shrink: 0;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px 24px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .compare-tray.open { display: flex; }
+  .compare-tray-inner { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .compare-tray-slots { display: flex; align-items: center; gap: 10px; flex: 1 1 auto; min-width: 0; }
+  .cmp-slot {
+    flex: 1 1 0; min-width: 0; min-height: 38px;
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 10px;
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    background: var(--surface2);
+  }
+  .cmp-slot.filled { border-style: solid; }
+  .cmp-slot.filled { border-color: var(--accent); }
+  .cmp-slot-badge {
+    flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.72rem; font-weight: 800; color: #000;
+  }
+  .cmp-slot-badge { background: var(--accent); }
+  .cmp-slot-empty-text { color: var(--text-muted); font-size: 0.85rem; font-style: italic; }
+  .cmp-slot-name {
+    flex: 1 1 auto; min-width: 0; font-weight: 700; font-size: 0.92rem;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .cmp-slot-team { color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; flex-shrink: 0; }
+  .cmp-slot-clear {
+    flex-shrink: 0; background: none; border: none; cursor: pointer;
+    color: var(--text-muted); font-size: 1rem; line-height: 1; padding: 2px 4px;
+  }
+  .cmp-slot-clear:hover { color: var(--text); }
+  .cmp-tray-vs { font-weight: 800; font-size: 0.8rem; color: var(--text-muted); letter-spacing: 1px; flex-shrink: 0; }
+  .compare-tray-actions { display: flex; gap: 8px; flex-shrink: 0; }
+  .cmp-go, .cmp-cancel {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; padding: 7px 16px;
+    border-radius: 6px; cursor: pointer; border: 1px solid var(--border);
+    transition: all 0.18s;
+  }
+  .cmp-go { background: var(--accent); color: #000; border-color: var(--accent); }
+  .cmp-go:disabled { background: var(--surface2); color: var(--text-muted); border-color: var(--border); cursor: default; }
+  .cmp-cancel { background: var(--surface2); color: var(--text-muted); }
+  .cmp-cancel:hover { color: var(--text); }
+  .compare-tray-hint { font-size: 0.76rem; color: var(--text-muted); }
+
+  /* Selected-row markers (compare mode) */
+  tbody tr.cmp-sel { cursor: pointer; background: color-mix(in srgb, var(--accent) 9%, transparent); }
+  tbody tr.cmp-sel .frozen { background: color-mix(in srgb, var(--accent) 14%, var(--frozen-bg-body)); }
+  tbody tr.cmp-sel .frozen-player { box-shadow: inset 4px 0 0 0 var(--accent); }
+  tbody tr.cmp-sel .frozen-player::before {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 15px; height: 15px; border-radius: 50%;
+    background: var(--accent); color: #000;
+    font-size: 0.6rem; font-weight: 800;
+    margin-right: 5px; vertical-align: middle;
+  }
+  tbody tr.cmp-sel-a .frozen-player::before { content: 'A'; }
+  tbody tr.cmp-sel-b .frozen-player::before { content: 'B'; }
+
+  /* ── Compare overlay ── */
+  .cmp-head { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; gap: 12px; }
+  .cmp-head-player { display: flex; flex-direction: column; gap: 6px; padding: 4px 6px; min-width: 0; }
+  .cmp-head-player.cmp-b { align-items: flex-end; text-align: right; }
+  .cmp-head-logo { height: 40px; width: auto; max-width: 64px; object-fit: contain; }
+  .cmp-head-rank { font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); }
+  .cmp-head-name { font-size: 1.25rem; font-weight: 800; text-transform: uppercase; line-height: 1.05; color: var(--accent); }
+  .cmp-head-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .cmp-head-player.cmp-b .cmp-head-meta { flex-direction: row-reverse; }
+  .cmp-head-meta .team { font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; }
+  .cmp-vs {
+    align-self: center; flex-shrink: 0;
+    font-size: 0.82rem; font-weight: 800; letter-spacing: 1px; color: var(--text-muted);
+    border: 1px solid var(--border); border-radius: 50%;
+    width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+  }
+  .cmp-section-title {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--text-muted); margin: 18px 0 10px;
+  }
+  .cmp-grid { display: flex; flex-direction: column; gap: 4px; max-width: 420px; margin-left: auto; margin-right: auto; }
+  .cmp-row {
+    display: grid;
+    grid-template-columns: minmax(56px, 1fr) minmax(120px, 1.5fr) minmax(56px, 1fr);
+    align-items: center; gap: 10px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 6px; padding: 7px 12px;
+  }
+  .cmp-v { font-size: 1.02rem; font-weight: 700; color: var(--text); }
+  .cmp-v-a { text-align: left; }
+  .cmp-v-b { text-align: right; }
+  .cmp-v.cmp-win  { color: var(--cmp-win); font-weight: 800; font-size: 1.08rem; }
+  .cmp-v.cmp-lose { color: var(--cmp-lose); font-weight: 500; opacity: 0.40; font-size: 0.97rem; }
+  .cmp-mid { min-width: 0; display: flex; flex-direction: column; gap: 5px; align-items: center; }
+  .cmp-lbl {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.5px;
+    text-transform: uppercase; color: var(--text-muted); text-align: center;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
+  }
+  .cmp-bar { display: flex; width: 100%; height: 5px; border-radius: 3px; overflow: hidden; background: rgba(255,255,255,0.05); }
+  .cmp-bar-win  { background: var(--cmp-win); }
+  .cmp-bar-lose { background: var(--cmp-lose); opacity: 0.14; }
+  .cmp-bar-tie  { background: rgba(255,255,255,0.18); }
+  .cmp-row--feat {
+    background: none; border: none; border-radius: 0;
+    border-bottom: 1px solid var(--border); padding: 9px 6px;
+  }
+  .cmp-row--feat .cmp-v { font-size: 1.3rem; }
+  .cmp-row--feat .cmp-v.cmp-win  { font-size: 1.42rem; }
+  .cmp-row--feat .cmp-v.cmp-lose { font-size: 1.22rem; }
+  .cmp-row--feat .cmp-lbl { font-size: 0.72rem; color: var(--text); }
+  .cmp-summaries { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .cmp-sum { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .cmp-sum-name { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+  .cmp-sum-name { color: var(--accent); }
+  .cmp-sum .modal-summary { border-left-color: var(--accent); }
+  .cmp-sum .modal-summary.empty { font-style: normal; color: var(--text-muted); border-left-color: var(--border); }
+  .cmp-tally {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    font-size: 0.82rem; font-weight: 700; margin-bottom: 12px; flex-wrap: wrap;
+  }
+  .cmp-tally .cmp-name { color: var(--accent); }
+  .cmp-tally .cmp-win  { color: var(--cmp-win); }
+  .cmp-tally .cmp-lose { color: var(--cmp-lose); }
+  .cmp-tally .cmp-draw { color: var(--text-muted); }
+  .cmp-tally-sep { color: var(--border); }
+  .cmp-rounds-grid { display: grid; grid-template-columns: repeat(18, 1fr); gap: 5px; }
+  .cmp-round-cell {
+    border-radius: 5px; padding: 5px 2px; text-align: center;
+    background: var(--surface2); border: 1px solid var(--border);
+  }
+  .cmp-round-cell.bye { opacity: 0.4; }
+  .cmp-round-cell .r-lbl { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 3px; }
+  .cmp-r { font-size: 0.78rem; font-weight: 700; border-radius: 3px; padding: 1px 0; }
+  .cmp-r-a, .cmp-r-b { color: var(--text); }
+  .cmp-r.cmp-r-win  { color: var(--cmp-win); background: rgba(46,224,107,0.16); font-weight: 800; }
+  .cmp-r.cmp-r-lose { color: var(--cmp-lose); opacity: 0.58; }
+  .cmp-r.dim { color: var(--text-muted); opacity: 0.5; font-weight: 600; }
+
   /* ── Mobile ── */
   @media (max-width: 768px) {
     header { padding: 10px 14px; }
@@ -792,6 +1001,31 @@
     .rounds-grid { grid-template-columns: repeat(9, 1fr); gap: 4px; }
     .round-cell { padding: 4px 2px; }
     .round-cell .r-val { font-size: 0.72rem; }
+
+    /* Compare — keep Tools pushed right so its (right-anchored) dropdown stays on-screen. */
+    .compare-tray { padding: 10px 12px; }
+    .compare-tray-inner { gap: 10px; }
+    .cmp-slot { padding: 5px 8px; min-height: 34px; }
+    .cmp-slot-name { font-size: 0.82rem; }
+    .cmp-slot-team { display: none; }
+    .compare-tray-actions { flex: 1 1 auto; }
+    .cmp-go, .cmp-cancel { flex: 1 1 0; padding: 7px 10px; }
+    .cmp-head { gap: 8px; }
+    .cmp-head-logo { height: 30px; }
+    .cmp-head-name { font-size: 1rem; }
+    .cmp-head-meta .team { display: none; }
+    .cmp-vs { width: 28px; height: 28px; font-size: 0.7rem; }
+    .cmp-row { grid-template-columns: minmax(44px,1fr) minmax(84px,1.3fr) minmax(44px,1fr); gap: 6px; padding: 6px 8px; }
+    .cmp-v { font-size: 0.92rem; }
+    .cmp-v.cmp-win  { font-size: 0.98rem; }
+    .cmp-v.cmp-lose { font-size: 0.88rem; }
+    .cmp-row--feat .cmp-v { font-size: 1.05rem; }
+    .cmp-row--feat .cmp-v.cmp-win  { font-size: 1.14rem; }
+    .cmp-row--feat .cmp-v.cmp-lose { font-size: 0.98rem; }
+    .cmp-lbl { font-size: 0.6rem; }
+    .cmp-summaries { grid-template-columns: 1fr; gap: 12px; }
+    .cmp-rounds-grid { grid-template-columns: repeat(9, 1fr); gap: 4px; }
+    .cmp-r { font-size: 0.7rem; }
   }
 
   /* Phones: View + Rank share one row, each as a label stacked above a full-width pill */
@@ -809,6 +1043,14 @@
     .stat-card--row .stat-lbl { font-size: 0.58rem; }
     .stat-card--row .stat-val { font-size: 0.88rem; }
     .stat-card--row .stat-rank-badge { font-size: 0.6rem; min-width: 24px; }
+  }
+
+  /* Desktop: tighten the head-to-head rows so the two values sit close to the centre
+     label (less eye-travel). Mobile keeps its own full-width, edge-aligned layout. */
+  @media (min-width: 769px) {
+    .cmp-row { grid-template-columns: 1fr 140px 1fr; }
+    .cmp-v-a { text-align: right;  padding-right: 10px; }
+    .cmp-v-b { text-align: left;   padding-left: 10px; }
   }
 </style>
 </head>
@@ -873,7 +1115,31 @@
       <button id="btn-rounds" onclick="setView('rounds')">Rounds</button>
     </div>
   </div>
-  <div class="count-badge">Showing <span id="count">—</span> players</div>
+  <div class="count-badge"><span id="count">—</span> players</div>
+  <div class="stat-group tools-group">
+    <button id="toolsBtn" class="tools-btn" onclick="toggleToolsMenu(event)" aria-haspopup="true" aria-expanded="false">Tools <span class="tools-caret">&#9662;</span></button>
+    <div class="tools-menu" id="toolsMenu" role="menu">
+      <button class="tools-menu-item" role="menuitem" onclick="enterCompareMode()">
+        <span class="tools-menu-item-title">Compare players</span>
+        <span class="tools-menu-item-sub">Pick two players for a side-by-side</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="compare-tray" id="compareTray">
+  <div class="compare-tray-inner">
+    <div class="compare-tray-slots">
+      <div class="cmp-slot" id="cmpSlot0"></div>
+      <div class="cmp-tray-vs">VS</div>
+      <div class="cmp-slot" id="cmpSlot1"></div>
+    </div>
+    <div class="compare-tray-actions">
+      <button class="cmp-go" id="compareGo" onclick="launchCompare()" disabled>Compare</button>
+      <button class="cmp-cancel" onclick="exitCompareMode()">Cancel</button>
+    </div>
+  </div>
+  <div class="compare-tray-hint" id="compareTrayHint">Tap two players in the table to compare them.</div>
 </div>
 
 <div class="table-area">
@@ -893,6 +1159,16 @@
     <div class="modal-body-wrap">
       <div class="modal-body" id="modalBody"></div>
       <div class="modal-scroll-fade" id="modalScrollFade"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay compare-overlay" id="compareOverlay" onclick="closeCompare(event)">
+  <div class="modal compare-modal" id="compareModal">
+    <div class="modal-header" id="compareHeader"></div>
+    <div class="modal-body-wrap">
+      <div class="modal-body" id="compareBody"></div>
+      <div class="modal-scroll-fade" id="compareScrollFade"></div>
     </div>
   </div>
 </div>
@@ -1151,7 +1427,12 @@ function renderRows() {
 
   filtered.forEach((row, i) => {
     const tr = document.createElement('tr');
-    tr.onclick = () => openModal(i);
+    tr.onclick = () => onRowClick(i);
+    if (compareMode) {
+      const s = compareSel.indexOf(row);
+      if (s === 0)      tr.classList.add('cmp-sel', 'cmp-sel-a');
+      else if (s === 1) tr.classList.add('cmp-sel', 'cmp-sel-b');
+    }
 
     cols.forEach(col => {
       const td = document.createElement('td');
@@ -1253,6 +1534,9 @@ function setLeague(league) {
   document.getElementById('search').value = '';
   sortCol = 'TOT. PTS.';
   sortDir = -1;
+  // Comparison is league-scoped — switching leagues clears any in-progress picks.
+  compareSel = [];
+  if (compareMode) renderCompareTray();
   populateTeamFilter();
   applyFilters();
 }
@@ -1534,9 +1818,337 @@ function closeModalDirect() {
   currentModalIndex = -1;
 }
 
+// ── Tools menu + Player comparison ──────────────────
+let compareMode = false;
+let compareSel  = [];      // ordered selected player row objects (max 2): [A, B]
+let compareA = null, compareB = null;
+let compareStatMode = 'total';   // 'total' | 'perGame' (compare overlay only)
+
+const COMPARE_STATS = [
+  { k: 'MINS',               l: 'Minutes',            pg: 'MINS PER GAME' },
+  { k: 'PPM',                l: 'Pts / Min' },
+  { k: 'TRIES',              l: 'Tries',              pg: 'TRIES PER GAME' },
+  { k: 'ASSISTS',            l: 'Try Assists',        pg: 'ASSISTS PER GAME' },
+  { k: 'METRES',             l: 'Metres Made',        pg: 'METRES PER GAME' },
+  { k: 'CLEAN BREAKS',       l: 'Line Breaks',        pg: 'CLEAN BREAKS PER GAME' },
+  { k: 'DEFENDERS BEATEN',   l: 'Defenders Beaten',   pg: 'DEFENDERS BEATEN PER GAME' },
+  { k: 'OFFLOADS',           l: 'Offloads',           pg: 'OFFLOADS PER GAME' },
+  { k: 'TACKLES',            l: 'Tackles',            pg: 'TACKLES PER GAME' },
+  { k: 'TACKLES MISSED',     l: 'Tackles Missed',     pg: 'TACKLES MISSED PER GAME' },
+  { k: 'TURNOVERS',          l: 'Turnovers Won',      pg: 'TURNOVERS PER GAME' },
+  { k: 'TURNOVERS CONCEDED', l: 'Turnovers Conceded', pg: 'TURNOVERS CONCEDED PER GAME' },
+  { k: 'LINEOUT STEALS',     l: 'Lineout Steals',     pg: 'LINEOUT STEALS PER GAME' },
+  { k: 'PENALTIES CONCEDED', l: 'Penalties Conceded', pg: 'PENALTIES CONCEDED PER GAME' },
+  { k: 'PENALTIES',          l: 'Penalty Kicks',      pg: 'PENALTIES PER GAME' },
+  { k: 'CONVERSIONS',        l: 'Conversions',        pg: 'CONVERSIONS PER GAME' },
+  { k: 'DROP GOALS',         l: 'Drop Goals',         pg: 'DROP GOALS PER GAME' },
+  { k: '50-22s',             l: '50-22 Kicks',        pg: '50-22s PER GAME' },
+  { k: 'YELLOW CARDS',       l: 'Yellow Cards',       pg: 'YELLOW CARDS PER GAME' },
+  { k: 'RED CARDS',          l: 'Red Cards',          pg: 'RED CARDS PER GAME' },
+];
+
+// — Tools dropdown —
+function toggleToolsMenu(e) {
+  if (e) e.stopPropagation();
+  const menu = document.getElementById('toolsMenu');
+  const btn  = document.getElementById('toolsBtn');
+  const open = menu.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+function closeToolsMenu() {
+  document.getElementById('toolsMenu').classList.remove('open');
+  const btn = document.getElementById('toolsBtn');
+  btn.classList.remove('open');
+  btn.setAttribute('aria-expanded', 'false');
+}
+document.addEventListener('click', e => {
+  const grp = document.querySelector('.tools-group');
+  if (grp && !grp.contains(e.target)) closeToolsMenu();
+});
+
+// — Row click dispatch: select in compare mode, else open the detail modal —
+function onRowClick(i) {
+  if (compareMode) toggleCompareSelect(filtered[i]);
+  else openModal(i);
+}
+
+// — Compare mode + selection tray —
+function enterCompareMode() {
+  closeToolsMenu();
+  compareMode = true;
+  compareSel = [];
+  document.getElementById('compareTray').classList.add('open');
+  renderCompareTray();
+  applyRowMarkers();
+}
+function exitCompareMode() {
+  compareMode = false;
+  compareSel = [];
+  document.getElementById('compareTray').classList.remove('open');
+  applyRowMarkers();
+}
+function toggleCompareSelect(player) {
+  if (!player) return;
+  const idx = compareSel.indexOf(player);
+  if (idx !== -1)                   compareSel.splice(idx, 1);   // tap again to deselect
+  else if (compareSel.length < 2)   compareSel.push(player);
+  else                              compareSel[1] = player;      // both full → keep A, replace B
+  renderCompareTray();
+  applyRowMarkers();
+}
+function removeCompareSlot(i) {
+  compareSel.splice(i, 1);
+  renderCompareTray();
+  applyRowMarkers();
+}
+function applyRowMarkers() {
+  const tbody = document.getElementById('tbody');
+  if (!tbody) return;
+  Array.from(tbody.children).forEach((tr, i) => {
+    tr.classList.remove('cmp-sel', 'cmp-sel-a', 'cmp-sel-b');
+    if (!compareMode) return;
+    const s = compareSel.indexOf(filtered[i]);
+    if (s === 0)      tr.classList.add('cmp-sel', 'cmp-sel-a');
+    else if (s === 1) tr.classList.add('cmp-sel', 'cmp-sel-b');
+  });
+}
+function renderCompareTray() {
+  const tag = i => i === 0 ? 'A' : 'B';
+  const cls = i => i === 0 ? 'cmp-slot--a' : 'cmp-slot--b';
+  [0, 1].forEach(i => {
+    const el = document.getElementById('cmpSlot' + i);
+    const p  = compareSel[i];
+    el.className = 'cmp-slot ' + cls(i) + (p ? ' filled' : '');
+    el.innerHTML = p
+      ? `<span class="cmp-slot-badge">${tag(i)}</span>` +
+        `<span class="cmp-slot-name">${p.PLAYER}</span>` +
+        `<span class="cmp-slot-team">${p.TEAM}</span>` +
+        `<button class="cmp-slot-clear" onclick="removeCompareSlot(${i})" aria-label="Remove">&#x2715;</button>`
+      : `<span class="cmp-slot-badge">${tag(i)}</span>` +
+        `<span class="cmp-slot-empty-text">Pick player ${tag(i)}&hellip;</span>`;
+  });
+  document.getElementById('compareGo').disabled = compareSel.length < 2;
+  const hint = document.getElementById('compareTrayHint');
+  if (hint) hint.textContent = compareSel.length < 2
+    ? 'Tap two players in the table to compare them.'
+    : 'Ready — hit Compare.';
+}
+function launchCompare() {
+  if (compareSel.length === 2) openCompare(compareSel[0], compareSel[1]);
+}
+
+// — Head-to-head helpers —
+// Returns 0 = tie/no data, 1 = A better, 2 = B better.
+function cmpDecide(va, vb, lowerBetter) {
+  const a = typeof va === 'number' ? va : parseFloat(va);
+  const b = typeof vb === 'number' ? vb : parseFloat(vb);
+  const aN = isFinite(a), bN = isFinite(b);
+  if (!aN && !bN) return 0;
+  if (!aN) return 2;
+  if (!bN) return 1;
+  if (a === b) return 0;
+  return (lowerBetter ? a < b : a > b) ? 1 : 2;
+}
+function cmpFmt(v) {
+  if (v === null || v === undefined || v === '') return '—';
+  if (typeof v === 'number') return v % 1 !== 0 ? v.toFixed(2) : String(v);
+  return v;
+}
+// One head-to-head row. opts: { lowerBetter, bar, featured, compare, decideA, decideB }
+function cmpRow(label, va, vb, opts = {}) {
+  const compare = opts.compare !== false;
+  const da = opts.decideA !== undefined ? opts.decideA : va;
+  const db = opts.decideB !== undefined ? opts.decideB : vb;
+  const state = compare ? cmpDecide(da, db, !!opts.lowerBetter) : 0;
+  const aCls = state === 1 ? 'cmp-win' : (state === 2 ? 'cmp-lose' : '');
+  const bCls = state === 2 ? 'cmp-win' : (state === 1 ? 'cmp-lose' : '');
+
+  let bar = '';
+  if (opts.bar) {
+    const a = parseFloat(da), b = parseFloat(db);
+    const av = isFinite(a) ? Math.max(a, 0) : 0;
+    const bv = isFinite(b) ? Math.max(b, 0) : 0;
+    const sum = av + bv;
+    if (sum > 0) {
+      const pa = Math.round(av / sum * 100);
+      const aSeg = state === 1 ? 'cmp-bar-win' : (state === 2 ? 'cmp-bar-lose' : 'cmp-bar-tie');
+      const bSeg = state === 2 ? 'cmp-bar-win' : (state === 1 ? 'cmp-bar-lose' : 'cmp-bar-tie');
+      bar = `<div class="cmp-bar">` +
+            `<span class="${aSeg}" style="width:${pa}%"></span>` +
+            `<span class="${bSeg}" style="width:${100 - pa}%"></span></div>`;
+    } else {
+      bar = `<div class="cmp-bar"></div>`;
+    }
+  }
+  return `<div class="cmp-row${opts.featured ? ' cmp-row--feat' : ''}">` +
+    `<div class="cmp-v cmp-v-a ${aCls}">${cmpFmt(va)}</div>` +
+    `<div class="cmp-mid"><div class="cmp-lbl">${label}</div>${bar}</div>` +
+    `<div class="cmp-v cmp-v-b ${bCls}">${cmpFmt(vb)}</div>` +
+  `</div>`;
+}
+
+// — Compare overlay —
+function openCompare(a, b) {
+  if (!a || !b) return;
+  compareA = a; compareB = b;
+  closeToolsMenu();
+  renderCompareHeader();
+  renderCompareBody();
+  const overlay = document.getElementById('compareOverlay');
+  overlay.classList.add('open');
+
+  const bodyEl = document.getElementById('compareBody');
+  const fade   = document.getElementById('compareScrollFade');
+  const updateFade = () => {
+    const atBottom = bodyEl.scrollTop + bodyEl.clientHeight >= bodyEl.scrollHeight - 4;
+    fade.classList.toggle('hidden', atBottom);
+  };
+  if (bodyEl._fadeHandler) bodyEl.removeEventListener('scroll', bodyEl._fadeHandler);
+  bodyEl._fadeHandler = updateFade;
+  bodyEl.addEventListener('scroll', updateFade);
+  bodyEl.scrollTop = 0;
+  updateFade();
+}
+function closeCompare(e) {
+  if (e.target === document.getElementById('compareOverlay')) closeCompareDirect();
+}
+function closeCompareDirect() {
+  document.getElementById('compareOverlay').classList.remove('open');
+}
+function setCompareStatMode(mode) {
+  compareStatMode = mode;
+  document.querySelectorAll('#cmp-seg-stat button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.stat === mode);
+  });
+  renderCompareStatGrid();
+}
+function cmpPlayerHead(p, side) {
+  const tl = teamLogoSrc(p.TEAM);
+  return `<div class="cmp-head-player cmp-${side}">` +
+    (tl ? `<img src="${tl}" class="cmp-head-logo" alt="${p.TEAM}">` : '') +
+    `<div class="cmp-head-rank">Overall #${p['OVERALL RANK']}</div>` +
+    `<div class="cmp-head-name">${p.PLAYER}</div>` +
+    `<div class="cmp-head-meta">${posBadge(p.POS)}<span class="team">${p.TEAM}</span></div>` +
+  `</div>`;
+}
+function renderCompareHeader() {
+  document.getElementById('compareHeader').innerHTML =
+    `<div class="modal-nav-bar">` +
+      `<span class="modal-nav-count">Player Comparison</span>` +
+      `<button class="modal-close" onclick="closeCompareDirect()">&#x2715;</button>` +
+    `</div>` +
+    `<div class="cmp-head">` +
+      cmpPlayerHead(compareA, 'a') +
+      `<div class="cmp-vs">VS</div>` +
+      cmpPlayerHead(compareB, 'b') +
+    `</div>`;
+}
+function renderCompareRounds() {
+  const a = compareA, b = compareB;
+  let aw = 0, bw = 0, dr = 0;
+  const cells = ROUNDS.map(r => {
+    const av = parseFloat(a[r]) || 0;
+    const bv = parseFloat(b[r]) || 0;
+    const bye = av === 0 && bv === 0;
+    let winA = false, winB = false;
+    const aPlayed = av > 0, bPlayed = bv > 0;
+    if (!bye) {
+      if (av > bv)      { winA = true; aw++; }
+      else if (bv > av) { winB = true; bw++; }
+      else              { dr++; }
+    }
+    const fmt = v => v % 1 !== 0 ? v.toFixed(1) : String(v);
+    // Winner = green; loser reddens only if they actually played (a no-show stays a muted dash).
+    const aState = winA ? ' cmp-r-win' : (winB && aPlayed ? ' cmp-r-lose' : '');
+    const bState = winB ? ' cmp-r-win' : (winA && bPlayed ? ' cmp-r-lose' : '');
+    const aCell = 'cmp-r cmp-r-a' + aState + (aPlayed ? '' : ' dim');
+    const bCell = 'cmp-r cmp-r-b' + bState + (bPlayed ? '' : ' dim');
+    return `<div class="cmp-round-cell${bye ? ' bye' : ''}">` +
+      `<div class="r-lbl">${r}</div>` +
+      `<div class="${aCell}">${av === 0 ? '—' : fmt(av)}</div>` +
+      `<div class="${bCell}">${bv === 0 ? '—' : fmt(bv)}</div>` +
+    `</div>`;
+  }).join('');
+  const aTally = aw > bw ? 'cmp-win' : (aw < bw ? 'cmp-lose' : '');
+  const bTally = bw > aw ? 'cmp-win' : (bw < aw ? 'cmp-lose' : '');
+  const tally =
+    `<div class="cmp-tally">` +
+      `<span><span class="cmp-name">${a.PLAYER}</span> <span class="${aTally}">${aw}</span></span>` +
+      `<span class="cmp-tally-sep">&middot;</span>` +
+      `<span class="cmp-draw">Drawn ${dr}</span>` +
+      `<span class="cmp-tally-sep">&middot;</span>` +
+      `<span><span class="cmp-name">${b.PLAYER}</span> <span class="${bTally}">${bw}</span></span>` +
+    `</div>`;
+  return tally + `<div class="cmp-rounds-grid">${cells}</div>`;
+}
+function renderCompareStatGrid() {
+  const a = compareA, b = compareB;
+  if (!a || !b) return;
+  const perGame = compareStatMode === 'perGame';
+  const rows = COMPARE_STATS.map(s => {
+    const usePG = perGame && !!s.pg;
+    const key   = usePG ? s.pg : s.k;
+    return cmpRow(s.l, a[key], b[key], { lowerBetter: NEGATIVE_STAT_KEYS.has(s.k), bar: true });
+  }).join('');
+  const el = document.getElementById('cmp-stat-grid');
+  if (el) el.innerHTML = rows;
+}
+function renderCompareBody() {
+  const a = compareA, b = compareB;
+  const samePos = a.POS === b.POS;
+  const posNum  = p => parseInt((p['POSITION RANK'] || '').match(/\d+/)?.[0] ?? 'x', 10);
+
+  const featured =
+    cmpRow('Overall Rank', a['OVERALL RANK'], b['OVERALL RANK'], { lowerBetter: true, featured: true }) +
+    cmpRow('Position Rank', a['POSITION RANK'] || '—', b['POSITION RANK'] || '—',
+           samePos ? { featured: true, lowerBetter: true, decideA: posNum(a), decideB: posNum(b) }
+                   : { featured: true, compare: false }) +
+    cmpRow('Total Points', a['TOT. PTS.'], b['TOT. PTS.'], { featured: true }) +
+    cmpRow('Games', a.GMS, b.GMS, { featured: true }) +
+    cmpRow('Pts / Game', a.PPG, b.PPG, { featured: true });
+
+  const sumBlock = (p, side) => {
+    const s = p['SEASON SUMMARY'];
+    return `<div class="cmp-sum cmp-${side}">` +
+      `<div class="cmp-sum-name">${p.PLAYER}</div>` +
+      (s ? `<div class="modal-summary">${s}</div>`
+         : `<div class="modal-summary empty">No season summary available.</div>`) +
+    `</div>`;
+  };
+  const summaries = (a['SEASON SUMMARY'] || b['SEASON SUMMARY'])
+    ? `<div class="cmp-section-title">Season Summary</div>` +
+      `<div class="cmp-summaries">${sumBlock(a, 'a')}${sumBlock(b, 'b')}</div>`
+    : '';
+
+  document.getElementById('compareBody').innerHTML =
+    `<div class="cmp-grid">${featured}</div>` +
+    summaries +
+    `<div class="cmp-section-title">Statistical Breakdown</div>` +
+    `<div class="modal-controls">` +
+      `<div class="seg-group">` +
+        `<span class="seg-label">View</span>` +
+        `<div class="seg" id="cmp-seg-stat">` +
+          `<button class="${compareStatMode === 'total' ? 'active' : ''}" data-stat="total" onclick="setCompareStatMode('total')">Totals</button>` +
+          `<button class="${compareStatMode === 'perGame' ? 'active' : ''}" data-stat="perGame" onclick="setCompareStatMode('perGame')">Per Game</button>` +
+        `</div>` +
+      `</div>` +
+    `</div>` +
+    `<div class="cmp-grid" id="cmp-stat-grid"></div>` +
+    `<div class="cmp-section-title">Round by Round &mdash; Head to Head</div>` +
+    renderCompareRounds();
+
+  renderCompareStatGrid();
+}
+
 document.addEventListener('keydown', e => {
   const open = document.getElementById('modalOverlay').classList.contains('open');
-  if (e.key === 'Escape') { closeModalDirect(); return; }
+  if (e.key === 'Escape') {
+    if (document.getElementById('compareOverlay').classList.contains('open')) { closeCompareDirect(); return; }
+    closeToolsMenu();
+    closeModalDirect();
+    return;
+  }
   if (!open) return;
   if (e.key === 'ArrowRight') { e.preventDefault(); navigateModal(1); }
   if (e.key === 'ArrowLeft')  { e.preventDefault(); navigateModal(-1); }
