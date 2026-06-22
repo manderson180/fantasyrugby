@@ -1923,12 +1923,18 @@ function llTeamCell(team) {
 }
 
 // Totals table — used by By Position and By Team. Pts coloured by season percentile.
+// The final column is PPG, except in By Team where position rank (e.g. "FH #1") is
+// more useful for gauging each player's standing within their position.
 function llTotalsTable(group, mode, key) {
+  const teamMode = mode === 'team';
+  const lastHeader = teamMode ? 'Pos Rank' : 'PPG';
   const rows = group.map((row, i) => {
     const pct = parseFloat(row.PERCENTILE) || 0;
     const ptsColor = percentileTextColor(pct);
     const pts = typeof row['TOT. PTS.'] === 'number' ? row['TOT. PTS.'].toFixed(2) : row['TOT. PTS.'];
-    const ppg = typeof row.PPG === 'number' ? row.PPG.toFixed(2) : row.PPG;
+    const lastVal = teamMode
+      ? (row['POSITION RANK'] || '—')
+      : (typeof row.PPG === 'number' ? row.PPG.toFixed(2) : row.PPG);
     return `<tr class="ll-row" data-mode="${mode}" data-key="${key}" data-idx="${i}">` +
       `<td class="ll-col-rank">${i + 1}</td>` +
       `<td class="ll-col-player">${llPlayerName(row)}</td>` +
@@ -1936,7 +1942,7 @@ function llTotalsTable(group, mode, key) {
       `<td class="ll-col-team">${llTeamCell(row.TEAM)}</td>` +
       `<td class="ll-col-pts" style="color:${ptsColor}">${pts}</td>` +
       `<td class="ll-col-gp">${row.GMS}</td>` +
-      `<td class="ll-col-ppg">${ppg}</td>` +
+      `<td class="ll-col-ppg">${lastVal}</td>` +
     `</tr>`;
   }).join('');
   return `<table class="ll-table ll-table--${mode}"><thead><tr>` +
@@ -1946,7 +1952,7 @@ function llTotalsTable(group, mode, key) {
     `<th class="ll-col-team">Team</th>` +
     `<th class="ll-col-pts">Pts</th>` +
     `<th class="ll-col-gp">GP</th>` +
-    `<th class="ll-col-ppg">PPG</th>` +
+    `<th class="ll-col-ppg">${lastHeader}</th>` +
   `</tr></thead><tbody>${rows}</tbody></table>`;
 }
 
