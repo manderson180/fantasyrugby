@@ -756,8 +756,9 @@
     overscroll-behavior: none;
     padding: 20px 24px 44px;
   }
-  .ll-section { margin-bottom: 30px; }
-  .ll-section:last-child { margin-bottom: 0; }
+  /* Two tables per row on desktop; sections fill the width with no wasted space. */
+  #ll-content { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 28px; align-items: start; }
+  .ll-section { min-width: 0; }
   .ll-section-header {
     display: flex;
     align-items: center;
@@ -767,6 +768,10 @@
     border-left: 4px solid var(--accent);
   }
   .ll-section-logo { height: 26px; width: 26px; object-fit: contain; flex-shrink: 0; }
+  /* Position section header is the lozenge alone — give it room and always show the
+     full label (overrides the mobile data-short rule via higher specificity). */
+  .ll-section-header .pos-badge { width: auto; padding: 4px 18px; font-size: 0.9rem; letter-spacing: 0.5px; }
+  .ll-section-header .pos-badge::after { content: attr(data-full); }
   .ll-section-title {
     font-size: 1.05rem;
     font-weight: 700;
@@ -832,7 +837,13 @@
   .ll-col-pts    { width: 84px;  text-align: center; font-weight: 700; font-size: 0.95rem; }
   .ll-col-gp     { width: 56px;  text-align: center; font-size: 0.88rem; color: var(--text-muted); }
   .ll-col-ppg    { width: 90px;  text-align: center; font-size: 0.88rem; }
-  th.ll-col-pts, th.ll-col-gp, th.ll-col-ppg, th.ll-col-pos, th.ll-col-rank { text-align: center; }
+  /* Centre the header to match its centred cell values (needs the table+thead
+     prefix to outweigh the left-aligning `.ll-table thead th` rule). */
+  .ll-table thead th.ll-col-pts,
+  .ll-table thead th.ll-col-gp,
+  .ll-table thead th.ll-col-ppg,
+  .ll-table thead th.ll-col-pos,
+  .ll-table thead th.ll-col-rank { text-align: center; }
 
   .ll-team-cell { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; overflow: hidden; }
   .ll-team-logo { height: 18px; width: 22px; object-fit: contain; flex-shrink: 0; }
@@ -1091,13 +1102,13 @@
     .ll-col-gp   { width: 38px; font-size: 0.8rem; }
     .ll-col-ppg  { width: 56px; font-size: 0.8rem; }
     .ll-round-score { padding: 2px 6px; font-size: 0.8rem; }
+    /* Single column on phones. */
+    #ll-content { grid-template-columns: 1fr; gap: 22px; }
     /* Team name is logo-only in rows; the section header already names everything. */
     .ll-team-name { display: none; }
-    /* Position badge is redundant within a position block, and the team column is
-       redundant within a team block — drop each on its own view to save width. */
-    .ll-table--position .ll-col-pos { display: none; }
-    .ll-table--round .ll-col-pos { display: none; }
-    .ll-table--team .ll-col-team { display: none; }
+    /* By Round keeps the position lozenge (mix of positions); the small data-short
+       badge fits fine on mobile. */
+    .ll-table--round .ll-col-pos { width: 40px; }
 
     .controls {
       padding: 10px 12px;
@@ -1439,17 +1450,11 @@ const POS_SHORT = {
 
 // League Leaders: positions in fixed display order, their badge colours
 // (mirrors the .pos-* CSS classes) and pluralised section titles.
-const POSITIONS_ORDER = ['Fly Half','Outside Back','Centre','Scrum Half','Loose Forward','Hooker','Lock','Prop'];
+const POSITIONS_ORDER = ['Outside Back','Centre','Fly Half','Scrum Half','Loose Forward','Lock','Prop','Hooker'];
 const POS_COLORS = {
   FH: '#ef4444', OB: '#3b82f6', CE: '#22c55e', LF: '#a855f7',
   SH: '#eab308', HK: '#6366f1', LK: '#f97316', PR: '#ec4899'
 };
-const POS_PLURAL = {
-  'Fly Half': 'Fly Halves', 'Outside Back': 'Outside Backs', 'Centre': 'Centres',
-  'Scrum Half': 'Scrum Halves', 'Loose Forward': 'Loose Forwards', 'Hooker': 'Hookers',
-  'Lock': 'Locks', 'Prop': 'Props'
-};
-
 const ROUNDS = ['R1','R2','R3','R4','R5','R6','R7','R8','R9','R10','R11','R12','R13','R14','R15','R16','R17','R18'];
 
 const LEAGUE_CONFIG = {
@@ -1935,21 +1940,27 @@ function llTotalsTable(group, mode, key) {
     const lastVal = teamMode
       ? (row['POSITION RANK'] || '—')
       : (typeof row.PPG === 'number' ? row.PPG.toFixed(2) : row.PPG);
+    // By Team shows the position badge (team is implied); By Position shows the
+    // team (position is implied) — each drops the redundant column entirely.
+    const midCol = teamMode
+      ? `<td class="ll-col-pos">${posBadge(row.POS)}</td>`
+      : `<td class="ll-col-team">${llTeamCell(row.TEAM)}</td>`;
     return `<tr class="ll-row" data-mode="${mode}" data-key="${key}" data-idx="${i}">` +
       `<td class="ll-col-rank">${i + 1}</td>` +
       `<td class="ll-col-player">${llPlayerName(row)}</td>` +
-      `<td class="ll-col-pos">${posBadge(row.POS)}</td>` +
-      `<td class="ll-col-team">${llTeamCell(row.TEAM)}</td>` +
+      midCol +
       `<td class="ll-col-pts" style="color:${ptsColor}">${pts}</td>` +
       `<td class="ll-col-gp">${row.GMS}</td>` +
       `<td class="ll-col-ppg">${lastVal}</td>` +
     `</tr>`;
   }).join('');
+  const midHeader = teamMode
+    ? `<th class="ll-col-pos">Pos</th>`
+    : `<th class="ll-col-team">Team</th>`;
   return `<table class="ll-table ll-table--${mode}"><thead><tr>` +
     `<th class="ll-col-rank">#</th>` +
     `<th class="ll-col-player">Player</th>` +
-    `<th class="ll-col-pos">Pos</th>` +
-    `<th class="ll-col-team">Team</th>` +
+    midHeader +
     `<th class="ll-col-pts">Pts</th>` +
     `<th class="ll-col-gp">GP</th>` +
     `<th class="ll-col-ppg">${lastHeader}</th>` +
@@ -1994,7 +2005,6 @@ function renderLeadersByPosition() {
     const header =
       `<div class="ll-section-header" style="border-left-color:${color}">` +
         posBadge(pos) +
-        `<span class="ll-section-title">${POS_PLURAL[pos] || pos}</span>` +
         `<button class="ll-view-btn" data-mode="position" data-key="${pos}">View in Stats Grid &rarr;</button>` +
       `</div>`;
     const body = group.length ? llTotalsTable(group, 'position', pos)
@@ -2023,7 +2033,7 @@ function renderLeadersByTeam() {
 }
 
 function renderLeadersByRound() {
-  const html = ROUNDS.map(r => {
+  const html = [...ROUNDS].reverse().map(r => {
     const header =
       `<div class="ll-section-header">` +
         `<span class="ll-section-title">Round ${r.slice(1)}</span>` +
