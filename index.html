@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>URC Fantasy Rugby Stats 2025/26</title>
+<title>Fantasy Data Hub</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -58,15 +58,18 @@
     flex-shrink: 0;
   }
 
-  .league-logo { height: 2.3rem; }
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    min-width: 0;
+  }
 
   .header-right {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
   }
-
-  .header-league-toggle { margin-left: 0 !important; }
 
   .draft-xv-text {
     font-size: 1.6rem;
@@ -82,14 +85,51 @@
     letter-spacing: 0px;
     text-transform: uppercase;
     color: var(--accent);
+    white-space: nowrap;
   }
 
-  header p {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    margin-top: 4px;
-    letter-spacing: 0px;
+  /* ── Header dropdowns ── */
+  .header-select-wrap { position: relative; display: inline-flex; }
+  .header-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-family: 'Rajdhani', sans-serif;
+    background-color: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 6px;
+    outline: none;
+    cursor: pointer;
+    padding: 7px 34px 7px 12px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%23888888' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 11px center;
+    background-size: 11px 7px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .header-select:hover { border-color: var(--accent); }
+  .header-select:focus { border-color: var(--accent); }
+  .header-select option { background-color: #1e2a32; color: var(--text); }
+
+  /* League select reads like the old subtitle: muted, understated. */
+  .header-league-select {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* Feature select is the primary nav: accent border + bold accent text make it
+     an obvious control. Caret stays neutral so it never goes stale on league switch. */
+  .header-feature-select {
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-color: var(--accent);
   }
 
   .controls {
@@ -665,6 +705,159 @@
     white-space: nowrap;
   }
 
+  /* ── Feature panels ── */
+  .feature-panel {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Coming soon placeholder ── */
+  .coming-soon-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    padding: 24px;
+  }
+  .coming-soon-title {
+    font-size: 1.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text);
+  }
+  .coming-soon-label {
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent);
+  }
+
+  /* ── League Leaders ── */
+  .ll-controls-bar {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .ll-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: none;
+    padding: 20px 24px 44px;
+  }
+  .ll-section { margin-bottom: 30px; }
+  .ll-section:last-child { margin-bottom: 0; }
+  .ll-section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 4px 0 4px 12px;
+    border-left: 4px solid var(--accent);
+  }
+  .ll-section-logo { height: 26px; width: 26px; object-fit: contain; flex-shrink: 0; }
+  .ll-section-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text);
+  }
+  .ll-view-btn {
+    margin-left: auto;
+    flex-shrink: 0;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.18s;
+  }
+  .ll-view-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+  .ll-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    table-layout: auto;
+  }
+  .ll-table thead th {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+    background: var(--frozen-bg-head);
+    white-space: nowrap;
+  }
+  .ll-table tbody td {
+    padding: 7px 10px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+  .ll-table tbody tr:last-child td { border-bottom: none; }
+  .ll-row { cursor: pointer; transition: background 0.1s; }
+  .ll-row:hover { background: var(--highlight-row); }
+
+  .ll-col-rank   { width: 48px;  text-align: center; font-weight: 700; color: var(--text-muted); }
+  .ll-col-player { font-weight: 600; font-size: 0.95rem; }
+  .ll-col-pos    { width: 96px;  text-align: center; }
+  .ll-col-team   { color: var(--text-muted); font-size: 0.85rem; }
+  .ll-col-pts    { width: 84px;  text-align: center; font-weight: 700; font-size: 0.95rem; }
+  .ll-col-gp     { width: 56px;  text-align: center; font-size: 0.88rem; color: var(--text-muted); }
+  .ll-col-ppg    { width: 90px;  text-align: center; font-size: 0.88rem; }
+  th.ll-col-pts, th.ll-col-gp, th.ll-col-ppg, th.ll-col-pos, th.ll-col-rank { text-align: center; }
+
+  .ll-team-cell { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; overflow: hidden; }
+  .ll-team-logo { height: 18px; width: 22px; object-fit: contain; flex-shrink: 0; }
+  .ll-team-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ll-player-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+
+  .ll-round-score {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  .ll-yet-to-play {
+    padding: 16px 14px;
+    text-align: center;
+    font-style: italic;
+    color: var(--text-muted);
+    background: var(--surface);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    font-size: 0.9rem;
+  }
+
   /* ── Tools overflow menu ── */
   .tools-group { position: relative; margin-left: auto; }
   .tools-btn {
@@ -873,11 +1066,38 @@
 
   /* ── Mobile ── */
   @media (max-width: 768px) {
-    header { padding: 10px 14px; }
-    header h1 { font-size: 1.2rem; letter-spacing: 1px; }
-    header p  { font-size: 0.68rem; }
-    .league-logo { display: none; }
+    header { padding: 10px 14px; gap: 10px; }
+    header h1 { display: none; }
     .draft-xv-text { display: none; }
+    .header-left { gap: 10px; flex: 1 1 auto; }
+    .header-league-select { font-size: 0.78rem; letter-spacing: 0; padding: 6px 28px 6px 10px; width: 100%; }
+    .header-league-select, .header-feature-select { background-position: right 9px center; }
+    .header-feature-select { font-size: 0.82rem; letter-spacing: 0.5px; padding: 6px 28px 6px 10px; }
+    .header-select-wrap { min-width: 0; }
+    .header-left .header-select-wrap { flex: 1 1 auto; }
+
+    /* League Leaders — compact tables that fit a phone without horizontal scroll. */
+    .ll-controls-bar { padding: 10px 12px; }
+    .ll-mode-toggle button { padding: 4px 9px; font-size: 0.72rem; }
+    .ll-scroll { padding: 14px 12px 32px; }
+    .ll-section-header { gap: 8px; padding-left: 9px; }
+    .ll-section-title { font-size: 0.92rem; }
+    .ll-view-btn { font-size: 0.66rem; padding: 4px 8px; }
+    .ll-table thead th { padding: 7px 6px; font-size: 0.62rem; }
+    .ll-table tbody td { padding: 6px 6px; }
+    .ll-col-player { font-size: 0.85rem; }
+    .ll-col-rank { width: 30px; }
+    .ll-col-pts  { width: 58px; font-size: 0.85rem; }
+    .ll-col-gp   { width: 38px; font-size: 0.8rem; }
+    .ll-col-ppg  { width: 56px; font-size: 0.8rem; }
+    .ll-round-score { padding: 2px 6px; font-size: 0.8rem; }
+    /* Team name is logo-only in rows; the section header already names everything. */
+    .ll-team-name { display: none; }
+    /* Position badge is redundant within a position block, and the team column is
+       redundant within a team block — drop each on its own view to save width. */
+    .ll-table--position .ll-col-pos { display: none; }
+    .ll-table--round .ll-col-pos { display: none; }
+    .ll-table--team .ll-col-team { display: none; }
 
     .controls {
       padding: 10px 12px;
@@ -1057,23 +1277,30 @@
 <body>
 
 <header>
-  <div style="display:flex;align-items:flex-start;gap:16px;">
-    <img id="leagueLogo" src="URC.svg" alt="URC" class="header-logo league-logo">
-    <div>
-      <h1>Fantasy Stats</h1>
-      <p id="leagueSubtitle">URC &mdash; 2025 / 26 Season Totals</p>
+  <div class="header-left">
+    <h1>Fantasy Data Hub</h1>
+    <div class="header-select-wrap">
+      <select id="leagueSelect" class="header-select header-league-select" onchange="setLeague(this.value)" aria-label="Select league">
+        <option value="URC">URC &mdash; 2025/26 Season</option>
+        <option value="PREM">Gallagher Prem &mdash; 2025/26 Season</option>
+      </select>
     </div>
   </div>
   <div class="header-right">
-    <div class="view-toggle header-league-toggle">
-      <button class="active" id="btn-league-URC" onclick="setLeague('URC')">URC</button>
-      <button id="btn-league-PREM" onclick="setLeague('PREM')">Prem</button>
+    <div class="header-select-wrap">
+      <select id="featureSelect" class="header-select header-feature-select" onchange="setFeature(this.value)" aria-label="Select feature">
+        <option value="stats">Stats</option>
+        <option value="leaders">Leaders</option>
+        <option value="waiver">Waiver</option>
+        <option value="fixtures">Fixtures</option>
+      </select>
     </div>
     <span class="draft-xv-text">Draft XV</span>
     <img src="DRAFTXV LOGO ONLY.png" alt="DraftXV" class="header-logo">
   </div>
 </header>
 
+<div id="panel-stats" class="feature-panel">
 <div class="controls">
   <div class="stat-group" id="search-group">
     <label>Search</label>
@@ -1152,6 +1379,27 @@
     </table>
   </div>
 </div>
+</div><!-- /#panel-stats -->
+
+<div id="panel-leaders" class="feature-panel" style="display:none">
+  <div class="ll-controls-bar">
+    <div class="seg ll-mode-toggle">
+      <button class="active" data-llmode="position" onclick="setLeadersMode('position')">By Position</button>
+      <button data-llmode="team" onclick="setLeadersMode('team')">By Team</button>
+      <button data-llmode="round" onclick="setLeadersMode('round')">By Round</button>
+    </div>
+  </div>
+  <div class="ll-scroll">
+    <div id="ll-content"></div>
+  </div>
+</div>
+
+<div id="panel-coming-soon" class="feature-panel" style="display:none">
+  <div class="coming-soon-wrap">
+    <div class="coming-soon-title" id="coming-soon-title">Waiver Trends</div>
+    <div class="coming-soon-label">Coming Soon</div>
+  </div>
+</div>
 
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
   <div class="modal" id="modal">
@@ -1189,11 +1437,24 @@ const POS_SHORT = {
   'Lock': 'L', 'Prop': 'P'
 };
 
+// League Leaders: positions in fixed display order, their badge colours
+// (mirrors the .pos-* CSS classes) and pluralised section titles.
+const POSITIONS_ORDER = ['Fly Half','Outside Back','Centre','Scrum Half','Loose Forward','Hooker','Lock','Prop'];
+const POS_COLORS = {
+  FH: '#ef4444', OB: '#3b82f6', CE: '#22c55e', LF: '#a855f7',
+  SH: '#eab308', HK: '#6366f1', LK: '#f97316', PR: '#ec4899'
+};
+const POS_PLURAL = {
+  'Fly Half': 'Fly Halves', 'Outside Back': 'Outside Backs', 'Centre': 'Centres',
+  'Scrum Half': 'Scrum Halves', 'Loose Forward': 'Loose Forwards', 'Hooker': 'Hookers',
+  'Lock': 'Locks', 'Prop': 'Props'
+};
+
 const ROUNDS = ['R1','R2','R3','R4','R5','R6','R7','R8','R9','R10','R11','R12','R13','R14','R15','R16','R17','R18'];
 
 const LEAGUE_CONFIG = {
-  URC:  { accent: '#00cde6', logo: 'URC.svg',  logoAlt: 'URC',  starPts: 30, tY: 14, tLG: 20, tG: 30 },
-  PREM: { accent: '#fb5006', logo: 'PREM.png', logoAlt: 'Prem', starPts: 40, tY: 14, tLG: 20, tG: 30 }
+  URC:  { accent: '#00cde6', starPts: 30, tY: 14, tLG: 20, tG: 30 },
+  PREM: { accent: '#fb5006', starPts: 40, tY: 14, tLG: 20, tG: 30 }
 };
 
 const TEAM_LOGOS = {
@@ -1232,6 +1493,8 @@ let gridMode = 'total'; // 'total' | 'perGame' — main grid metric basis (overv
 let sortCol = 'TOT. PTS.';
 let sortDir = -1;
 let filtered = [];
+let currentFeature = 'stats';        // 'stats' | 'leaders' | 'waiver' | 'fixtures'
+let leadersGroupMode = 'position';   // 'position' | 'team' | 'round'
 
 // ── Column definitions ──────────────────────────────
 // `pg` = the data key to use when the grid is in Per Game mode. Only the individual
@@ -1523,13 +1786,7 @@ function setLeague(league) {
   currentLeague = league;
   const cfg = LEAGUE_CONFIG[league];
   document.documentElement.style.setProperty('--accent', cfg.accent);
-  const logo = document.getElementById('leagueLogo');
-  logo.src = cfg.logo;
-  logo.alt = cfg.logoAlt;
-  ['URC', 'PREM'].forEach(l => {
-    document.getElementById('btn-league-' + l).classList.toggle('active', l === league);
-  });
-  document.getElementById('leagueSubtitle').textContent = (league === 'URC' ? 'URC' : 'Gallagher Prem') + ' — 2025 / 26 Season Totals';
+  document.getElementById('leagueSelect').value = league;
   document.getElementById('posFilter').value = '';
   document.getElementById('search').value = '';
   sortCol = 'TOT. PTS.';
@@ -1539,6 +1796,8 @@ function setLeague(league) {
   if (compareMode) renderCompareTray();
   populateTeamFilter();
   applyFilters();
+  // Keep the League Leaders view in sync when it's the active feature.
+  if (currentFeature === 'leaders') renderLeagueLeaders();
 }
 
 function applyFilters() {
@@ -1596,6 +1855,221 @@ function setGridMode(mode) {
   });
   applyFilters(); // re-sort + re-render against the new metric basis
 }
+
+// ── Feature switching ───────────────────────────────
+function setFeature(feature) {
+  currentFeature = feature;
+  document.getElementById('featureSelect').value = feature;
+  document.getElementById('panel-stats').style.display       = feature === 'stats'   ? '' : 'none';
+  document.getElementById('panel-leaders').style.display     = feature === 'leaders' ? '' : 'none';
+  document.getElementById('panel-coming-soon').style.display = (feature === 'waiver' || feature === 'fixtures') ? '' : 'none';
+
+  if (feature === 'stats') {
+    // The grid's row clicks and nav rely on `filtered` matching the rendered rows.
+    // The League Leaders modal repurposes `filtered`, so resync when returning here.
+    applyFilters();
+  } else if (feature === 'leaders') {
+    renderLeagueLeaders();
+  } else if (feature === 'waiver') {
+    document.getElementById('coming-soon-title').textContent = 'Waiver Trends';
+  } else if (feature === 'fixtures') {
+    document.getElementById('coming-soon-title').textContent = 'Fixtures / Lineups';
+  }
+}
+
+// ── League Leaders ──────────────────────────────────
+function setLeadersMode(mode) {
+  leadersGroupMode = mode;
+  document.querySelectorAll('.ll-mode-toggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.llmode === mode);
+  });
+  renderLeagueLeaders();
+  const scroll = document.querySelector('.ll-scroll');
+  if (scroll) scroll.scrollTop = 0;
+}
+
+function renderLeagueLeaders() {
+  if (leadersGroupMode === 'team')       renderLeadersByTeam();
+  else if (leadersGroupMode === 'round') renderLeadersByRound();
+  else                                   renderLeadersByPosition();
+}
+
+// Build the full sorted group (not sliced) — the modal navigates through this whole list.
+// The displayed top 10 are the first 10 entries, so a row's display rank maps to its index.
+function buildLeadersGroup(mode, key) {
+  const data = getCurrentData();
+  if (mode === 'team') {
+    return data.filter(r => r.TEAM === key).sort((a, b) => b['TOT. PTS.'] - a['TOT. PTS.']);
+  }
+  if (mode === 'round') {
+    return data.filter(r => (parseFloat(r[key]) || 0) > 0)
+               .sort((a, b) => (parseFloat(b[key]) || 0) - (parseFloat(a[key]) || 0));
+  }
+  return data.filter(r => r.POS === key).sort((a, b) => b['TOT. PTS.'] - a['TOT. PTS.']);
+}
+
+function roundHasData(r) {
+  return getCurrentData().some(p => (parseFloat(p[r]) || 0) !== 0);
+}
+
+function llPlayerName(row) {
+  const icon = row['SEASON SUMMARY'] ? '<img src="talk.png" class="player-summary-icon" alt="">' : '';
+  return `<span class="player-name-wrap"><span class="ll-player-name">${row.PLAYER}</span>${icon}</span>`;
+}
+
+function llTeamCell(team) {
+  const tl = teamLogoSrc(team);
+  return `<span class="ll-team-cell">${tl ? `<img src="${tl}" class="ll-team-logo" alt="">` : ''}<span class="ll-team-name">${team}</span></span>`;
+}
+
+// Totals table — used by By Position and By Team. Pts coloured by season percentile.
+function llTotalsTable(group, mode, key) {
+  const rows = group.map((row, i) => {
+    const pct = parseFloat(row.PERCENTILE) || 0;
+    const ptsColor = percentileTextColor(pct);
+    const pts = typeof row['TOT. PTS.'] === 'number' ? row['TOT. PTS.'].toFixed(2) : row['TOT. PTS.'];
+    const ppg = typeof row.PPG === 'number' ? row.PPG.toFixed(2) : row.PPG;
+    return `<tr class="ll-row" data-mode="${mode}" data-key="${key}" data-idx="${i}">` +
+      `<td class="ll-col-rank">${i + 1}</td>` +
+      `<td class="ll-col-player">${llPlayerName(row)}</td>` +
+      `<td class="ll-col-pos">${posBadge(row.POS)}</td>` +
+      `<td class="ll-col-team">${llTeamCell(row.TEAM)}</td>` +
+      `<td class="ll-col-pts" style="color:${ptsColor}">${pts}</td>` +
+      `<td class="ll-col-gp">${row.GMS}</td>` +
+      `<td class="ll-col-ppg">${ppg}</td>` +
+    `</tr>`;
+  }).join('');
+  return `<table class="ll-table ll-table--${mode}"><thead><tr>` +
+    `<th class="ll-col-rank">#</th>` +
+    `<th class="ll-col-player">Player</th>` +
+    `<th class="ll-col-pos">Pos</th>` +
+    `<th class="ll-col-team">Team</th>` +
+    `<th class="ll-col-pts">Pts</th>` +
+    `<th class="ll-col-gp">GP</th>` +
+    `<th class="ll-col-ppg">PPG</th>` +
+  `</tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+// Round table — main stat is the round score (heat-mapped); also shows season PPG for context.
+function llRoundTable(group, roundKey) {
+  const rows = group.map((row, i) => {
+    const rv = parseFloat(row[roundKey]) || 0;
+    let style;
+    if (rv >= LEAGUE_CONFIG[currentLeague].starPts) {
+      style = 'background:#22c55e;color:#ffffff';
+    } else {
+      const sc = roundScoreColor(rv);
+      style = `background:${sc.bg};color:${sc.color}`;
+    }
+    const ppg = typeof row.PPG === 'number' ? row.PPG.toFixed(2) : row.PPG;
+    return `<tr class="ll-row" data-mode="round" data-key="${roundKey}" data-idx="${i}">` +
+      `<td class="ll-col-rank">${i + 1}</td>` +
+      `<td class="ll-col-player">${llPlayerName(row)}</td>` +
+      `<td class="ll-col-pos">${posBadge(row.POS)}</td>` +
+      `<td class="ll-col-team">${llTeamCell(row.TEAM)}</td>` +
+      `<td class="ll-col-pts"><span class="ll-round-score" style="${style}">${rv.toFixed(2)}</span></td>` +
+      `<td class="ll-col-ppg">${ppg}</td>` +
+    `</tr>`;
+  }).join('');
+  return `<table class="ll-table ll-table--round"><thead><tr>` +
+    `<th class="ll-col-rank">#</th>` +
+    `<th class="ll-col-player">Player</th>` +
+    `<th class="ll-col-pos">Pos</th>` +
+    `<th class="ll-col-team">Team</th>` +
+    `<th class="ll-col-pts">Round Pts</th>` +
+    `<th class="ll-col-ppg">Season PPG</th>` +
+  `</tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function renderLeadersByPosition() {
+  const html = POSITIONS_ORDER.map(pos => {
+    const group = buildLeadersGroup('position', pos).slice(0, 10);
+    const color = POS_COLORS[POS_MAP[pos]] || 'var(--accent)';
+    const header =
+      `<div class="ll-section-header" style="border-left-color:${color}">` +
+        posBadge(pos) +
+        `<span class="ll-section-title">${POS_PLURAL[pos] || pos}</span>` +
+        `<button class="ll-view-btn" data-mode="position" data-key="${pos}">View in Stats Grid &rarr;</button>` +
+      `</div>`;
+    const body = group.length ? llTotalsTable(group, 'position', pos)
+                              : `<div class="ll-yet-to-play">No players available.</div>`;
+    return `<div class="ll-section">${header}${body}</div>`;
+  }).join('');
+  document.getElementById('ll-content').innerHTML = html;
+}
+
+function renderLeadersByTeam() {
+  const teams = [...new Set(getCurrentData().map(r => r.TEAM))].sort();
+  const html = teams.map(team => {
+    const group = buildLeadersGroup('team', team).slice(0, 10);
+    const tl = teamLogoSrc(team);
+    const header =
+      `<div class="ll-section-header">` +
+        (tl ? `<img src="${tl}" class="ll-section-logo" alt="">` : '') +
+        `<span class="ll-section-title">${team}</span>` +
+        `<button class="ll-view-btn" data-mode="team" data-key="${team}">View in Stats Grid &rarr;</button>` +
+      `</div>`;
+    const body = group.length ? llTotalsTable(group, 'team', team)
+                              : `<div class="ll-yet-to-play">No players available.</div>`;
+    return `<div class="ll-section">${header}${body}</div>`;
+  }).join('');
+  document.getElementById('ll-content').innerHTML = html;
+}
+
+function renderLeadersByRound() {
+  const html = ROUNDS.map(r => {
+    const header =
+      `<div class="ll-section-header">` +
+        `<span class="ll-section-title">Round ${r.slice(1)}</span>` +
+      `</div>`;
+    let body;
+    if (!roundHasData(r)) {
+      body = `<div class="ll-yet-to-play">Yet to play</div>`;
+    } else {
+      const group = buildLeadersGroup('round', r).slice(0, 10);
+      body = group.length ? llRoundTable(group, r) : `<div class="ll-yet-to-play">Yet to play</div>`;
+    }
+    return `<div class="ll-section">${header}${body}</div>`;
+  }).join('');
+  document.getElementById('ll-content').innerHTML = html;
+}
+
+// Open the player modal from a Leaders row. `filtered` is repurposed as the modal's
+// navigation list (the full sorted group), so arrows step through every player in it.
+function openModalFromLeaders(mode, key, idx) {
+  if (isNaN(idx)) return;
+  filtered = buildLeadersGroup(mode, key);
+  if (idx >= 0 && idx < filtered.length) openModal(idx);
+}
+
+function goToStatsForPosition(pos) {
+  setFeature('stats');
+  document.getElementById('search').value = '';
+  document.getElementById('teamFilter').value = '';
+  document.getElementById('posFilter').value = pos;
+  applyFilters();
+}
+
+function goToStatsForTeam(team) {
+  setFeature('stats');
+  document.getElementById('search').value = '';
+  document.getElementById('posFilter').value = '';
+  document.getElementById('teamFilter').value = team;
+  applyFilters();
+}
+
+// Single delegated handler for the whole Leaders panel: view buttons + row clicks.
+document.getElementById('ll-content').addEventListener('click', e => {
+  const viewBtn = e.target.closest('.ll-view-btn');
+  if (viewBtn) {
+    e.stopPropagation();
+    if (viewBtn.dataset.mode === 'team') goToStatsForTeam(viewBtn.dataset.key);
+    else                                 goToStatsForPosition(viewBtn.dataset.key);
+    return;
+  }
+  const row = e.target.closest('.ll-row');
+  if (row) openModalFromLeaders(row.dataset.mode, row.dataset.key, parseInt(row.dataset.idx, 10));
+});
 
 // ── Modal ───────────────────────────────────────────
 let currentModalIndex = -1;
