@@ -31,6 +31,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 INDEX_HTML = HERE.parent / "index.html"
 CSV_PATH = HERE / "player_availability.csv"
+INTL_CSV_PATH = HERE / "international_squads.csv"
 ROUND_DATES_PATH = HERE / "round_dates.json"
 REPORT_PATH = HERE / "join_report.txt"
 
@@ -76,6 +77,11 @@ STATUS_META = {
 
 # internal_status / presumption combos whose "doubt" a later appearance can clear.
 RESOLVABLE_INTERNAL = {"injured", "unknown_potentially_injured"}
+
+# For pulling a nation out of a free-text international-duty note when it isn't phrased
+# as "Named in <nation>'s squad". Longer names first so "New Zealand" beats "Zealand".
+NATIONS = ["South Africa", "New Zealand", "Argentina", "Australia", "England", "Scotland",
+           "Ireland", "Wales", "Italy", "France", "Fiji", "Samoa", "Tonga", "Georgia", "Japan"]
 
 
 # ── helpers ────────────────────────────────────────────────────────────────
@@ -195,13 +201,35 @@ def main():
                 key = f"{ar['league']}|{ar['team']}|{ar['player']}"
                 injury_data[key] = entry
 
+    # ── International duty: fold in summer-2026 squads (club status takes precedence) ──
+    OVERRIDABLE = {"Healthy", "Likely Healthy (Unconfirmed)"}
+    intl_added, intl_list = 0, []
+    if INTL_CSV_PATH.exists():
+        with INTL_CSV_PATH.open(encoding="utf-8") as f:
+            for rec in csv.DictReader(f):
+                name = (rec.get("player_name") or "").strip()
+                if not name:
+                    continue
+                nname = norm_name(PLAYER_ALIASES.get(name, name))
+                cand = by_name.get(nname, [])
+                if len({(c["league"], c["team"], c["player"]) for c in cand}) != 1:
+                    continue  # not one of our players (or an ambiguous name) -> ignore
+                for ar in cand:
+                    key = f"{ar['league']}|{ar['team']}|{ar['player']}"
+                    existing = injury_data.get(key)
+                    if existing is None or existing["status"] in OVERRIDABLE:
+                        injury_data[key] = build_intl_entry(rec)
+                        intl_added += 1
+                        intl_list.append(f"{ar['player']} ({ar['team']}) — {rec['nation']}")
+
     inject(html, injury_data)
-    write_report(stats, unmatched, resolved_list, name_only_list, alias_list)
+    write_report(stats, unmatched, resolved_list, name_only_list, alias_list, intl_list)
     print(f"INJURY_DATA: {len(injury_data)} entries written to index.html")
-    print(f"  matched {stats['matched']}/{stats['rows']} "
+    print(f"  club: matched {stats['matched']}/{stats['rows']} "
           f"(exact {stats['exact']}, name-only {stats['name_only']}, "
           f"of which aliased {stats['aliased']}); "
           f"resolved-to-Healthy {stats['resolved']}; unmatched {stats['unmatched']}")
+    print(f"  international duty added from squads: {intl_added}")
     print(f"  full audit -> {REPORT_PATH.relative_to(HERE.parent)}")
 
 
@@ -226,8 +254,8 @@ def build_entry(rec, ar, ref_date, qualifies, round_dates):
             via_round, via_date = played_after[-1]  # latest appearance
             resolved = {"via_round": via_round, "via_date": via_date.isoformat(),
                         "original_status": status}
-            notes = (f"Confirmed fit — appeared for {ar['team']} in {via_round} "
-                     f"({via_date.isoformat()}). Earlier note: {notes}")
+            notes = ("Was reported unavailable with an injury earlier in the season, "
+                     "but has since returned to play.")
             status = "Healthy"
 
     severity, grid = STATUS_META.get(status, ("doubtful", False))
@@ -250,7 +278,41 @@ def build_entry(rec, ar, ref_date, qualifies, round_dates):
     }
     if resolved:
         entry["resolved"] = resolved
+    if entry["internal_status"] == "international_duty":
+        m = re.search(r"Named in ([A-Z][A-Za-z ]+?)'s squad", notes)
+        if m:
+            entry["nation"] = m.group(1).strip()
+        else:  # custom phrasing ("called into Wales", "captaining Ireland's tour", ...)
+            for nn in NATIONS:
+                if nn in notes:
+                    entry["nation"] = nn
+                    break
     return entry
+
+
+def build_intl_entry(rec):
+    nation = (rec.get("nation") or "").strip()
+    window = (rec.get("window") or "the current international window").strip()
+    severity, grid = STATUS_META["International Duty"]
+    return {
+        "status": "International Duty",
+        "severity": severity,
+        "grid": grid,
+        "notes": (f"Named in {nation}'s squad for {window}. "
+                  f"Fit and away on international duty, not injured."),
+        "nation": nation,
+        "injury_type": "",
+        "body_part": "",
+        "expected_return": "",
+        "injury_date": "",
+        "last_verified": (rec.get("source_date") or "").strip(),
+        "confidence": "high",
+        "source_name": (rec.get("source_name") or "").strip(),
+        "source_url": (rec.get("source_url") or "").strip(),
+        "source_date": (rec.get("source_date") or "").strip(),
+        "internal_status": "international_duty",
+        "presumption_rule_applied": "no",
+    }
 
 
 def inject(html, injury_data):
@@ -276,7 +338,7 @@ def inject(html, injury_data):
     INDEX_HTML.write_text(html, encoding="utf-8")
 
 
-def write_report(stats, unmatched, resolved_list, name_only_list, alias_list):
+def write_report(stats, unmatched, resolved_list, name_only_list, alias_list, intl_list):
     lines = [
         f"Injury join report — {dt.datetime.now().isoformat(timespec='seconds')}",
         "=" * 60,
@@ -285,9 +347,13 @@ def write_report(stats, unmatched, resolved_list, name_only_list, alias_list):
         f"(exact {stats['exact']}, name-only {stats['name_only']}, of which aliased {stats['aliased']})",
         f"Resolved to Healthy       : {stats['resolved']} (played after injury date)",
         f"Unmatched (no app player) : {stats['unmatched']}",
+        f"International duty added   : {len(intl_list)} (from international_squads.csv)",
         "",
         "── Resolved to Healthy via appearance ──",
         *(resolved_list or ["(none)"]),
+        "",
+        "── International duty added from squads (verify names) ──",
+        *(sorted(intl_list) or ["(none)"]),
         "",
         "── Name aliases applied (curated PLAYER_ALIASES) ──",
         *(alias_list or ["(none)"]),

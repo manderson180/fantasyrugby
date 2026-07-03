@@ -1,9 +1,10 @@
-Injury join report — 2026-07-03T01:07:04
+Injury join report — 2026-07-03T06:56:08
 ============================================================
 CSV player rows processed : 241
 Matched to an app player  : 208 (exact 206, name-only 2, of which aliased 4)
 Resolved to Healthy       : 60 (played after injury date)
 Unmatched (no app player) : 33
+International duty added   : 144 (from international_squads.csv)
 
 ── Resolved to Healthy via appearance ──
 JIMMY HALLIWELL (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
@@ -66,6 +67,152 @@ JURENZO JULIUS (Hollywoodbets Sharks): Likely Healthy (Unconfirmed) -> Healthy (
 LE ROUX MALAN (Hollywoodbets Sharks): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
 MATT ROMAO (Hollywoodbets Sharks): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
 THOMAS DYER (Hollywoodbets Sharks): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+
+── International duty added from squads (verify names) ──
+ALESSANDRO FUSCO (Zebre Parma) — Italy
+ALESSANDRO GARBISI (Benetton Rugby) — Italy
+ALESSANDRO ORTOMBINA (Zebre Parma) — Italy
+ALEX COLES (Northampton Saints) — England
+ALEX MITCHELL (Northampton Saints) — England
+ALEX SAMUEL (Glasgow Warriors) — Scotland
+ANDRE ESTERHUIZEN (Hollywoodbets Sharks) — South Africa
+ANDRE-HUGO VENTER (DHL Stormers) — South Africa
+ANDREA ZAMBONIN (Exeter Chiefs) — Italy
+ANGUS BELL (Ulster Rugby) — Australia
+APHELELE FASSI (Hollywoodbets Sharks) — South Africa
+ARTHUR CLARK (Gloucester Rugby) — England
+ASHER OPOKU-FORDJOUR (Sale Sharks) — England
+BEN EARL (Saracens) — England
+BEN SPENCER (Bath Rugby) — England
+BEN-JASON DIXON (DHL Stormers) — South Africa
+BENHARD JANSE VAN RENSBURG (Bristol Bears) — England
+BENO OBANO (Bath Rugby) — England
+BOAN VENTER (Edinburgh Rugby) — South Africa
+BORIS WENGER (Harlequins) — Argentina
+CADAN MURLEY (Harlequins) — England
+CAMERON HANEKOM (Vodacom Bulls) — South Africa
+CANAN MOODIE (Vodacom Bulls) — South Africa
+CHARLIE EWELS (Bath Rugby) — England
+COBUS REINACH (DHL Stormers) — South Africa
+COBUS WIESE (Vodacom Bulls) — South Africa
+D'ARCY RAE (Edinburgh Rugby) — Scotland
+DAMIAN WILLEMSE (DHL Stormers) — South Africa
+DANILO FISCHETTI (Northampton Saints) — Italy
+DARCY GRAHAM (Edinburgh Rugby) — Scotland
+DAVID ODIASE (Zebre Parma) — Italy
+DUHAN VAN DER MERWE (Edinburgh Rugby) — Scotland
+EBEN ETZEBETH (Hollywoodbets Sharks) — South Africa
+EDWILL VAN DER MERWE (Hollywoodbets Sharks) — South Africa
+ELLIOT MILLAR MILLS (Northampton Saints) — Scotland
+ELLIS GENGE (Bristol Bears) — England
+ELRIGH LOUW (Vodacom Bulls) — South Africa
+EMBROSE PAPIER (Vodacom Bulls) — South Africa
+ERONI MAWI (Saracens) — Fiji
+ETHAN HOOKER (Hollywoodbets Sharks) — South Africa
+EVAN ROOS (DHL Stormers) — South Africa
+EWAN ASHMAN (Edinburgh Rugby) — Scotland
+FEDERICO RUZZA (Benetton Rugby) — Italy
+FERGUS BURKE (Saracens) — Scotland
+FIN SMITH (Northampton Saints) — England
+FREDDIE STEWARD (Leicester Tigers) — England
+FREDDY DOUGLAS (Edinburgh Rugby) — Scotland
+GEORGE FORD (Sale Sharks) — England
+GEORGE FURBANK (Northampton Saints) — England
+GEORGE KLOSKA (Bristol Bears) — England
+GEORGE MARTIN (Leicester Tigers) — England
+GERHARD STEENEKAMP (Vodacom Bulls) — South Africa
+GIACOMO DA RE (Zebre Parma) — Italy
+GIULIO BERTACCINI (Zebre Parma) — Italy
+GIULIO MARINI (Benetton Rugby) — Italy
+GONZALO GARCIA (Zebre Parma) — Argentina
+GRANT WILLIAMS (Hollywoodbets Sharks) — South Africa
+GREGOR BROWN (Glasgow Warriors) — Scotland
+GUIDO PETTI (Harlequins) — Argentina
+GUY PEPPER (Bath Rugby) — England
+HANDRE POLLARD (Vodacom Bulls) — South Africa
+HARRY WILSON (Saracens) — Australia
+HENRY POLLOCK (Northampton Saints) — England
+HENRY SLADE (Exeter Chiefs) — England
+IGNACIO MENDY (Benetton Rugby) — Argentina
+ION NECULAI (Zebre Parma) — Italy
+JACK DEMPSEY (Glasgow Warriors) — Scotland
+JACK VAN POORTVLIET (Leicester Tigers) — England
+JACO WILLIAMS (Hollywoodbets Sharks) — South Africa
+JAMIE DOBIE (Glasgow Warriors) — Scotland
+JAMIE GEORGE (Saracens) — England
+JAN-HENDRIK WESSELS (Vodacom Bulls) — South Africa
+JOAQUIN MORO (Leicester Tigers) — Argentina
+JOE HEYES (Leicester Tigers) — England
+JOHAN GROBBELAAR (Vodacom Bulls) — South Africa
+JOSH BAYLISS (Bath Rugby) — Scotland
+KALAVETI RAVOUVOU (Bristol Bears) — Fiji
+KURT-LEE ARENDSE (Vodacom Bulls) — South Africa
+KYLE ROWE (Glasgow Warriors) — Scotland
+KYLE STEYN (Glasgow Warriors) — Scotland
+LEN IKITAU (Exeter Chiefs) — Australia
+LEONARDO MARIN (Benetton Rugby) — Italy
+LIAM MCCONNELL (Edinburgh Rugby) — Scotland
+LORENZO CANNONE (Benetton Rugby) — Italy
+LORENZO PANI (Zebre Parma) — Italy
+LOUIS LYNAGH (Benetton Rugby) — Italy
+LUCIO CINTI (Saracens) — Argentina
+LUKE COWAN-DICKIE (Sale Sharks) — England
+MAGNUS BRADBURY (Edinburgh Rugby) — Scotland
+MALIK FAISSAL (Zebre Parma) — Italy
+MARCO RICCIONI (Saracens) — Italy
+MARCO VAN STADEN (Vodacom Bulls) — South Africa
+MARCUS SMITH (Harlequins) — England
+MATIAS ALEMANNO (Gloucester Rugby) — Argentina
+MATIAS MORONI (Bristol Bears) — Argentina
+MATT FAGERSON (Glasgow Warriors) — Scotland
+MAX OJOMOH (Bath Rugby) — England
+MAX WILLIAMSON (Glasgow Warriors) — Scotland
+MICHELE LAMARO (Benetton Rugby) — Italy
+MIRCO SPAGNOLO (Benetton Rugby) — Italy
+MUHAMED HASA (Zebre Parma) — Italy
+NATHAN MCBETH (Glasgow Warriors) — Scotland
+NICCOLO CANNONE (Benetton Rugby) — Italy
+NICOLAS ROGER (Benetton Rugby) — Argentina
+NOAH CALUORI (Saracens) — England
+NTUTHUKO MCHUNU (DHL Stormers) — South Africa
+OLLIE CHESSUM (Leicester Tigers) — England
+OLLIE SMITH (Glasgow Warriors) — Scotland
+OX NCHE (Hollywoodbets Sharks) — South Africa
+PAOLO ODOGWU (Benetton Rugby) — Italy
+PAUL DE VILLIERS (DHL Stormers) — South Africa
+PEDRO DELGADO (Harlequins) — Argentina
+PIERRE SCHOEMAN (Edinburgh Rugby) — Scotland
+QUAN HORN (Lions) — South Africa
+RICCARDO FAVRETTO (Benetton Rugby) — Italy
+RODRIGO ISGRO (Harlequins) — Argentina
+RORY DARGE (Glasgow Warriors) — Scotland
+RORY HUTCHINSON (Northampton Saints) — Scotland
+RORY SUTHERLAND (Glasgow Warriors) — Scotland
+RUAN NORTJE (Vodacom Bulls) — South Africa
+SANTIAGO CARRERAS (Bath Rugby) — Argentina
+SANTIAGO GRONDONA (Bristol Bears) — Argentina
+SCOTT CUMMINGS (Glasgow Warriors) — Scotland
+SEB ATKINSON (Gloucester Rugby) — England
+SIMON BENITEZ CRUZ (Newcastle Red Bull) — Argentina
+SIONE TUIPULOTU (Glasgow Warriors) — Scotland
+SIYA KOLISI (Hollywoodbets Sharks) — South Africa
+STAFFORD MCDOWALL (Glasgow Warriors) — Scotland
+STEPHEN VARNEY (Exeter Chiefs) — Italy
+TED HILL (Bath Rugby) — England
+THEO DAN (Saracens) — England
+THOMAS DU TOIT (Bath Rugby) — South Africa
+TOM CURRY (Sale Sharks) — England
+TOM HOOPER (Exeter Chiefs) — Australia
+TOM JORDAN (Bristol Bears) — Scotland
+TOMAS ALBORNOZ (Benetton Rugby) — Argentina
+TOMMASO DI BARTOLOMEO (Zebre Parma) — Italy
+TOMMASO MENONCELLO (Benetton Rugby) — Italy
+TOMMY FREEMAN (Northampton Saints) — England
+VINCENT TSHITUKA (Hollywoodbets Sharks) — South Africa
+WILCO LOUW (Vodacom Bulls) — South Africa
+WILL HURD (Leicester Tigers) — Scotland
+ZACHARY PORTHEN (DHL Stormers) — South Africa
+ZANDER FAGERSON (Glasgow Warriors) — Scotland
 
 ── Name aliases applied (curated PLAYER_ALIASES) ──
 Oli Spencer  ->  OLIVER SPENCER (Newcastle Red Bull)
