@@ -1,0 +1,113 @@
+Injury join report — 2026-07-03T01:07:04
+============================================================
+CSV player rows processed : 241
+Matched to an app player  : 208 (exact 206, name-only 2, of which aliased 4)
+Resolved to Healthy       : 60 (played after injury date)
+Unmatched (no app player) : 33
+
+── Resolved to Healthy via appearance ──
+JIMMY HALLIWELL (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+KENZIE JENKINS (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+SANTIAGO GRONDONA (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R17 2026-05-31)
+LUKA IVANISHVILI (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R16 2026-05-17)
+KIERAN MARMION (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R17 2026-05-31)
+AJ MACGINTY (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R17 2026-05-31)
+AIDAN BOSHOFF (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+SEB BLAKE (Gloucester Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+BEN REDSHAW (Gloucester Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+CIARAN KNIGHT (Gloucester Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+HARRY BROWNE (Harlequins): Likely Healthy (Unconfirmed) -> Healthy (played R15 2026-05-10)
+PEDRO DELGADO (Harlequins): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+JONNY GREEN (Harlequins): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+BORIS WENGER (Harlequins): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+TOM LAWDAY (Harlequins): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+JAMIE BENSON (Harlequins): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+JOSH BELLAMY (Harlequins): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+RODRIGO ISGRO (Harlequins): Likely Healthy (Unconfirmed) -> Healthy (played R16 2026-05-17)
+WILL PORTER (Harlequins): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+CASSIUS CLEAVES (Harlequins): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+STEPHAN LEWIES (Harlequins): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+JAMES O'CONNOR (Leicester Tigers): Unclear -> Healthy (played R18 2026-06-06)
+SAMMY ARNOLD (Newcastle Red Bull): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+ETHAN GRAYSON (Newcastle Red Bull): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+CONNOR HANCOCK (Newcastle Red Bull): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+FREDDIE LOCKWOOD (Newcastle Red Bull): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+AMANAKI MAFI (Newcastle Red Bull): Likely Healthy (Unconfirmed) -> Healthy (played R17 2026-05-31)
+GEORGE MCGUIGAN (Newcastle Red Bull): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+ALEX COLES (Northampton Saints): Likely Healthy (Unconfirmed) -> Healthy (played R17 2026-05-31)
+GEORGE FURBANK (Northampton Saints): Likely Healthy (Unconfirmed) -> Healthy (played R17 2026-05-31)
+TOM JAMES (Northampton Saints): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+CURTIS LANGDON (Northampton Saints): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+TOM PEARSON (Northampton Saints): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+JAMES RAMM (Northampton Saints): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+JJ VAN DER MESCHT (Northampton Saints): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+JORDAN LARMOUR (Leinster Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+DIARMUID MANGAN (Leinster Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+ALEX USANOV (Leinster Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+ANGUS BELL (Ulster Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+SCOTT WILSON (Ulster Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+TOM O'TOOLE (Ulster Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+JAMES HUME (Ulster Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+JUDE POSTLETHWAITE (Ulster Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R17 2026-05-09)
+NICK TIMONEY (Ulster Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+ROB HERRING (Ulster Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+JOSH IOANE (Connacht Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+GREGOR BROWN (Glasgow Warriors): Potential Injury -> Healthy (played R18 2026-05-16)
+DUHAN VAN DER MERWE (Edinburgh Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+HARRY PATERSON (Edinburgh Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+MAGNUS BRADBURY (Edinburgh Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+LIAM MCCONNELL (Edinburgh Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R17 2026-05-09)
+TOM ROGERS (Scarlets): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+ARCHER HOLZ (Scarlets): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+JOSH MACLEOD (Scarlets): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+WILL EVANS (Harlequins): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
+JACO WILLIAMS (Hollywoodbets Sharks): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+JURENZO JULIUS (Hollywoodbets Sharks): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+LE ROUX MALAN (Hollywoodbets Sharks): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+MATT ROMAO (Hollywoodbets Sharks): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+THOMAS DYER (Hollywoodbets Sharks): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+
+── Name aliases applied (curated PLAYER_ALIASES) ──
+Oli Spencer  ->  OLIVER SPENCER (Newcastle Red Bull)
+Rob du Preez  ->  ROBERT DU PREEZ (Sale Sharks)
+Paddy Harrison  ->  PATRICK HARRISON (Edinburgh Rugby)
+Tom Dyer  ->  THOMAS DYER (Hollywoodbets Sharks)
+
+── Name-only matches, team differed (verify these) ──
+Hamish Watson [Edinburgh Rugby]  ->  HAMISH WATSON [Leicester Tigers]
+Will Evans [Scarlets]  ->  WILL EVANS [Harlequins]
+
+── Unmatched injury rows (kept in CSV, no display entry) ──
+PREM Bristol Bears          Paddy Pearce
+PREM Bristol Bears          Steele Barker
+PREM Bristol Bears          Victor Worsnip
+PREM Bristol Bears          Evan Morris
+PREM Exeter Chiefs          Tommy Wyatt
+PREM Gloucester             Jack Singleton
+PREM Gloucester             Callum Braley
+PREM Gloucester             Olly Allport
+PREM Harlequins             Cameron Doak
+PREM Harlequins             James Chisholm
+PREM Harlequins             Tate Williams
+PREM Harlequins             Lucas Schmid
+PREM Harlequins             Frank McMillan
+PREM Harlequins             Sean Sharp
+PREM Newcastle Red Bulls    Eduardo Bello
+PREM Newcastle Red Bulls    Joel Grayson
+PREM Newcastle Red Bulls    Callum Hancock
+PREM Newcastle Red Bulls    Elvis Kitenge-Fuki
+PREM Northampton Saints     Freddie St John
+PREM Northampton Saints     Charlie Ulcoq
+URC  Munster                Roman Salanoa
+URC  Ulster                 James McNabney
+URC  Ulster                 Rory McGuire
+URC  Connacht               Temi Lasisi
+URC  Connacht               Oisin Dowling
+URC  Edinburgh Rugby        Charlie McCaig
+URC  Edinburgh Rugby        Rhys Litterick
+URC  Edinburgh Rugby        Rob Carmichael
+URC  Cardiff Rugby          Seb Wainwright
+URC  Scarlets               Dom Kossuth
+URC  Hollywoodbets Sharks   Bryce Calvert
+URC  Hollywoodbets Sharks   Coetzee le Roux
+URC  Hollywoodbets Sharks   Trevor Nyakane
