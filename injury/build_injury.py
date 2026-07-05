@@ -94,12 +94,58 @@ def norm_name(s: str) -> str:
     return re.sub(r"\s+", " ", s).strip()
 
 
+DATE_FORMATS = ("%Y-%m-%d", "%d/%m/%Y", "%d/%m/%y", "%m/%d/%Y", "%d-%m-%Y", "%d.%m.%Y")
+
+
 def parse_date(s: str):
+    """Accepts ISO plus the common date shapes Excel produces when it 'corrects' a
+    CSV opened and re-saved under a non-US locale (e.g. DD/MM/YYYY on a UK machine).
+    Tried in order, ISO first, so genuinely ambiguous strings (e.g. 03/04/2026)
+    resolve day-before-month, matching the UK-centric source data."""
     s = (s or "").strip()
-    try:
-        return dt.date.fromisoformat(s)
-    except ValueError:
+    if not s:
         return None
+    for fmt in DATE_FORMATS:
+        try:
+            return dt.datetime.strptime(s, fmt).date()
+        except ValueError:
+            continue
+    return None
+
+
+def normalize_csv_dates(path: Path, date_cols=("injury_date", "last_verified", "source_date")):
+    """Self-heal player_availability.csv back to ISO dates in place. Lets the file be
+    freely opened/edited/re-saved in Excel (which silently reformats date-shaped cells
+    to the system locale on save) without permanently drifting away from the ISO
+    format build_injury.py's resolution logic is calibrated against. Returns
+    (changed_count, unparsable_list)."""
+    with path.open(encoding="utf-8", newline="") as f:
+        reader = csv.DictReader(f)
+        fieldnames = reader.fieldnames
+        rows = list(reader)
+
+    changed, unparsable = 0, []
+    for rec in rows:
+        for col in date_cols:
+            raw = (rec.get(col) or "").strip()
+            if not raw:
+                continue
+            d = parse_date(raw)
+            if d is None:
+                unparsable.append(f"{rec.get('team','?')} / {rec.get('player_name','?')} [{col}]: {raw!r}")
+                continue
+            iso = d.isoformat()
+            if iso != raw:
+                rec[col] = iso
+                changed += 1
+
+    if changed:
+        with path.open("w", encoding="utf-8", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(rows)
+
+    return changed, unparsable
 
 
 def extract_array(html: str, varname: str):
@@ -231,6 +277,15 @@ def main():
           f"resolved-to-Healthy {stats['resolved']}; unmatched {stats['unmatched']}")
     print(f"  international duty added from squads: {intl_added}")
     print(f"  full audit -> {REPORT_PATH.relative_to(HERE.parent)}")
+
+    changed, unparsable = normalize_csv_dates(CSV_PATH)
+    if changed:
+        print(f"  normalized {changed} date value(s) in player_availability.csv back to ISO "
+              f"(safe to re-open/edit in Excel — dates get healed on the next run)")
+    if unparsable:
+        print(f"  WARNING: {len(unparsable)} date value(s) could not be parsed at all — fix manually:")
+        for u in unparsable:
+            print(f"    {u}")
 
 
 def build_entry(rec, ar, ref_date, qualifies, round_dates):
