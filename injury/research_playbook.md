@@ -93,17 +93,19 @@ internal_status, presumption_rule_applied, source_name, source_date,
 source_url, internal_notes
 ```
 
-**All three date columns (`injury_date`, `last_verified`, `source_date`) must be
-ISO format (`YYYY-MM-DD`), never `DD/MM/YYYY` or any other format.**
-`build_injury.py`'s `parse_date()` (line 97) calls `dt.date.fromisoformat()`
-directly with no fallback — a non-ISO date doesn't raise a visible error, it
-just silently returns `None`. That quietly disables the match-appearance
-auto-resolve (§5) for every affected row, with no warning in `join_report.txt`
-to flag it. This has actually happened once already (the whole CSV got
-reformatted to `DD/MM/YYYY` by an unknown process, which dropped
-"resolved-to-Healthy" from 58 rows to 0 with no error). If a rewrite/reformat
-of this file is ever necessary, verify dates are still ISO afterward by
-checking that `resolved-to-Healthy` in `join_report.txt` hasn't collapsed to 0.
+The three date columns (`injury_date`, `last_verified`, `source_date`) are
+canonically ISO format (`YYYY-MM-DD`). It's fine to open this file in Excel to
+test manual edits — Excel silently reformats date-shaped cells to the system
+locale (e.g. `DD/MM/YYYY`) whenever the file is saved, but `build_injury.py`'s
+`parse_date()` now accepts both ISO and the common Excel/locale variants, and
+every run calls `normalize_csv_dates()` at the end to rewrite the file back to
+ISO in place — so the file self-heals on the next `python3
+injury/build_injury.py` run regardless of what shape Excel left the dates in.
+If a date is in a shape neither parser recognises, the run prints an explicit
+`WARNING: ... could not be parsed` with the offending row(s) rather than
+silently dropping them (this replaced an earlier silent failure mode, where a
+non-ISO date just returned `None` and quietly zeroed out the match-appearance
+auto-resolve for that row with nothing in `join_report.txt` to flag it).
 
 `international_squads.csv` columns, in order:
 

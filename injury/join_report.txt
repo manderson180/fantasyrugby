@@ -1,4 +1,4 @@
-Injury join report — 2026-07-05T17:38:50
+Injury join report — 2026-07-05T17:56:28
 ============================================================
 CSV player rows processed : 241
 Matched to an app player  : 208 (exact 206, name-only 2, of which aliased 4)
