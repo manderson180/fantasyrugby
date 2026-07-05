@@ -1,10 +1,10 @@
-Injury join report — 2026-07-05T12:31:19
+Injury join report — 2026-07-05T17:38:50
 ============================================================
 CSV player rows processed : 241
 Matched to an app player  : 208 (exact 206, name-only 2, of which aliased 4)
 Resolved to Healthy       : 58 (played after injury date)
 Unmatched (no app player) : 33
-International duty added   : 139 (from international_squads.csv)
+International duty added   : 138 (from international_squads.csv)
 
 ── Resolved to Healthy via appearance ──
 JIMMY HALLIWELL (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
@@ -188,7 +188,6 @@ SCOTT CUMMINGS (Glasgow Warriors) — Scotland
 SEB ATKINSON (Gloucester Rugby) — England
 SIMON BENITEZ CRUZ (Newcastle Red Bull) — Argentina
 SIONE TUIPULOTU (Glasgow Warriors) — Scotland
-SIYA KOLISI (Hollywoodbets Sharks) — South Africa
 STAFFORD MCDOWALL (Glasgow Warriors) — Scotland
 STEPHEN VARNEY (Exeter Chiefs) — Italy
 TED HILL (Bath Rugby) — England
