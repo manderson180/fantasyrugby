@@ -1,10 +1,10 @@
-Injury join report — 2026-07-05T17:56:28
+Injury join report — 2026-07-07T12:08:13
 ============================================================
-CSV player rows processed : 241
-Matched to an app player  : 208 (exact 206, name-only 2, of which aliased 4)
-Resolved to Healthy       : 58 (played after injury date)
+CSV player rows processed : 246
+Matched to an app player  : 213 (exact 211, name-only 2, of which aliased 4)
+Resolved to Healthy       : 57 (played after injury date)
 Unmatched (no app player) : 33
-International duty added   : 138 (from international_squads.csv)
+International duty added   : 133 (from international_squads.csv)
 
 ── Resolved to Healthy via appearance ──
 JIMMY HALLIWELL (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
@@ -35,7 +35,6 @@ FREDDIE LOCKWOOD (Newcastle Red Bull): Likely Healthy (Unconfirmed) -> Healthy (
 AMANAKI MAFI (Newcastle Red Bull): Likely Healthy (Unconfirmed) -> Healthy (played R17 2026-05-31)
 GEORGE MCGUIGAN (Newcastle Red Bull): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
 ALEX COLES (Northampton Saints): Likely Healthy (Unconfirmed) -> Healthy (played R17 2026-05-31)
-GEORGE FURBANK (Northampton Saints): Likely Healthy (Unconfirmed) -> Healthy (played R17 2026-05-31)
 TOM JAMES (Northampton Saints): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
 CURTIS LANGDON (Northampton Saints): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
 TOM PEARSON (Northampton Saints): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
@@ -71,9 +70,7 @@ ALESSANDRO FUSCO (Zebre Parma) — Italy
 ALESSANDRO GARBISI (Benetton Rugby) — Italy
 ALESSANDRO ORTOMBINA (Zebre Parma) — Italy
 ALEX COLES (Northampton Saints) — England
-ALEX MITCHELL (Northampton Saints) — England
 ALEX SAMUEL (Glasgow Warriors) — Scotland
-ANDRE ESTERHUIZEN (Hollywoodbets Sharks) — South Africa
 ANDRE-HUGO VENTER (DHL Stormers) — South Africa
 ANDREA ZAMBONIN (Exeter Chiefs) — Italy
 ANGUS BELL (Ulster Rugby) — Australia
@@ -112,7 +109,6 @@ FIN SMITH (Northampton Saints) — England
 FREDDIE STEWARD (Leicester Tigers) — England
 FREDDY DOUGLAS (Edinburgh Rugby) — Scotland
 GEORGE FORD (Sale Sharks) — England
-GEORGE FURBANK (Northampton Saints) — England
 GEORGE KLOSKA (Bristol Bears) — England
 GEORGE MARTIN (Leicester Tigers) — England
 GERHARD STEENEKAMP (Vodacom Bulls) — South Africa
@@ -170,7 +166,6 @@ NOAH CALUORI (Saracens) — England
 NTUTHUKO MCHUNU (DHL Stormers) — South Africa
 OLLIE CHESSUM (Leicester Tigers) — England
 OLLIE SMITH (Glasgow Warriors) — Scotland
-OX NCHE (Hollywoodbets Sharks) — South Africa
 PAOLO ODOGWU (Benetton Rugby) — Italy
 PAUL DE VILLIERS (DHL Stormers) — South Africa
 PEDRO DELGADO (Harlequins) — Argentina
@@ -194,7 +189,6 @@ TED HILL (Bath Rugby) — England
 THEO DAN (Saracens) — England
 THOMAS DU TOIT (Bath Rugby) — South Africa
 TOM CURRY (Sale Sharks) — England
-TOM HOOPER (Exeter Chiefs) — Australia
 TOM JORDAN (Bristol Bears) — Scotland
 TOMAS ALBORNOZ (Benetton Rugby) — Argentina
 TOMMASO DI BARTOLOMEO (Zebre Parma) — Italy
