@@ -1,6 +1,10 @@
 import pandas as pd
+from pathlib import Path
 
-df = pd.read_csv("/home/claude/rugby/player_availability_first_sweep.csv")
+HERE = Path(__file__).resolve().parent
+CSV_PATH = HERE / "player_availability.csv"
+
+df = pd.read_csv(CSV_PATH)
 
 qualifies = ((df.internal_status == "unknown_potentially_injured") &
              (df.source_name == "RugbyPass injury-list audit") &
@@ -40,7 +44,7 @@ cols = ["competition","team","player_name","user_status","user_notes","expected_
         "injury_type","body_part","confidence","last_verified","internal_status","presumption_rule_applied",
         "source_name","source_date","source_url","internal_notes"]
 df = df[cols]
-df.to_csv("/home/claude/rugby/player_availability_first_sweep.csv", index=False)
+df.to_csv(CSV_PATH, index=False)
 
 print(df.groupby("user_status").size().to_string())
 print("\npresumption applied:", (df.presumption_rule_applied=="yes").sum())
