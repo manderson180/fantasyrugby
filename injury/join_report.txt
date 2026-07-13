@@ -1,10 +1,10 @@
-Injury join report — 2026-07-09T11:55:46
+Injury join report — 2026-07-13T12:34:19
 ============================================================
-CSV player rows processed : 247
-Matched to an app player  : 214 (exact 212, name-only 2, of which aliased 4)
+CSV player rows processed : 252
+Matched to an app player  : 219 (exact 217, name-only 2, of which aliased 4)
 Resolved to Healthy       : 56 (played after injury date)
 Unmatched (no app player) : 33
-International duty added   : 132 (from international_squads.csv)
+International duty added   : 128 (from international_squads.csv)
 
 ── Resolved to Healthy via appearance ──
 JIMMY HALLIWELL (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
@@ -69,7 +69,6 @@ ALESSANDRO FUSCO (Zebre Parma) — Italy
 ALESSANDRO GARBISI (Benetton Rugby) — Italy
 ALESSANDRO ORTOMBINA (Zebre Parma) — Italy
 ALEX COLES (Northampton Saints) — England
-ALEX SAMUEL (Glasgow Warriors) — Scotland
 ANDRE-HUGO VENTER (DHL Stormers) — South Africa
 ANDREA ZAMBONIN (Exeter Chiefs) — Italy
 ANGUS BELL (Ulster Rugby) — Australia
@@ -80,10 +79,8 @@ BEN EARL (Saracens) — England
 BEN SPENCER (Bath Rugby) — England
 BEN-JASON DIXON (DHL Stormers) — South Africa
 BENHARD JANSE VAN RENSBURG (Bristol Bears) — England
-BENO OBANO (Bath Rugby) — England
 BOAN VENTER (Edinburgh Rugby) — South Africa
 BORIS WENGER (Harlequins) — Argentina
-CADAN MURLEY (Harlequins) — England
 CAMERON HANEKOM (Vodacom Bulls) — South Africa
 CANAN MOODIE (Vodacom Bulls) — South Africa
 CHARLIE EWELS (Bath Rugby) — England
@@ -171,7 +168,6 @@ PIERRE SCHOEMAN (Edinburgh Rugby) — Scotland
 QUAN HORN (Lions) — South Africa
 RICCARDO FAVRETTO (Benetton Rugby) — Italy
 RODRIGO ISGRO (Harlequins) — Argentina
-RORY DARGE (Glasgow Warriors) — Scotland
 RORY HUTCHINSON (Northampton Saints) — Scotland
 RORY SUTHERLAND (Glasgow Warriors) — Scotland
 RUAN NORTJE (Vodacom Bulls) — South Africa
