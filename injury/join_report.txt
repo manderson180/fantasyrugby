@@ -1,10 +1,10 @@
-Injury join report — 2026-07-13T12:34:19
+Injury join report — 2026-08-11T11:50:32
 ============================================================
 CSV player rows processed : 252
 Matched to an app player  : 219 (exact 217, name-only 2, of which aliased 4)
-Resolved to Healthy       : 56 (played after injury date)
+Resolved to Healthy       : 54 (played after injury date)
 Unmatched (no app player) : 33
-International duty added   : 128 (from international_squads.csv)
+International duty added   : 129 (from international_squads.csv)
 
 ── Resolved to Healthy via appearance ──
 JIMMY HALLIWELL (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
@@ -59,9 +59,7 @@ TOM ROGERS (Scarlets): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-
 ARCHER HOLZ (Scarlets): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
 JOSH MACLEOD (Scarlets): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
 WILL EVANS (Harlequins): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
-JURENZO JULIUS (Hollywoodbets Sharks): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
 LE ROUX MALAN (Hollywoodbets Sharks): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
-MATT ROMAO (Hollywoodbets Sharks): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
 THOMAS DYER (Hollywoodbets Sharks): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
 
 ── International duty added from squads (verify names) ──
@@ -92,6 +90,7 @@ DANILO FISCHETTI (Northampton Saints) — Italy
 DARCY GRAHAM (Edinburgh Rugby) — Scotland
 DAVID ODIASE (Zebre Parma) — Italy
 DUHAN VAN DER MERWE (Edinburgh Rugby) — Scotland
+EBEN ETZEBETH (Hollywoodbets Sharks) — South Africa
 EDWILL VAN DER MERWE (Hollywoodbets Sharks) — South Africa
 ELLIS GENGE (Bristol Bears) — England
 ELRIGH LOUW (Vodacom Bulls) — South Africa
