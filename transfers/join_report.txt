@@ -1,0 +1,80 @@
+Transfer join report — 2026-08-18T09:37:49
+============================================================
+Squads rows processed     : 1673
+Actionable (move/dep/ret) : 275
+Matched to an app player  : 213 (exact 210, name-only 3)
+  by type (matched)       : move 80, departed 114, retired 19
+Unmatched (no app row)    : 62
+Ambiguous name (skipped)  : 0
+
+── Name-only matches, team differed in the sheet (verify these) ──
+Ben Healy [Edinburgh Rugby]  ->  BEN HEALY [Newcastle Red Bull]
+Hamish Watson [Edinburgh Rugby]  ->  HAMISH WATSON [Leicester Tigers]
+Max Pearce [Bath Rugby]  ->  MAX PEARCE [Cardiff Rugby]
+
+── Ambiguous names (>1 app player, left unmatched) ──
+(none)
+
+── Unmatched actionable rows (no season-totals row to annotate) ──
+departed  Bath Rugby               Mikey Summerfield
+departed  Benetton Rugby           Simon Koroiyadi
+departed  Bristol Bears            John Edwards
+departed  Bristol Bears            Steele Barker
+departed  Bristol Bears            Will Capon
+departed  Cardiff Rugby            Will Davies-King
+departed  Connacht Rugby           Oisin Dowling
+departed  Connacht Rugby           Temi Lasisi
+departed  Dragons RFC              Luke Yendle
+departed  Exeter Chiefs            Alfie Bell
+departed  Exeter Chiefs            Charlie Bell
+departed  Exeter Chiefs            Harry Ascherl
+departed  Exeter Chiefs            Iwan Jenkins
+departed  Exeter Chiefs            Jack Forsythe
+departed  Exeter Chiefs            Keita Ando
+departed  Exeter Chiefs            Khwezi Mona
+departed  Exeter Chiefs            Kian Gentry
+departed  Exeter Chiefs            Orson James
+departed  Exeter Chiefs            Tamati Tua
+departed  Exeter Chiefs            Will Becconsall
+departed  Gloucester Rugby         Jake Morris
+departed  Gloucester Rugby         Jono Benz-Salomon
+departed  Harlequins               Conor Byrne
+departed  Harlequins               Guy Rogers
+departed  Harlequins               Mattias Woollard
+departed  Harlequins               Tom Humphreys
+departed  Leicester Tigers         Cameron Miell
+departed  Leicester Tigers         Jack Kinder
+departed  Leicester Tigers         John Stewart
+departed  Leicester Tigers         Monty Loggenberg
+departed  Leicester Tigers         Tom Threlfall
+departed  Leicester Tigers         Tubuna Maka
+departed  Munster Rugby            Fionn Gibbons
+departed  Munster Rugby            Roman Salanoa
+departed  Newcastle Red Bull       Joel Grayson
+departed  Newcastle Red Bull       Sam Waugh
+departed  Northampton Saints       Marco Manfredi
+departed  Ospreys                  Connor Moyse
+departed  Ospreys                  Ieuan Cornelius
+departed  Sale Sharks              Huw Davies
+departed  Sale Sharks              Nye Thomas
+departed  Sale Sharks              Tom Curtis
+departed  Saracens                 Louie Johnson
+departed  Saracens                 Sam Spink
+departed  Ulster Rugby             Rory McGuire
+departed  Vodacom Bulls            Henry Immelman
+departed  Zebre Parma              Martin Roger Farias
+move      Bath Rugby               Harvey Cuckson
+move      Bath Rugby               Sam Harris
+move      DHL Stormers             Alex Groves
+move      DHL Stormers             Asad Moos
+move      DHL Stormers             Corne Weilbach
+move      Exeter Chiefs            Louie Sinclair
+move      Exeter Chiefs            Martin Moloney
+move      Exeter Chiefs            Sol Moody
+move      Harlequins               Jack Doorey-Palmer
+move      Harlequins               Jake Murray
+move      Newcastle Red Bull       Eduardo Bello
+move      Sale Sharks              Obi Ene
+move      Vodacom Bulls            Siphosethu Mnebelele
+retired   DHL Stormers             Lizo Gqoboka
+retired   Newcastle Red Bull       Hame Faiva
