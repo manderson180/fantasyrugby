@@ -1,4 +1,4 @@
-Projections transfer refresh — 2026-08-18T13:02:15
+Projections transfer refresh — 2026-08-18T13:48:59
 ================================================================
 Tier cutoffs (position-percentile): {'PREM': {'Elite': 97.88732394366197, 'Premium': 86.875, 'Good': 65.38461538461539, 'Squad': 45.73170731707317}, 'URC': {'Elite': 97.88732394366197, 'Premium': 92.77777777777777, 'Good': 76.49253731343283, 'Squad': 49.21875}}
 

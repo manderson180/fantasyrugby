@@ -109,6 +109,18 @@ def main():
     # Working copies of every row (dicts) from the pristine originals.
     rows = {lg: [dict(r) for r in orig[lg][1]] for lg in PACKS}
 
+    # Projection-context display columns (Projections tab only): the player's new/current
+    # team, the "Moved from ..." / "New signing ..." note, and a status flag ('move'|'new')
+    # that drives the projection-row icon. All derived — no new input data required.
+    PROJ_DISPLAY_COLS = ["PROJ_TEAM", "PROJ_MOVE_NOTE", "PROJ_STATUS"]
+    for lg in PACKS:
+        for c in PROJ_DISPLAY_COLS:
+            if c not in fieldnames[lg]:
+                fieldnames[lg].append(c)
+        for r in rows[lg]:
+            for c in PROJ_DISPLAY_COLS:
+                r.setdefault(c, "")
+
     team_league = {r["TEAM"].strip(): lg for lg in PACKS for r in rows[lg]}
 
     # POS -> abbreviation, learned from existing PROJ POS RANK values (e.g. "OB #1").
@@ -170,10 +182,13 @@ def main():
 
     # --- Classify existing players via the squads sheet (matched by unique name) ---
     squad = {}
+    new_prev = {}   # norm(new player) -> previous club, for the "New signing (from X)" note
     for r in load(SQUADS)[1]:
         ct = (r.get("change_type") or "").strip().lower()
         if ct in ("move", "departed", "retired"):
             squad[norm(r["player"])] = {"ct": ct, "dest_team": (r.get("team_2627") or "").strip()}
+        elif ct == "new":
+            new_prev[norm(r["player"])] = (r.get("team") or "").strip()
 
     report = {"removed": defaultdict(list), "moved_out": [], "new": [], "skipped_move_norow": []}
     pending_new = {"PREM": [], "URC": []}   # rows to append per league
@@ -190,6 +205,7 @@ def main():
                     r[c] = ""
             elif ct == "move":
                 dest_lg = team_league.get(info["dest_team"])
+                old_team = r["TEAM"]
                 if dest_lg and dest_lg != lg:
                     old_ppg, old_gms = num(r["PROJ_PPG"]), num(r["EXPECTED_GMS"])
                     for c in PROJ_COLS:
@@ -201,11 +217,18 @@ def main():
                     new_ppg = old_ppg * f
                     pending_new[dest_lg].append({
                         "PLAYER": r["PLAYER"], "TEAM": info["dest_team"], "POS": r["POS"],
-                        "PROJ_PPG": new_ppg, "EXPECTED_GMS": old_gms})
+                        "PROJ_PPG": new_ppg, "EXPECTED_GMS": old_gms,
+                        "PROJ_TEAM": info["dest_team"], "PROJ_STATUS": "move",
+                        "PROJ_MOVE_NOTE": f"Moved from {old_team}"})
                     report["moved_out"].append(
                         f"{r['PLAYER']:24} {lg}->{dest_lg} {r['POS']:13} "
                         f"PPG {fmt(old_ppg)}->{fmt(new_ppg)} (x{f:.3f})")
-                # same-league move -> untouched
+                elif dest_lg == lg:
+                    # Same-league move: projection value unchanged, but the Projections tab
+                    # relabels the team to the new club and flips the note to "Moved from ...".
+                    r["PROJ_TEAM"] = info["dest_team"]
+                    r["PROJ_MOVE_NOTE"] = f"Moved from {old_team}"
+                    r["PROJ_STATUS"] = "move"
 
     # --- New players from the ratings file ---
     for r in load(RATINGS)[1]:
@@ -214,9 +237,13 @@ def main():
         pctl = num(r["quality_pctl"]) or 40
         gms = num(r["exp_gms"]) or 6
         ppg = pctl_value(orig_ppg[lg].get(pos, []), pctl)
+        prev = new_prev.get(norm(r["player"]), "")
+        note = f"New signing (from {prev})" if prev else "New signing"
         # PLAYER is stored UPPERCASE in the packs — match that so new names render consistently.
         pending_new[lg].append({"PLAYER": r["player"].strip().upper(), "TEAM": r["dest_team"].strip(),
-                                 "POS": pos, "PROJ_PPG": ppg, "EXPECTED_GMS": gms})
+                                 "POS": pos, "PROJ_PPG": ppg, "EXPECTED_GMS": gms,
+                                 "PROJ_TEAM": r["dest_team"].strip(), "PROJ_STATUS": "new",
+                                 "PROJ_MOVE_NOTE": note})
         report["new"].append(f"{lg} {r['dest_team']:20} {pos:13} {r['player']:24} "
                              f"pctl{int(pctl)} gms{int(gms)} -> PPG {fmt(ppg)}")
 
@@ -229,6 +256,9 @@ def main():
             row["PROJ_PPG"] = fmt(nr["PROJ_PPG"])
             row["EXPECTED_GMS"] = fmt(nr["EXPECTED_GMS"])
             row["PROJ_TOTAL_EXPECTED_GMS"] = fmt(nr["PROJ_PPG"] * nr["EXPECTED_GMS"])
+            row["PROJ_TEAM"] = nr.get("PROJ_TEAM", "")
+            row["PROJ_MOVE_NOTE"] = nr.get("PROJ_MOVE_NOTE", "")
+            row["PROJ_STATUS"] = nr.get("PROJ_STATUS", "")
             rows[lg].append(row)
             affected_ids[lg].add(id(row))
 
