@@ -1,0 +1,88 @@
+player,dest_league,dest_team,position,tier_hint,quality_pctl,exp_gms,basis
+Will Roue,PREM,Bath Rugby,lock,Project,25,5,Academy promotion; unproven
+Josh Caulfield,PREM,Bristol Bears,loose-forward,Rotation,42,8,From Ealing (Championship); experienced back-row
+Tobi Wilson,PREM,Bristol Bears,outside-back,Rotation,40,7,From Ealing (Championship)
+Khalik Kareem,PREM,Bristol Bears,prop,Depth,38,8,From Worcester; front-row depth
+Dallas McLeod,PREM,Exeter Chiefs,centre,Starter,60,11,Crusaders (Super Rugby) centre; likely starter
+Obinna Nkwocha,PREM,Exeter Chiefs,loose-forward,Rotation,42,8,From Worcester; young back-row
+Nika Abuladze,PREM,Exeter Chiefs,prop,Rotation,52,9,Georgia international prop; Montpellier
+Callum McCabe,PREM,Gloucester Rugby,fly-half,Depth,40,7,From Chiefs NZ; back-up 10
+Eliot Salt,PREM,Gloucester Rugby,lock,Depth,40,8,From Coventry (Championship)
+Marco Fepulea'i,PREM,Gloucester Rugby,prop,Rotation,44,8,ProD2 (Mont-de-Marsan) prop
+Dan Robson,PREM,Gloucester Rugby,scrum-half,Starter,68,11,England SH; experienced starter (from Pau)
+Halen King,PREM,Gloucester Rugby,scrum-half,Depth,40,7,From Chiefs NZ; back-up 9
+Sampie Swiegers,PREM,Harlequins,prop,Rotation,46,8,Pumas (Super Rugby) prop
+Harry Johnson-Holmes,PREM,Harlequins,prop,Starter,55,10,Wallaby prop (Western Force)
+Elliott Stooke,PREM,Leicester Tigers,lock,Rotation,55,10,Experienced ex-Bath lock (from Japan)
+Joel Sclavi,PREM,Leicester Tigers,prop,Starter,60,10,Argentina international prop (La Rochelle)
+Mako Vunipola,PREM,Leicester Tigers,prop,Rotation,58,9,England veteran loosehead (from Vannes)
+Zack Henry,PREM,Newcastle Red Bull,fly-half,Starter,78,12,Goal-kicking 10 from Stade Francais; likely first-choice kicker
+Franco Molina,PREM,Newcastle Red Bull,lock,Starter,58,10,Argentina lock (Western Force)
+Allan Ferrie,PREM,Newcastle Red Bull,lock,Depth,38,8,From Coventry (Championship)
+Hoskins Sotutu,PREM,Newcastle Red Bull,loose-forward,Star,82,10,All Black No.8; 2024 SR Player of Year; joins after Super Rugby (fewer games)
+Fehi Fineanganofo,PREM,Newcastle Red Bull,outside-back,Starter,60,8,Hurricanes wing; All Blacks call-up but future uncertain
+Max Hicks,PREM,Newcastle Red Bull,outside-back,Rotation,46,8,From Perpignan
+Pouri Rakete-Stones,PREM,Newcastle Red Bull,prop,Rotation,52,9,Hurricanes/Maori All Blacks prop depth
+Zuriel Togiatama,PREM,Newcastle Red Bull,prop,Rotation,50,9,Fijian Drua prop
+Ben Alexander,PREM,Northampton Saints,hooker,Project,30,6,From Old Albanian (club); development hooker
+Josh Taylor,PREM,Northampton Saints,loose-forward,Rotation,42,8,From Ealing (Championship)
+Lefty Zigiriadis,PREM,Northampton Saints,prop,Depth,38,7,From Ealing (Championship)
+Joe Marchant,PREM,Sale Sharks,centre,Star,80,12,England centre returning from Stade Francais; first-choice
+Courtney Lawes,PREM,Sale Sharks,lock,Starter,68,9,England veteran lock (from Brive); rotation given age
+Elia Canakaivata,PREM,Sale Sharks,loose-forward,Starter,58,10,Fiji international flanker (Fijian Drua)
+Ponipate Loganimasi,PREM,Sale Sharks,outside-back,Starter,60,10,Fiji winger; try threat (Fijian Drua)
+David Opoku,PREM,Sale Sharks,outside-back,Depth,40,7,From Coventry (Championship)
+Tomas Francis,PREM,Sale Sharks,prop,Rotation,50,8,Wales veteran tighthead (from Aix)
+Xavier Roe,PREM,Sale Sharks,scrum-half,Rotation,44,8,From Chiefs NZ; scrum-half cover
+Sione Va'enuku,PREM,Saracens,centre,Depth,38,7,From Ampthill (Championship)
+François Carlo Mey,URC,Benetton Rugby,centre,Rotation,45,8,From Soyaux-Angouleme (ProD2)
+Isaia Walker-Leawere,URC,Benetton Rugby,lock,Starter,55,10,Hurricanes lock
+Gonzalo Hughes,URC,Benetton Rugby,prop,Depth,40,8,From Perigueux
+Matias Medrano,URC,Benetton Rugby,prop,Rotation,50,9,Argentina prop (Pampas)
+Semisi Paea,URC,Cardiff Rugby,prop,Rotation,48,9,Moana Pasifika prop
+Thomas Connolly,URC,Connacht Rugby,prop,Project,30,6,From Belvedere (club rugby); development
+Cheslin Kolbe,URC,DHL Stormers,outside-back,Star,96,12,Springbok superstar winger returning from Japan; elite try threat
+Anzelo Tuitavuki,URC,Dragons RFC,centre,Rotation,46,8,From Colomiers (ProD2)
+Terrell Peita,URC,Dragons RFC,centre,Rotation,48,9,Blues (Super Rugby) midfielder
+Caio Parry,URC,Dragons RFC,outside-back,Depth,35,7,From RGC 1404 (Welsh Championship)
+Ere Enari,URC,Dragons RFC,scrum-half,Starter,58,10,Samoa international scrum-half (Hurricanes)
+Riley Higgins,URC,Edinburgh Rugby,centre,Rotation,50,9,Hurricanes midfielder
+Kienan Higgins,URC,Edinburgh Rugby,centre,Rotation,42,8,From New England Free Jacks (MLR)
+James Grayson,URC,Edinburgh Rugby,fly-half,Starter,52,8,Goal-kicking 10 returning from Japan; cover but kicks
+Louie Chapman,URC,Edinburgh Rugby,loose-forward,Rotation,46,8,Young Crusaders back-row
+Ollie Duncan,URC,Edinburgh Rugby,loose-forward,Project,30,5,Academy promotion
+Geordie Gwynn,URC,Edinburgh Rugby,outside-back,Rotation,44,8,From Ealing (Championship)
+Bayley Kuenzle,URC,Glasgow Warriors,fly-half,Rotation,52,9,Western Force utility back; cover 10/12/15
+Ruwald van der Merwe,URC,Glasgow Warriors,loose-forward,Rotation,48,9,Pumas back-row
+Jamie Ritchie,URC,Glasgow Warriors,loose-forward,Starter,70,11,Scotland flanker; first-choice (from Perpignan)
+Murray Koster,URC,Hollywoodbets Sharks,centre,Rotation,46,9,Experienced centre from Japan (Hino)
+Dominic Besag,URC,Hollywoodbets Sharks,centre,Depth,38,7,From USA; unproven at URC level
+Donavan Don,URC,Hollywoodbets Sharks,outside-back,Rotation,45,7,SA Sevens convert; try threat but raw at XVs
+Nemo Roelofse,URC,Hollywoodbets Sharks,prop,Rotation,46,8,From Perpignan
+Joey Carbery,URC,Leinster Rugby,fly-half,Rotation,58,8,Ireland 10 but behind Prendergast at Leinster; limited starts
+JP du Preez,URC,Lions,lock,Starter,55,10,Tall experienced lock (from Japan)
+Sikhumbuzo Notshe,URC,Lions,loose-forward,Starter,58,10,Experienced SA back-row (from Montauban)
+Will Harrison,URC,Munster Rugby,fly-half,Rotation,48,8,Ex-Waratahs 10 from Japan; back-up
+Kieran Brookes,URC,Munster Rugby,prop,Rotation,50,8,Ex-England tighthead, 35yo; scrum depth (from Perpignan)
+Lalakai Foketi,URC,Ospreys,centre,Starter,68,11,Wallaby centre (from Chiefs NZ); first-choice
+Lawson Creighton,URC,Ospreys,fly-half,Rotation,52,9,Waratahs 10; cover for Dan Edwards
+Liam Wright,URC,Ospreys,loose-forward,Starter,60,9,Former Wallaby captain flanker
+Gareth Anscombe,URC,Scarlets,fly-half,Star,82,12,Wales Grand Slam 10 and goal-kicker (from Bayonne)
+Isaac Young,URC,Scarlets,hooker,Project,30,5,Academy promotion
+Tom Allen,URC,Scarlets,lock,Rotation,45,8,21yo NZ U20 lock (Hurricanes); project with upside
+Cullen Grace,URC,Scarlets,loose-forward,Starter,65,11,Crusaders back-rower; quality signing
+Isaac Murray-MacGregor,URC,Scarlets,outside-back,Rotation,44,8,From Canterbury (NPC)
+Chris Apoua,URC,Scarlets,prop,Rotation,46,8,Moana Pasifika prop
+Keynan Knox,URC,Ulster Rugby,prop,Rotation,50,9,Ex-Munster SA prop (from Nevers)
+Sango Xamlashe,URC,Vodacom Bulls,centre,Rotation,46,9,Pumas midfielder
+Curwin Bosch,URC,Vodacom Bulls,fly-half,Star,82,12,Springbok 10/15 and goal-kicker (from Brive)
+Heinrich Theron,URC,Vodacom Bulls,lock,Project,30,5,Academy promotion
+Lorenzo Citton,URC,Zebre Parma,centre,Rotation,46,9,Italy-eligible centre (from Petrarca)
+Patricio Baronio,URC,Zebre Parma,centre,Depth,42,8,From Viadana (Italian club)
+Tommaso Allan,URC,Zebre Parma,fly-half,Star,85,13,Italy record points scorer and primary goal-kicker (from Perpignan)
+Francisco Minervino,URC,Zebre Parma,hooker,Rotation,42,8,From Petrarca (Italian club)
+Alex Mattioli,URC,Zebre Parma,lock,Rotation,48,9,Returning from Racing 92
+Pietro Turrisi,URC,Zebre Parma,lock,Rotation,45,9,Returning from Racing 92
+Jacopo Botturi,URC,Zebre Parma,loose-forward,Depth,38,7,From Petrarca (Italian club)
+Leonardo Sodo Migliori,URC,Zebre Parma,outside-back,Depth,38,7,From Fiamme Oro (Italian club)
+Sergio Pelliccioli,URC,Zebre Parma,prop,Depth,38,7,From Petrarca (Italian club)

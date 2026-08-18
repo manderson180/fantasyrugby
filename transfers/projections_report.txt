@@ -1,0 +1,256 @@
+Projections transfer refresh — 2026-08-18T13:48:59
+================================================================
+Tier cutoffs (position-percentile): {'PREM': {'Elite': 97.88732394366197, 'Premium': 86.875, 'Good': 65.38461538461539, 'Squad': 45.73170731707317}, 'URC': {'Elite': 97.88732394366197, 'Premium': 92.77777777777777, 'Good': 76.49253731343283, 'Squad': 49.21875}}
+
+── Cross-league movers rescaled (22) ──
+AARON WAINWRIGHT         URC->PREM Loose Forward PPG 0.01->0.01 (x1.036)
+BOETA CHAMBERLAIN        PREM->URC Fly Half      PPG 2.77->2.26 (x0.816)
+CEBO DLAMINI             URC->PREM Prop          PPG 9.09->9.51 (x1.046)
+DAN JOHN                 PREM->URC Outside Back  PPG 6.69->5.29 (x0.791)
+DEWI LAKE                URC->PREM Hooker        PPG 7.33->8.73 (x1.191)
+FRANCOIS VAN WYK         PREM->URC Prop          PPG 10.02->9.58 (x0.956)
+HANRO LIEBENBERG         PREM->URC Loose Forward PPG 6.71->6.47 (x0.965)
+HYRON ANDREWS            PREM->URC Lock          PPG 5.88->6.71 (x1.141)
+ION NECULAI              URC->PREM Prop          PPG 9.41->9.84 (x1.046)
+IVAN VAN ZYL             PREM->URC Scrum Half    PPG 3.81->4.22 (x1.108)
+JAC MORGAN               URC->PREM Loose Forward PPG 8.62->8.93 (x1.036)
+JAMIE BENSON             PREM->URC Fly Half      PPG 13.66->11.15 (x0.816)
+JAMIE BHATTI             URC->PREM Prop          PPG 8.07->8.44 (x1.046)
+JARROD EVANS             PREM->URC Fly Half      PPG 6.91->5.64 (x0.816)
+JEAN KLEYN               URC->PREM Lock          PPG 8.41->7.37 (x0.876)
+JOE JOYCE                URC->PREM Lock          PPG 6.83->5.99 (x0.876)
+MALIK FAISSAL            URC->PREM Outside Back  PPG 9.59->12.13 (x1.265)
+PHIL COKANASIGA          URC->PREM Centre        PPG 5.86->7.09 (x1.211)
+SCOTT SIO                PREM->URC Prop          PPG 13.18->12.6 (x0.956)
+STEPHAN LEWIES           PREM->URC Lock          PPG 10.26->11.71 (x1.141)
+THOMAS DU TOIT           PREM->URC Prop          PPG 0.04->0.04 (x0.956)
+WERNER KOK               URC->PREM Outside Back  PPG 13.09->16.55 (x1.265)
+
+── New players added (87) ──
+PREM Bath Rugby           Lock          Will Roue                pctl25 gms5 -> PPG 6.52
+PREM Bristol Bears        Loose Forward Josh Caulfield           pctl42 gms8 -> PPG 6.07
+PREM Bristol Bears        Outside Back  Tobi Wilson              pctl40 gms7 -> PPG 10.43
+PREM Bristol Bears        Prop          Khalik Kareem            pctl38 gms8 -> PPG 10.61
+PREM Exeter Chiefs        Centre        Dallas McLeod            pctl60 gms11 -> PPG 8.73
+PREM Exeter Chiefs        Loose Forward Obinna Nkwocha           pctl42 gms8 -> PPG 6.07
+PREM Exeter Chiefs        Prop          Nika Abuladze            pctl52 gms9 -> PPG 10.97
+PREM Gloucester Rugby     Fly Half      Callum McCabe            pctl40 gms7 -> PPG 8.37
+PREM Gloucester Rugby     Lock          Eliot Salt               pctl40 gms8 -> PPG 7.22
+PREM Gloucester Rugby     Prop          Marco Fepulea'i          pctl44 gms8 -> PPG 10.86
+PREM Gloucester Rugby     Scrum Half    Dan Robson               pctl68 gms11 -> PPG 5.21
+PREM Gloucester Rugby     Scrum Half    Halen King               pctl40 gms7 -> PPG 3.17
+PREM Harlequins           Prop          Harry Johnson-Holmes     pctl55 gms10 -> PPG 11
+PREM Harlequins           Prop          Sampie Swiegers          pctl46 gms8 -> PPG 10.9
+PREM Leicester Tigers     Lock          Elliott Stooke           pctl55 gms10 -> PPG 7.85
+PREM Leicester Tigers     Prop          Joel Sclavi              pctl60 gms10 -> PPG 11.26
+PREM Leicester Tigers     Prop          Mako Vunipola            pctl58 gms9 -> PPG 11.2
+PREM Newcastle Red Bull   Fly Half      Zack Henry               pctl78 gms12 -> PPG 13.63
+PREM Newcastle Red Bull   Lock          Allan Ferrie             pctl38 gms8 -> PPG 7.2
+PREM Newcastle Red Bull   Lock          Franco Molina            pctl58 gms10 -> PPG 8.54
+PREM Newcastle Red Bull   Loose Forward Hoskins Sotutu           pctl82 gms10 -> PPG 9.88
+PREM Newcastle Red Bull   Outside Back  Fehi Fineanganofo        pctl60 gms8 -> PPG 11.76
+PREM Newcastle Red Bull   Outside Back  Max Hicks                pctl46 gms8 -> PPG 11.07
+PREM Newcastle Red Bull   Prop          Pouri Rakete-Stones      pctl52 gms9 -> PPG 10.97
+PREM Newcastle Red Bull   Prop          Zuriel Togiatama         pctl50 gms9 -> PPG 10.95
+PREM Northampton Saints   Hooker        Ben Alexander            pctl30 gms6 -> PPG 4.95
+PREM Northampton Saints   Loose Forward Josh Taylor              pctl42 gms8 -> PPG 6.07
+PREM Northampton Saints   Prop          Lefty Zigiriadis         pctl38 gms7 -> PPG 10.61
+PREM Sale Sharks          Centre        Joe Marchant             pctl80 gms12 -> PPG 10.62
+PREM Sale Sharks          Lock          Courtney Lawes           pctl68 gms9 -> PPG 10.26
+PREM Sale Sharks          Loose Forward Elia Canakaivata         pctl58 gms10 -> PPG 6.91
+PREM Sale Sharks          Outside Back  David Opoku              pctl40 gms7 -> PPG 10.43
+PREM Sale Sharks          Outside Back  Ponipate Loganimasi      pctl60 gms10 -> PPG 11.76
+PREM Sale Sharks          Prop          Tomas Francis            pctl50 gms8 -> PPG 10.95
+PREM Sale Sharks          Scrum Half    Xavier Roe               pctl44 gms8 -> PPG 3.25
+PREM Saracens             Centre        Sione Va'enuku           pctl38 gms7 -> PPG 6.61
+URC Benetton Rugby       Centre        François Carlo Mey       pctl45 gms8 -> PPG 6.05
+URC Benetton Rugby       Lock          Isaia Walker-Leawere     pctl55 gms10 -> PPG 8.55
+URC Benetton Rugby       Prop          Gonzalo Hughes           pctl40 gms8 -> PPG 10.23
+URC Benetton Rugby       Prop          Matias Medrano           pctl50 gms9 -> PPG 10.46
+URC Cardiff Rugby        Prop          Semisi Paea              pctl48 gms9 -> PPG 10.43
+URC Connacht Rugby       Prop          Thomas Connolly          pctl30 gms6 -> PPG 9.82
+URC DHL Stormers         Outside Back  Cheslin Kolbe            pctl96 gms12 -> PPG 14.49
+URC Dragons RFC          Centre        Anzelo Tuitavuki         pctl46 gms8 -> PPG 6.07
+URC Dragons RFC          Centre        Terrell Peita            pctl48 gms9 -> PPG 6.13
+URC Dragons RFC          Outside Back  Caio Parry               pctl35 gms7 -> PPG 8.02
+URC Dragons RFC          Scrum Half    Ere Enari                pctl58 gms10 -> PPG 3.93
+URC Edinburgh Rugby      Centre        Kienan Higgins           pctl42 gms8 -> PPG 5.99
+URC Edinburgh Rugby      Centre        Riley Higgins            pctl50 gms9 -> PPG 6.18
+URC Edinburgh Rugby      Fly Half      James Grayson            pctl52 gms8 -> PPG 7.54
+URC Edinburgh Rugby      Loose Forward Louie Chapman            pctl46 gms8 -> PPG 6.13
+URC Edinburgh Rugby      Loose Forward Ollie Duncan             pctl30 gms5 -> PPG 5.51
+URC Edinburgh Rugby      Outside Back  Geordie Gwynn            pctl44 gms8 -> PPG 8.42
+URC Glasgow Warriors     Fly Half      Bayley Kuenzle           pctl52 gms9 -> PPG 7.54
+URC Glasgow Warriors     Loose Forward Jamie Ritchie            pctl70 gms11 -> PPG 7.79
+URC Glasgow Warriors     Loose Forward Ruwald van der Merwe     pctl48 gms9 -> PPG 6.23
+URC Hollywoodbets Sharks Centre        Dominic Besag            pctl38 gms7 -> PPG 5.93
+URC Hollywoodbets Sharks Centre        Murray Koster            pctl46 gms9 -> PPG 6.07
+URC Hollywoodbets Sharks Outside Back  Donavan Don              pctl45 gms7 -> PPG 8.46
+URC Hollywoodbets Sharks Prop          Nemo Roelofse            pctl46 gms8 -> PPG 10.39
+URC Leinster Rugby       Fly Half      Joey Carbery             pctl58 gms8 -> PPG 7.9
+URC Lions                Lock          JP du Preez              pctl55 gms10 -> PPG 8.55
+URC Lions                Loose Forward Sikhumbuzo Notshe        pctl58 gms10 -> PPG 6.85
+URC Munster Rugby        Fly Half      Will Harrison            pctl48 gms8 -> PPG 7.1
+URC Munster Rugby        Prop          Kieran Brookes           pctl50 gms8 -> PPG 10.46
+URC Ospreys              Centre        Lalakai Foketi           pctl68 gms11 -> PPG 7.54
+URC Ospreys              Fly Half      Lawson Creighton         pctl52 gms9 -> PPG 7.54
+URC Ospreys              Loose Forward Liam Wright              pctl60 gms9 -> PPG 6.91
+URC Scarlets             Fly Half      Gareth Anscombe          pctl82 gms12 -> PPG 11.26
+URC Scarlets             Hooker        Isaac Young              pctl30 gms5 -> PPG 4.77
+URC Scarlets             Lock          Tom Allen                pctl45 gms8 -> PPG 8.27
+URC Scarlets             Loose Forward Cullen Grace             pctl65 gms11 -> PPG 7.39
+URC Scarlets             Outside Back  Isaac Murray-MacGregor   pctl44 gms8 -> PPG 8.42
+URC Scarlets             Prop          Chris Apoua              pctl46 gms8 -> PPG 10.39
+URC Ulster Rugby         Prop          Keynan Knox              pctl50 gms9 -> PPG 10.46
+URC Vodacom Bulls        Centre        Sango Xamlashe           pctl46 gms9 -> PPG 6.07
+URC Vodacom Bulls        Fly Half      Curwin Bosch             pctl82 gms12 -> PPG 11.26
+URC Vodacom Bulls        Lock          Heinrich Theron          pctl30 gms5 -> PPG 7.74
+URC Zebre Parma          Centre        Lorenzo Citton           pctl46 gms9 -> PPG 6.07
+URC Zebre Parma          Centre        Patricio Baronio         pctl42 gms8 -> PPG 5.99
+URC Zebre Parma          Fly Half      Tommaso Allan            pctl85 gms13 -> PPG 11.68
+URC Zebre Parma          Hooker        Francisco Minervino      pctl42 gms8 -> PPG 4.91
+URC Zebre Parma          Lock          Alex Mattioli            pctl48 gms9 -> PPG 8.37
+URC Zebre Parma          Lock          Pietro Turrisi           pctl45 gms9 -> PPG 8.27
+URC Zebre Parma          Loose Forward Jacopo Botturi           pctl38 gms7 -> PPG 5.85
+URC Zebre Parma          Outside Back  Leonardo Sodo Migliori   pctl38 gms7 -> PPG 8.12
+URC Zebre Parma          Prop          Sergio Pelliccioli       pctl38 gms7 -> PPG 10.09
+
+── Removed from projections: departed (114) ──
+PREM Bristol Bears RICHARD LANE
+PREM Bristol Bears SAM GRAHAMSLAW
+PREM Bristol Bears SANTIAGO GRONDONA
+PREM Exeter Chiefs CHARLIE CHAPMAN
+PREM Exeter Chiefs KWENZO BLOSE
+PREM Exeter Chiefs LEN IKITAU
+PREM Gloucester Rugby HUGH BOKENHAM
+PREM Gloucester Rugby JOSH BASHAM
+PREM Gloucester Rugby MATIAS ALEMANNO
+PREM Gloucester Rugby NEPO LAULALA
+PREM Gloucester Rugby ROB RUSSELL
+PREM Gloucester Rugby WILLIAM BUTLER
+PREM Harlequins HAYDEN HYDE
+PREM Harlequins JACK GRANT
+PREM Harlequins JOE JONES
+PREM Harlequins MAX GREEN
+PREM Harlequins TOM LAWDAY
+PREM Leicester Tigers HAMISH WATSON
+PREM Leicester Tigers HARRY WELLS
+PREM Leicester Tigers IZAIA PERESE
+PREM Leicester Tigers JAMES O'CONNOR
+PREM Newcastle Red Bull AMANAKI MAFI
+PREM Newcastle Red Bull BEN HEALY
+PREM Newcastle Red Bull CAMERON NEILD
+PREM Newcastle Red Bull CONNOR DOHERTY
+PREM Newcastle Red Bull ELLIOTT OBATOYINBO
+PREM Newcastle Red Bull FERGUS LEE-WARNER
+PREM Newcastle Red Bull FREDDIE CLARKE
+PREM Newcastle Red Bull FREDDIE LOCKWOOD
+PREM Newcastle Red Bull JAMIE CLARK
+PREM Newcastle Red Bull JAMIE HODGSON
+PREM Newcastle Red Bull JOHN HAWKINS
+PREM Newcastle Red Bull LUAN DE BRUIN
+PREM Newcastle Red Bull MAX CLARK
+PREM Newcastle Red Bull SAM STUART
+PREM Newcastle Red Bull SEBASTIAN DE CHAVES
+PREM Newcastle Red Bull STEFAN COETZEE
+PREM Newcastle Red Bull TIM CARDALL
+PREM Newcastle Red Bull TOM GORDON
+PREM Northampton Saints EMEKA ATUANYA
+PREM Sale Sharks JOE BEDLOW
+PREM Sale Sharks ROBERT DU PREEZ
+PREM Sale Sharks TUMY ONASANYA
+PREM Sale Sharks WILLGRIFF JOHN
+PREM Saracens GARETH SIMPSON
+PREM Saracens MARCO RICCIONI
+PREM Saracens THEO MCFARLAND
+PREM Saracens TOM WILLIS
+URC Benetton Rugby MALAKAI FEKITOA
+URC Benetton Rugby NICOLAS ROGER
+URC Benetton Rugby THOMAS GALLO
+URC Benetton Rugby TOMMASO MENONCELLO
+URC Cardiff Rugby ED BYRNE
+URC Cardiff Rugby RORY JENNINGS
+URC Connacht Rugby DAVID HAWKSHAW
+URC Connacht Rugby DENIS BUCKLEY
+URC Connacht Rugby OISIN MCCORMACK
+URC DHL Stormers DANIEL DU PLESSIS
+URC DHL Stormers RUBEN VAN HEERDEN
+URC DHL Stormers SALMAAN MOERAT
+URC Dragons RFC EWAN ROSSER
+URC Dragons RFC NIALL ARMSTRONG
+URC Edinburgh Rugby ANGUS WILLIAMS
+URC Edinburgh Rugby CHARLIE SHIEL
+URC Edinburgh Rugby JAMES LANG
+URC Edinburgh Rugby MIKEY JONES
+URC Edinburgh Rugby ROSS MCCANN
+URC Edinburgh Rugby SAM SKINNER
+URC Glasgow Warriors ADAM HASTINGS
+URC Glasgow Warriors HUW JONES
+URC Glasgow Warriors JACK DEMPSEY
+URC Glasgow Warriors JOHNNY MATTHEWS
+URC Glasgow Warriors SIONE VAILANU
+URC Hollywoodbets Sharks APHELELE FASSI
+URC Hollywoodbets Sharks GRANT WILLIAMS
+URC Hollywoodbets Sharks MARVIN ORIE
+URC Leinster Rugby JAMES LOWE
+URC Leinster Rugby LUKE MCGRATH
+URC Leinster Rugby RABAH SLIMANI
+URC Leinster Rugby RIEKO IOANE
+URC Lions LUBABALO DOBELA
+URC Lions RUBEN SCHOEMAN
+URC Munster Rugby ANDREW SMITH
+URC Munster Rugby CONOR BARTLEY
+URC Munster Rugby PADDY PATTERSON
+URC Munster Rugby TONY BUTLER
+URC Ospreys JACK WALSH
+URC Ospreys JAMES FENDER
+URC Ospreys LUKE SCULLY
+URC Ospreys MAX NAGY
+URC Ospreys RYAN CONBEER
+URC Ospreys TOM FLORENCE
+URC Scarlets BEN WILLIAMS
+URC Scarlets JARROD TAYLOR
+URC Scarlets MAX DOUGLAS
+URC Ulster Rugby ANGUS BELL
+URC Ulster Rugby BEN MOXHAM
+URC Ulster Rugby BRYAN O'CONNOR
+URC Ulster Rugby DAVE SHANAHAN
+URC Ulster Rugby JAMES HUMPHREYS
+URC Ulster Rugby JOHN ANDREW
+URC Ulster Rugby LORCAN MCLOUGHLIN
+URC Ulster Rugby MARCUS REA
+URC Ulster Rugby MATTHEW DALTON
+URC Ulster Rugby SEAN REFFELL
+URC Vodacom Bulls DAVID KRIEL
+URC Vodacom Bulls KURT-LEE ARENDSE
+URC Vodacom Bulls RUAN NORTJE
+URC Zebre Parma ALBERT EINSTEIN BATISTA
+URC Zebre Parma ENRIQUE PIERETTO
+URC Zebre Parma GONZALO GARCIA
+URC Zebre Parma GUIDO VOLPI
+URC Zebre Parma IACOPO BIANCHI
+URC Zebre Parma SHILO KLEIN
+
+── Removed from projections: retired (19) ──
+PREM Gloucester Rugby KIRILL GOTOVTSEV
+PREM Harlequins JOE LAUNCHBURY
+URC Benetton Rugby NAHUEL TETAZ CHAPARRO
+URC Benetton Rugby SCOTT SCRAFTON
+URC Cardiff Rugby LEIGH HALFPENNY
+URC Connacht Rugby JACK CARTY
+URC DHL Stormers SCARRA NTUBENI
+URC Dragons RFC JAMES BENJAMIN
+URC Glasgow Warriors DUNCAN WEIR
+URC Hollywoodbets Sharks FRANCOIS VENTER
+URC Lions FRANCO MARAIS
+URC Munster Rugby JOHN RYAN
+URC Munster Rugby NIALL SCANNELL
+URC Munster Rugby OLI JAGER
+URC Ospreys WILLIAM GREATBANKS
+URC Scarlets JAKE BALL
+URC Vodacom Bulls JAN SERFONTEIN
+URC Zebre Parma ENRICO LUCCHIN
+URC Zebre Parma LUCA MORISI
+
+── Cross-league move skipped, no prior projection (0) ──
+(none)

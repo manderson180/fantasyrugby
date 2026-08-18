@@ -1,0 +1,88 @@
+dest_league,dest_team,position,player,prev_team,confidence,notes
+PREM,Bath Rugby,lock,Will Roue,Bath Rugby Academy,Medium,Academy promotion (new to list)
+PREM,Bristol Bears,loose-forward,Josh Caulfield,Ealing Trailfinders,Medium,New to leagues; signed from Ealing Trailfinders
+PREM,Bristol Bears,outside-back,Tobi Wilson,Ealing Trailfinders,Medium,New to leagues; signed from Ealing Trailfinders
+PREM,Bristol Bears,prop,Khalik Kareem,Worcester Warriors,Medium,New to leagues; signed from Worcester Warriors
+PREM,Exeter Chiefs,centre,Dallas McLeod,Crusaders,Medium,New to leagues; signed from Crusaders
+PREM,Exeter Chiefs,loose-forward,Obinna Nkwocha,Worcester Warriors,Medium,New to leagues; signed from Worcester Warriors
+PREM,Exeter Chiefs,prop,Nika Abuladze,Montpellier,Medium,New to leagues; signed from Montpellier
+PREM,Gloucester Rugby,fly-half,Callum McCabe,Chiefs (NZ),Medium,New to leagues; signed from Chiefs (NZ)
+PREM,Gloucester Rugby,lock,Eliot Salt,Coventry,Medium,New to leagues; signed from Coventry
+PREM,Gloucester Rugby,prop,Marco Fepulea'i,Mont-de-Marsan,Medium,New to leagues; signed from Mont-de-Marsan
+PREM,Gloucester Rugby,scrum-half,Dan Robson,Pau,Medium,New to leagues; signed from Pau
+PREM,Gloucester Rugby,scrum-half,Halen King,Chiefs (NZ),Medium,New to leagues; signed from Chiefs (NZ)
+PREM,Harlequins,prop,Sampie Swiegers,Pumas,Medium,New to leagues; signed from Pumas
+PREM,Harlequins,prop,Harry Johnson-Holmes,Western Force,Medium,New to leagues; signed from Western Force
+PREM,Leicester Tigers,lock,Elliott Stooke,Red Hurricanes Osaka,Medium,New to leagues; signed from Red Hurricanes Osaka
+PREM,Leicester Tigers,prop,Joel Sclavi,La Rochelle,Medium,New to leagues; signed from La Rochelle
+PREM,Leicester Tigers,prop,Mako Vunipola,Vannes,Medium,New to leagues; signed from Vannes
+PREM,Newcastle Red Bull,fly-half,Zack Henry,Paris,Medium,New to leagues; signed from Paris
+PREM,Newcastle Red Bull,lock,Franco Molina,Western Force,Medium,New to leagues; signed from Western Force
+PREM,Newcastle Red Bull,lock,Allan Ferrie,Coventry,Medium,New to leagues; signed from Coventry
+PREM,Newcastle Red Bull,loose-forward,Hoskins Sotutu,Blues,Medium,New to leagues; signed from Blues
+PREM,Newcastle Red Bull,outside-back,Fehi Fineanganofo,Hurricanes,Medium,New to leagues; signed from Hurricanes
+PREM,Newcastle Red Bull,outside-back,Max Hicks,Perpignan,Medium,New to leagues; signed from Perpignan
+PREM,Newcastle Red Bull,prop,Pouri Rakete-Stones,Hurricanes,Medium,New to leagues; signed from Hurricanes
+PREM,Newcastle Red Bull,prop,Zuriel Togiatama,Fijian Drua,Medium,New to leagues; signed from Fijian Drua
+PREM,Northampton Saints,hooker,Ben Alexander,Old Albanian,Medium,New to leagues; signed from Old Albanian
+PREM,Northampton Saints,loose-forward,Josh Taylor,Ealing Trailfinders,Medium,New to leagues; signed from Ealing Trailfinders
+PREM,Northampton Saints,prop,Lefty Zigiriadis,Ealing Trailfinders,Medium,New to leagues; signed from Ealing Trailfinders
+PREM,Sale Sharks,centre,Joe Marchant,Paris,Medium,New to leagues; signed from Paris
+PREM,Sale Sharks,lock,Courtney Lawes,Brive,Medium,New to leagues; signed from Brive
+PREM,Sale Sharks,loose-forward,Elia Canakaivata,Fijian Drua,Medium,New to leagues; signed from Fijian Drua
+PREM,Sale Sharks,outside-back,Ponipate Loganimasi,Fijian Drua,Medium,New to leagues; signed from Fijian Drua
+PREM,Sale Sharks,outside-back,David Opoku,Coventry,Medium,New to leagues; signed from Coventry
+PREM,Sale Sharks,prop,Tomas Francis,Aix,Medium,New to leagues; signed from Aix
+PREM,Sale Sharks,scrum-half,Xavier Roe,Chiefs (NZ),Medium,New to leagues; signed from Chiefs (NZ)
+PREM,Saracens,centre,Sione Va'enuku,Ampthill,Medium,New to leagues; signed from Ampthill
+URC,Benetton Rugby,centre,François Carlo Mey,Soyaux Angouleme,Medium,New to leagues; signed from Soyaux Angouleme
+URC,Benetton Rugby,lock,Isaia Walker-Leawere,Hurricanes,Medium,New to leagues; signed from Hurricanes
+URC,Benetton Rugby,prop,Gonzalo Hughes,Perigueux,Medium,New to leagues; signed from Perigueux
+URC,Benetton Rugby,prop,Matias Medrano,Pampas XV,Medium,New to leagues; signed from Pampas XV
+URC,Cardiff Rugby,prop,Semisi Paea,Moana Pasifika,Medium,New to leagues; signed from Moana Pasifika
+URC,Connacht Rugby,prop,Thomas Connolly,Belvedere,Medium,New to leagues; signed from Belvedere
+URC,DHL Stormers,outside-back,Cheslin Kolbe,Tokyo Sungoliath,Medium,New to leagues; signed from Tokyo Sungoliath
+URC,Dragons RFC,centre,Anzelo Tuitavuki,Colomiers,Medium,New to leagues; signed from Colomiers
+URC,Dragons RFC,centre,Terrell Peita,Blues,Medium,New to leagues; signed from Blues
+URC,Dragons RFC,outside-back,Caio Parry,RGC 1404,Medium,New to leagues; signed from RGC 1404
+URC,Dragons RFC,scrum-half,Ere Enari,Hurricanes,Medium,New to leagues; signed from Hurricanes
+URC,Edinburgh Rugby,centre,Riley Higgins,Hurricanes,Medium,New to leagues; signed from Hurricanes
+URC,Edinburgh Rugby,centre,Kienan Higgins,New England Free Jacks,Medium,New to leagues; signed from New England Free Jacks
+URC,Edinburgh Rugby,fly-half,James Grayson,Sagamihara,Medium,New to leagues; signed from Sagamihara
+URC,Edinburgh Rugby,loose-forward,Louie Chapman,Crusaders,Medium,New to leagues; signed from Crusaders
+URC,Edinburgh Rugby,loose-forward,Ollie Duncan,Edinburgh Rugby Academy,Medium,Academy promotion (new to list)
+URC,Edinburgh Rugby,outside-back,Geordie Gwynn,Ealing Trailfinders,Medium,New to leagues; signed from Ealing Trailfinders
+URC,Glasgow Warriors,fly-half,Bayley Kuenzle,Western Force,Medium,New to leagues; signed from Western Force
+URC,Glasgow Warriors,loose-forward,Ruwald van der Merwe,Pumas,Medium,New to leagues; signed from Pumas
+URC,Glasgow Warriors,loose-forward,Jamie Ritchie,Perpignan,Medium,New to leagues; signed from Perpignan
+URC,Hollywoodbets Sharks,centre,Murray Koster,Hino Red Dolphins,Medium,New to leagues; signed from Hino Red Dolphins
+URC,Hollywoodbets Sharks,centre,Dominic Besag,Unattached (USA),Medium,New to leagues; signed from Unattached (USA)
+URC,Hollywoodbets Sharks,outside-back,Donavan Don,South Africa Sevens,Medium,New to leagues; signed from South Africa Sevens
+URC,Hollywoodbets Sharks,prop,Nemo Roelofse,Perpignan,Medium,New to leagues; signed from Perpignan
+URC,Leinster Rugby,fly-half,Joey Carbery,Bordeaux,Medium,New to leagues; signed from Bordeaux
+URC,Lions,lock,JP du Preez,Red Hurricanes Osaka,Medium,New to leagues; signed from Red Hurricanes Osaka
+URC,Lions,loose-forward,Sikhumbuzo Notshe,Montauban,Medium,New to leagues; signed from Montauban
+URC,Munster Rugby,fly-half,Will Harrison,Hanazono Kintetsu Liners,Medium,New to leagues; signed from Hanazono Kintetsu Liners
+URC,Munster Rugby,prop,Kieran Brookes,Perpignan,Medium,New to leagues; signed from Perpignan
+URC,Ospreys,centre,Lalakai Foketi,Chiefs (NZ),Medium,New to leagues; signed from Chiefs (NZ)
+URC,Ospreys,fly-half,Lawson Creighton,NSW Waratahs,Medium,New to leagues; signed from NSW Waratahs
+URC,Ospreys,loose-forward,Liam Wright,Unattached,Medium,New to leagues; signed from Unattached
+URC,Scarlets,fly-half,Gareth Anscombe,Bayonne,Medium,New to leagues; signed from Bayonne
+URC,Scarlets,hooker,Isaac Young,Scarlets Academy,Medium,Academy promotion (new to list)
+URC,Scarlets,lock,Tom Allen,Hurricanes,Medium,New to leagues; signed from Hurricanes
+URC,Scarlets,loose-forward,Cullen Grace,Crusaders,Medium,New to leagues; signed from Crusaders
+URC,Scarlets,outside-back,Isaac Murray-MacGregor,Canterbury,Medium,New to leagues; signed from Canterbury
+URC,Scarlets,prop,Chris Apoua,Moana Pasifika,Medium,New to leagues; signed from Moana Pasifika
+URC,Ulster Rugby,prop,Keynan Knox,Nevers,Medium,New to leagues; signed from Nevers
+URC,Vodacom Bulls,centre,Sango Xamlashe,Pumas,Medium,New to leagues; signed from Pumas
+URC,Vodacom Bulls,fly-half,Curwin Bosch,Brive,Medium,New to leagues; signed from Brive
+URC,Vodacom Bulls,lock,Heinrich Theron,Vodacom Bulls Academy,Medium,Academy promotion (new to list)
+URC,Zebre Parma,centre,Lorenzo Citton,Petrarca,Medium,New to leagues; signed from Petrarca
+URC,Zebre Parma,centre,Patricio Baronio,Rugby Viadana,Medium,New to leagues; signed from Rugby Viadana
+URC,Zebre Parma,fly-half,Tommaso Allan,Perpignan,Medium,New to leagues; signed from Perpignan
+URC,Zebre Parma,hooker,Francisco Minervino,Petrarca,Medium,New to leagues; signed from Petrarca
+URC,Zebre Parma,lock,Alex Mattioli,Racing 92,Medium,New to leagues; signed from Racing 92
+URC,Zebre Parma,lock,Pietro Turrisi,Racing 92,Medium,New to leagues; signed from Racing 92
+URC,Zebre Parma,loose-forward,Jacopo Botturi,Petrarca,Medium,New to leagues; signed from Petrarca
+URC,Zebre Parma,outside-back,Leonardo Sodo Migliori,Fiamme Oro,Medium,New to leagues; signed from Fiamme Oro
+URC,Zebre Parma,prop,Sergio Pelliccioli,Petrarca,Medium,New to leagues; signed from Petrarca
