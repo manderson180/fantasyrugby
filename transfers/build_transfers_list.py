@@ -1,0 +1,137 @@
+#!/usr/bin/env python3
+"""
+build_transfers_list.py — emit a complete transfer list for the "Transfers" tab.
+
+Straight from the squads sheet (the source of truth for offseason moves), so it includes
+new signings and players with no 2025-26 stats — unlike the runtime _transfer comment
+layer, which only covers players matched to a season row. Independent of build_transfers.py
+(no name-matching), so it is safe to re-run at any time.
+
+For every squad row whose change_type is not 'stay'/'unknown' it records:
+  player, pos, from (2025-26 club), to (2026-27 club/destination), status, from_lg, to_lg, note
+and injects a compact TRANSFERS_LIST array into ../index.html between
+/* TRANSFERS_LIST:START */ ... /* TRANSFERS_LIST:END */ markers (idempotent).
+
+Run:  python3 transfers/build_transfers_list.py   (std-lib only)
+"""
+
+import csv, json, re
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parent
+INDEX = ROOT / "index.html"
+SQUADS = ROOT / "25-26 Squads - Copy of 26-27 Squads (1).csv"
+PACKS = {"PREM": "PREM 25_26 Data Pack - SEASON TOTALS (17).csv",
+         "URC":  "URC 25_26 Data Pack - SEASON TOTALS (17).csv"}
+
+POS_STD = {"lock": "Lock", "loose-forward": "Loose Forward", "outside-back": "Outside Back",
+           "prop": "Prop", "centre": "Centre", "fly-half": "Fly Half",
+           "scrum-half": "Scrum Half", "hooker": "Hooker"}
+
+STATUS = {"move": "Moved", "departed": "Departed", "retired": "Retired", "new": "New"}
+
+
+def load(path):
+    with open(path, encoding="utf-8-sig", newline="") as f:
+        return list(csv.DictReader(f))
+
+
+def clean_dest(notes):
+    """A departed row's destination lives in `notes` ('To Toulon', 'Released — destination
+    TBC', or occasionally curator prose). Return a tidy club/label for the To column."""
+    n = (notes or "").strip()
+    if n.lower().startswith("duplicate resolved"):
+        m = re.search(r"departed to ([^.;(]+)", n, re.I)
+        if m:
+            return m.group(1).strip()
+        if re.search(r"released", n, re.I):
+            return "Released (TBC)"
+        return ""
+    if n.lower().startswith("to "):
+        return n[3:].strip()
+    if n.lower().startswith("released"):
+        return "Released (TBC)"
+    return n
+
+
+def main():
+    team_lg = {}
+    for lg, name in PACKS.items():
+        for r in load(ROOT / name):
+            team_lg[r["TEAM"].strip()] = lg
+
+    entries = []
+    for r in load(SQUADS):
+        ct = (r.get("change_type") or "").strip().lower()
+        if ct not in STATUS:
+            continue
+        pos_raw = (r.get("position") or "").strip()
+        pos = POS_STD.get(pos_raw.lower(), pos_raw.title())
+        from_team = (r.get("team") or "").strip()
+        to_2627 = (r.get("team_2627") or "").strip()
+        notes = (r.get("notes") or "").strip()
+        from_lg = team_lg.get(from_team, "")
+
+        status = ct
+        if ct == "move":
+            to_team, note = to_2627, f"Moved to {to_2627}"
+        elif ct == "new":
+            to_team, note = to_2627, (f"New signing (from {from_team})" if from_team else "New signing")
+        elif ct == "departed":
+            dest = clean_dest(notes)
+            to_team, note = dest, (f"Left the club ({clean_dest(notes) or notes})" if notes else "Left the club")
+        else:  # retired
+            to_team, note = "", "Retired"
+
+        to_lg = team_lg.get(to_team, "")
+        base = {
+            "player": (r.get("player") or "").strip().upper(),
+            "pos": pos, "from": from_team, "to": to_team,
+            "from_lg": from_lg, "to_lg": to_lg, "note": note,
+        }
+        # A cross-league move (URC <-> PREM) is BOTH a departure from the old league and an
+        # arrival in the new one, so emit two rows: 'departed' (shown in the league being left,
+        # since "Moved" is reserved for same-league club changes) and 'arrived' (shown in the
+        # new league, displayed as "New"). 'arrived' stays distinct from a genuine 'new' player
+        # in the data because these players already carry player_ids and genuinely-new ones don't.
+        if status == "move" and from_lg and to_lg and from_lg != to_lg:
+            entries.append({**base, "status": "departed"})
+            entries.append({**base, "status": "arrived"})
+        else:
+            entries.append({**base, "status": status})
+
+    # Stable, readable order: status, then player.
+    order = {"move": 0, "new": 1, "arrived": 1, "departed": 2, "retired": 3}
+    entries.sort(key=lambda e: (order.get(e["status"], 9), e["player"]))
+
+    inject(entries)
+    from collections import Counter
+    c = Counter(e["status"] for e in entries)
+    print(f"TRANSFERS_LIST: {len(entries)} entries written (moved {c['move']}, new {c['new']}, "
+          f"arrived {c['arrived']}, departed {c['departed']}, retired {c['retired']})")
+
+
+def inject(entries):
+    html = INDEX.read_text(encoding="utf-8")
+    blob = json.dumps(entries, ensure_ascii=False, separators=(",", ":"))
+    block = ("/* TRANSFERS_LIST:START (generated by transfers/build_transfers_list.py — do not edit) */\n"
+             f"const TRANSFERS_LIST = {blob};\n"
+             "/* TRANSFERS_LIST:END */")
+    pat = re.compile(r"/\* TRANSFERS_LIST:START.*?TRANSFERS_LIST:END \*/", re.DOTALL)
+    if pat.search(html):
+        html = pat.sub(lambda _m: block, html, count=1)
+    else:
+        lines = html.split("\n")
+        for i, line in enumerate(lines):
+            if "TRANSFER_DATA:END" in line:
+                lines.insert(i + 1, block)
+                break
+        else:
+            raise SystemExit("Could not find TRANSFER_DATA:END to insert after")
+        html = "\n".join(lines)
+    INDEX.write_text(html, encoding="utf-8")
+
+
+if __name__ == "__main__":
+    main()
