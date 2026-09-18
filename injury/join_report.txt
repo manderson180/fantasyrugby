@@ -1,10 +1,10 @@
-Injury join report — 2026-08-19T16:41:54
+Injury join report — 2026-09-18T16:35:55
 ============================================================
-CSV player rows processed : 254
-Matched to an app player  : 221 (exact 219, name-only 2, of which aliased 4)
-Resolved to Healthy       : 52 (played after injury date)
+CSV player rows processed : 264
+Matched to an app player  : 231 (exact 224, name-only 7, of which aliased 4)
+Resolved to Healthy       : 45 (played after injury date)
 Unmatched (no app player) : 33
-International duty added   : 132 (from international_squads.csv)
+International duty added   : 140 (from international_squads.csv)
 
 ── Resolved to Healthy via appearance ──
 JIMMY HALLIWELL (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
@@ -49,16 +49,9 @@ TOM O'TOOLE (Ulster Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 
 JAMES HUME (Ulster Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
 NICK TIMONEY (Ulster Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
 ROB HERRING (Ulster Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
-JOSH IOANE (Connacht Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
-DUHAN VAN DER MERWE (Edinburgh Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
-HARRY PATERSON (Edinburgh Rugby): Potential Injury -> Healthy (played R18 2026-05-16)
-MAGNUS BRADBURY (Edinburgh Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
-LIAM MCCONNELL (Edinburgh Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R17 2026-05-09)
-TOM ROGERS (Scarlets): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+GREGOR BROWN (Glasgow Warriors): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
 ARCHER HOLZ (Scarlets): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
-JOSH MACLEOD (Scarlets): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
-WILL EVANS (Harlequins): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
-THOMAS DYER (Hollywoodbets Sharks): Potential Injury -> Healthy (played R18 2026-05-16)
+THOMAS DYER (Hollywoodbets Sharks): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
 
 ── International duty added from squads (verify names) ──
 ALESSANDRO FUSCO (Zebre Parma) — Italy
@@ -83,15 +76,14 @@ CHARLIE EWELS (Bath Rugby) — England
 CHESLIN KOLBE (DHL Stormers) — South Africa
 COBUS REINACH (DHL Stormers) — South Africa
 COBUS WIESE (Vodacom Bulls) — South Africa
-D'ARCY RAE (Edinburgh Rugby) — Scotland
 DAMIAN WILLEMSE (DHL Stormers) — South Africa
 DANILO FISCHETTI (Northampton Saints) — Italy
 DARCY GRAHAM (Edinburgh Rugby) — Scotland
 DAVID ODIASE (Zebre Parma) — Italy
-DUHAN VAN DER MERWE (Edinburgh Rugby) — Scotland
 EBEN ETZEBETH (Hollywoodbets Sharks) — South Africa
 EDWILL VAN DER MERWE (Hollywoodbets Sharks) — South Africa
 ELIA CANAKAIVATA (Sale Sharks) — Fiji
+ELLIOT MILLAR MILLS (Northampton Saints) — Scotland
 ELLIS GENGE (Bristol Bears) — England
 ELRIGH LOUW (Vodacom Bulls) — South Africa
 EMBROSE PAPIER (Vodacom Bulls) — South Africa
@@ -101,10 +93,13 @@ EWAN ASHMAN (Edinburgh Rugby) — Scotland
 FEDERICO RUZZA (Benetton Rugby) — Italy
 FERGUS BURKE (Saracens) — Scotland
 FIN SMITH (Northampton Saints) — England
+FINN RUSSELL (Bath Rugby) — Scotland
 FRANCO MOLINA (Newcastle Red Bull) — Argentina
 FREDDIE STEWARD (Leicester Tigers) — England
 FREDDY DOUGLAS (Edinburgh Rugby) — Scotland
 GEORGE FORD (Sale Sharks) — England
+GEORGE FURBANK (Northampton Saints) — England
+GEORGE HORNE (Glasgow Warriors) — Scotland
 GEORGE KLOSKA (Bristol Bears) — England
 GEORGE MARTIN (Leicester Tigers) — England
 GERHARD STEENEKAMP (Vodacom Bulls) — South Africa
@@ -113,6 +108,9 @@ GIULIO BERTACCINI (Zebre Parma) — Italy
 GIULIO MARINI (Benetton Rugby) — Italy
 GONZALO GARCIA (Zebre Parma) — Argentina
 GRANT WILLIAMS (Hollywoodbets Sharks) — South Africa
+GREG FISILAU (Exeter Chiefs) — England
+GREGOR BROWN (Glasgow Warriors) — Scotland
+GREGOR HIDDLESTON (Glasgow Warriors) — Scotland
 GUIDO PETTI (Harlequins) — Argentina
 GUY PEPPER (Bath Rugby) — England
 HANDRE POLLARD (Vodacom Bulls) — South Africa
@@ -120,6 +118,7 @@ HARRY WILSON (Saracens) — Australia
 HENRY POLLOCK (Northampton Saints) — England
 HENRY SLADE (Exeter Chiefs) — England
 IGNACIO MENDY (Benetton Rugby) — Argentina
+IMMANUEL FEYI-WABOSO (Exeter Chiefs) — England
 JACK DEMPSEY (Glasgow Warriors) — Scotland
 JACK VAN POORTVLIET (Leicester Tigers) — England
 JACO WILLIAMS (Hollywoodbets Sharks) — South Africa
@@ -141,12 +140,12 @@ LORENZO CANNONE (Benetton Rugby) — Italy
 LORENZO PANI (Zebre Parma) — Italy
 LOUIS LYNAGH (Benetton Rugby) — Italy
 LUCIO CINTI (Saracens) — Argentina
+LUKE COWAN-DICKIE (Sale Sharks) — England
 MAGNUS BRADBURY (Edinburgh Rugby) — Scotland
 MARCO RICCIONI (Saracens) — Italy
 MARCO VAN STADEN (Vodacom Bulls) — South Africa
 MARCUS SMITH (Harlequins) — England
 MATIAS ALEMANNO (Gloucester Rugby) — Argentina
-MATIAS MORONI (Bristol Bears) — Argentina
 MATT FAGERSON (Glasgow Warriors) — Scotland
 MAX OJOMOH (Bath Rugby) — England
 MAX WILLIAMSON (Glasgow Warriors) — Scotland
@@ -169,11 +168,13 @@ RICCARDO FAVRETTO (Benetton Rugby) — Italy
 RODRIGO ISGRO (Harlequins) — Argentina
 RORY HUTCHINSON (Northampton Saints) — Scotland
 RORY SUTHERLAND (Glasgow Warriors) — Scotland
+ROSS VINTCENT (Exeter Chiefs) — Italy
 RUAN NORTJE (Vodacom Bulls) — South Africa
 SANTIAGO CARRERAS (Bath Rugby) — Argentina
 SANTIAGO GRONDONA (Bristol Bears) — Argentina
 SCOTT CUMMINGS (Glasgow Warriors) — Scotland
 SEB ATKINSON (Gloucester Rugby) — England
+SEB STEPHEN (Glasgow Warriors) — Scotland
 SIMON BENITEZ CRUZ (Newcastle Red Bull) — Argentina
 SIONE TUIPULOTU (Glasgow Warriors) — Scotland
 STAFFORD MCDOWALL (Glasgow Warriors) — Scotland
@@ -203,6 +204,11 @@ Tom Dyer  ->  THOMAS DYER (Hollywoodbets Sharks)
 ── Name-only matches, team differed (verify these) ──
 Hamish Watson [Edinburgh Rugby]  ->  HAMISH WATSON [Leicester Tigers]
 Will Evans [Scarlets]  ->  WILL EVANS [Harlequins]
+Tomos Williams [Saracens]  ->  TOMOS WILLIAMS [Gloucester Rugby]
+George Furbank [Harlequins]  ->  GEORGE FURBANK [Northampton Saints]
+Nicky Smith [Sale Sharks]  ->  NICKY SMITH [Leicester Tigers]
+Elliot Millar Mills [Newcastle Red Bulls]  ->  ELLIOT MILLAR MILLS [Northampton Saints]
+Tom Rogers [Ospreys]  ->  TOM ROGERS [Scarlets]
 
 ── Unmatched injury rows (kept in CSV, no display entry) ──
 PREM Bristol Bears          Paddy Pearce
