@@ -184,6 +184,34 @@ yield results.
 4. Read `join_report.txt` — check match rate hasn't regressed and skim the
    diff of `INJURY_DATA` in `index.html` for anything surprising.
 
+## 7a. Lessons from the 2026-09-24 full sweep (read before searching)
+
+1. **Search-result summaries mislabel dates — verify every source by fetching it.** In one sweep the search
+   backend presented a 2022 URC ban, a March-2026 Northampton teamsheet, an April-2026 Exeter injury
+   report and a 2021 Springbok squad page (stamped with "today's" date) as this week's news. A source's date is
+   what the fetched page prints; if it prints none, the URL slug or the text (coach names, fixture, season) must
+   prove it, otherwise don't cite it. Cross-check squad/lineup lists against a second outlet.
+2. **Best-yield sources in the week of a round** (teams are named Tue-Thu): RugbyPass and Yahoo/PA "injury
+   latest ahead of ..." pieces, Planet Rugby team news, The42/RTE/Rugby365, OnRugby (Benetton/Zebre),
+   Scotland Rugby News, Swansea Bay News/britbrief (Scarlets/Ospreys), SA Rugby Mag/Briefly (SA franchises), and
+   the clubs' own dated pages (Glasgow, Connacht, Cardiff). PREM club hubs are JS-rendered (no text), and several
+   club/press sites return 403 — cite what you can fetch; flag anything taken from a search excerpt as medium
+   confidence in `internal_notes`.
+3. **`international_squads.csv` must contain only windows that are open now.** It is an overlay saying a player is
+   *away*, so July's Nations Championship squads showed 134 wrong airplane icons in late September. Archive closed
+   windows to `injury/archive/`, check the calendar (see the docstring in `build_international_squads.py`), and
+   re-run both builders. Post-tour "managed rest" absences that a club confirms are not injuries — record them as
+   `Unavailable (Other)` with the club's statement as the source.
+4. **Set `injury_date` on or after the player's last appearance.** `build_injury.py` resolves an injured row to
+   Healthy if the player scored in any round dated *after* `injury_date` (falling back to `last_verified`). An
+   approximate date that lands before the round they were hurt in (Faletau, Hope, Harrison in this sweep) silently
+   flips a season-ending injury to Healthy. If the date is unknown leave it blank rather than guess.
+5. **Don't re-run `apply_presumption_rule.py` after per-row edits** — it recomputes `presumption_rule_applied` for
+   every row from the original April-audit condition, resetting the flag on later Likely-Healthy rows.
+6. **Named in a matchday 23 = fit.** A verified team sheet is direct evidence and clears a stale injury / presumption
+   row (Murley, Mitchell, Ganyane, Bosch). Absence from a club's official unavailable list on match week supports
+   downgrading a vague "Potential Injury" to Likely Healthy, but not to Healthy.
+
 ## 8. Cost expectations
 
 A full 26-club sweep from scratch (searches + reading full article pages +
