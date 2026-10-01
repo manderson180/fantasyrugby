@@ -1,10 +1,10 @@
-Injury join report — 2026-09-24T17:39:26
+Injury join report — 2026-10-01T19:25:21
 ============================================================
-CSV player rows processed : 381
-Matched to an app player  : 336 (exact 321, name-only 15, of which aliased 4)
-Resolved to Healthy       : 32 (played after injury date)
-Unmatched (no app player) : 45
-International duty added   : 22 (from international_squads.csv)
+CSV player rows processed : 410
+Matched to an app player  : 362 (exact 347, name-only 15, of which aliased 6)
+Resolved to Healthy       : 22 (played after injury date)
+Unmatched (no app player) : 48
+International duty added   : 0 (from international_squads.csv)
 
 ── Resolved to Healthy via appearance ──
 JIMMY HALLIWELL (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
@@ -12,11 +12,8 @@ KENZIE JENKINS (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played 
 SANTIAGO GRONDONA (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R17 2026-05-31)
 LUKA IVANISHVILI (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R16 2026-05-17)
 KIERAN MARMION (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R17 2026-05-31)
-AJ MACGINTY (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R17 2026-05-31)
 AIDAN BOSHOFF (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
 SEB BLAKE (Gloucester Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
-BEN REDSHAW (Gloucester Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
-CIARAN KNIGHT (Gloucester Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
 JONNY GREEN (Harlequins): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
 TOM LAWDAY (Harlequins): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
 JAMIE BENSON (Harlequins): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
@@ -24,51 +21,25 @@ CASSIUS CLEAVES (Harlequins): Likely Healthy (Unconfirmed) -> Healthy (played R1
 STEPHAN LEWIES (Harlequins): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
 SAMMY ARNOLD (Newcastle Red Bull): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
 ETHAN GRAYSON (Newcastle Red Bull): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
-CONNOR HANCOCK (Newcastle Red Bull): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
-FREDDIE LOCKWOOD (Newcastle Red Bull): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
-AMANAKI MAFI (Newcastle Red Bull): Likely Healthy (Unconfirmed) -> Healthy (played R17 2026-05-31)
 TOM JAMES (Northampton Saints): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
-TOM PEARSON (Northampton Saints): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
 JAMES RAMM (Northampton Saints): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
 JJ VAN DER MESCHT (Northampton Saints): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
-ALEX USANOV (Leinster Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
+ALEX USANOV (Leinster Rugby): Healthy -> Healthy (played R18 2026-05-16)
 ANGUS BELL (Ulster Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
 SCOTT WILSON (Ulster Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
-TOM O'TOOLE (Ulster Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
-NICK TIMONEY (Ulster Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
 ROB HERRING (Ulster Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
-GREGOR BROWN (Glasgow Warriors): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
 THOMAS DYER (Hollywoodbets Sharks): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-05-16)
 
 ── International duty added from squads (verify names) ──
-ANDRE ESTERHUIZEN (Hollywoodbets Sharks) — South Africa
-ANGUS BELL (Ulster Rugby) — Australia
-APHELELE FASSI (Hollywoodbets Sharks) — South Africa
-CANAN MOODIE (Vodacom Bulls) — South Africa
-EBEN ETZEBETH (Hollywoodbets Sharks) — South Africa
-EDWILL VAN DER MERWE (Hollywoodbets Sharks) — South Africa
-ELRIGH LOUW (Vodacom Bulls) — South Africa
-ETHAN HOOKER (Hollywoodbets Sharks) — South Africa
-HANDRE POLLARD (Vodacom Bulls) — South Africa
-HARRY WILSON (Saracens) — Australia
-JAN-HENDRIK WESSELS (Vodacom Bulls) — South Africa
-JOHAN GROBBELAAR (Vodacom Bulls) — South Africa
-LEN IKITAU (Exeter Chiefs) — Australia
-MARCO VAN STADEN (Vodacom Bulls) — South Africa
-MORNE VAN DEN BERG (Lions) — South Africa
-OX NCHE (Hollywoodbets Sharks) — South Africa
-PAUL DE VILLIERS (DHL Stormers) — South Africa
-QUAN HORN (Lions) — South Africa
-SACHA FEINBERG-MNGOMEZULU (DHL Stormers) — South Africa
-TOM HOOPER (Exeter Chiefs) — Australia
-WILCO LOUW (Vodacom Bulls) — South Africa
-ZACHARY PORTHEN (DHL Stormers) — South Africa
+(none)
 
 ── Name aliases applied (curated PLAYER_ALIASES) ──
 Oli Spencer  ->  OLIVER SPENCER (Newcastle Red Bull)
 Rob du Preez  ->  ROBERT DU PREEZ (Sale Sharks)
 Paddy Harrison  ->  PATRICK HARRISON (Edinburgh Rugby)
 Tom Dyer  ->  THOMAS DYER (Hollywoodbets Sharks)
+Michael Lowry  ->  MIKE LOWRY (Ulster Rugby)
+Aitzol Arenzana-King  ->  AITZOL KING (Ulster Rugby)
 
 ── Name-only matches, team differed (verify these) ──
 Hamish Watson [Edinburgh Rugby]  ->  HAMISH WATSON [Leicester Tigers]
@@ -133,3 +104,6 @@ URC  DHL Stormers           Frans Malherbe
 URC  Hollywoodbets Sharks   Cam Dawson
 URC  Glasgow Warriors       Charlie Savala
 URC  Edinburgh Rugby        Malelili Satala
+PREM Bath                   Vilikesa Sela
+URC  Glasgow Warriors       Ruaraidh Hart
+URC  Zebre Parma            Dewi Passarella

@@ -59,6 +59,8 @@ PLAYER_ALIASES = {
     "Rob du Preez": "Robert du Preez",
     "Paddy Harrison": "Patrick Harrison",
     "Tom Dyer": "Thomas Dyer",
+    "Michael Lowry": "Mike Lowry",
+    "Aitzol Arenzana-King": "Aitzol King",
 }
 
 # user_status -> (severity, show-in-grid?)
