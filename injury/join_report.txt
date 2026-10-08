@@ -1,17 +1,14 @@
-Injury join report — 2026-10-01T19:25:21
+Injury join report — 2026-10-08T16:12:01
 ============================================================
-CSV player rows processed : 410
-Matched to an app player  : 362 (exact 347, name-only 15, of which aliased 6)
-Resolved to Healthy       : 22 (played after injury date)
-Unmatched (no app player) : 48
+CSV player rows processed : 443
+Matched to an app player  : 394 (exact 378, name-only 16, of which aliased 6)
+Resolved to Healthy       : 19 (played after injury date)
+Unmatched (no app player) : 49
 International duty added   : 0 (from international_squads.csv)
 
 ── Resolved to Healthy via appearance ──
-JIMMY HALLIWELL (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
 KENZIE JENKINS (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
 SANTIAGO GRONDONA (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R17 2026-05-31)
-LUKA IVANISHVILI (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R16 2026-05-17)
-KIERAN MARMION (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R17 2026-05-31)
 AIDAN BOSHOFF (Bristol Bears): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
 SEB BLAKE (Gloucester Rugby): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
 JONNY GREEN (Harlequins): Likely Healthy (Unconfirmed) -> Healthy (played R18 2026-06-06)
@@ -57,6 +54,7 @@ Ethan Staddon [Bristol Bears]  ->  ETHAN STADDON [Bath Rugby]
 Will Connors [Connacht]  ->  WILL CONNORS [Leinster Rugby]
 Corey Domachowski [Scarlets]  ->  COREY DOMACHOWSKI [Cardiff Rugby]
 Ciaran Frawley [Connacht]  ->  CIARAN FRAWLEY [Leinster Rugby]
+Mawande Mdanda [Vodacom Bulls]  ->  MAWANDE MDANDA [Hollywoodbets Sharks]
 
 ── Unmatched injury rows (kept in CSV, no display entry) ──
 PREM Bristol Bears          Paddy Pearce
@@ -104,6 +102,7 @@ URC  DHL Stormers           Frans Malherbe
 URC  Hollywoodbets Sharks   Cam Dawson
 URC  Glasgow Warriors       Charlie Savala
 URC  Edinburgh Rugby        Malelili Satala
+PREM Northampton Saints     Oliver Scola
 PREM Bath                   Vilikesa Sela
 URC  Glasgow Warriors       Ruaraidh Hart
 URC  Zebre Parma            Dewi Passarella
